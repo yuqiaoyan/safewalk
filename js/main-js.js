@@ -7,6 +7,8 @@ function submit() {
 var bestRoute;
 
 function getBestRoute() {
+	sortCrime();
+	
 	var start = $(".start").val();
 	var end = $(".end").val();
 	var minCrimes = routeCrimePts[0].totalCrimes;
@@ -23,7 +25,7 @@ function getBestRoute() {
 	console.log("Max Crimes " + minCrimes);
 	console.log("bestRoute " + bestRoute);
 	currentRouteNum = bestRoute;
-	sortCrime();
+	
 	updateRouteRenderer(start, end, currentRouteNum);
 	// calcRoute(start, end, bestRoute, false)
 
