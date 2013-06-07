@@ -1,0 +1,325 @@
+body{ margin: 0; padding: 0; } 
+
+.content_area{
+	background-image: url('img/HomeBackground.png');
+	/*background-position: center;*/
+	/*background-repeat: no-repeat;*/
+	background-size: 100%;
+	
+	/*height: 100% !important;*/
+	padding: 0 !important;
+	/*margin-left: 0 auto !important;*/
+	/*margin-left: 0 auto !important;*/
+}
+.logo{
+	position: absolute;
+	left: 30% !important;
+	width: 40%;
+	height: 40%;
+	margin: auto !important;
+	/*width: 100%;
+	height: 50%;*/
+
+}
+.filler{
+
+	height: 50%;
+}
+/*.but_area{
+	top: 60%;
+	position: absolute;
+}*/
+.start{
+	/*height: 1px !important;*/
+	width: 100% !important;
+	font-size: 10px !important;
+
+}
+.end{
+	/*height: 1px !important;*/
+	width: 100% !important;
+	font-size: 10px !important;
+}
+.input_field{
+	padding: 0px !important;
+	width: 100% !important;
+	/*margin: 0px !important;*/
+}
+.ui-input-text{
+	/*width: 100% !important;*/
+}
+.back{
+	background-image: url('img/HomeBackground.png') !important;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: 100% !important;
+}
+#map-canvas{
+	width: 100%; 
+	height: 100%; 
+	position: absolute;
+	z-index: 0;
+}
+.map_back{
+	padding: 0px !important;
+}
+
+
+#bestRoute{
+	background: #ebf2fc;
+	font-weight: bold;
+}
+
+
+#popupOptions-popup {
+    right: 0 !important;
+    left: auto !important;
+}
+#popupOptions {
+	position: relative;
+	/*top: 80% !important;*/
+	width: 100%;
+	border: 1px solid #000;
+	border-right: none;
+	background: rgba(0,0,0,.4);
+	margin: -1px 0;
+}
+#popupOptions .ui-btn {
+	margin: 2em 15px;
+}
+
+
+
+
+.ui-content.mobilecontainer1 {
+	padding: 15px 15px 15px 15px;
+	height: 100%;
+}
+/* mobilesearchbar_13 */
+.mobilesearchbar1 {
+	margin: 0px 0px 6px 0px;
+}
+#j_6-cover-div {
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	margin: 9px 7px 8px 7px;
+	z-index: 9999;
+}
+/* ResultMap */
+.googlemap1 {
+	width: 320px; height: 560px;
+	margin: 2px 0px 2px 0px;
+}
+/* ResultMarker */
+.marker1 {
+	text-shadow:none;
+	color:black;
+	font-family:Arial;
+}
+
+/* optionscontainer */
+.ui-content.optionscontainer1 {
+	padding: 15px 15px 15px 15px;
+	height: 100%;
+}
+/* optionsgrid_28 */
+.optionsgrid1 {
+	height:auto;
+	width:100%;
+	margin: 4px 0px 4px 0px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.optionsgrid1 > tr > td {
+	vertical-align: top;
+}
+.optionsgrid1_row_0, .optionsgrid1_row_0 > td {
+	height: 30px
+}
+.optionsgrid1_row_1, .optionsgrid1_row_1 > td {
+	height: 30px
+}
+.optionsgrid1_row_2, .optionsgrid1_row_2 > td {
+	height: 30px
+}
+.optionsgrid1_row_3, .optionsgrid1_row_3 > td {
+	height: 30px
+}
+/* optionsgridcell_29 */
+.optionsgridcell1 {
+	padding: 2px 2px 2px 2px;
+}
+.optionsgridcell1 > .optionscell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* optionslabel_35 */
+.optionslabel1 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: left;
+	margin: 4px 0px 4px 10px;
+	word-wrap: break-word;
+}
+/* optionslabel_47 */
+.optionslabel2 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: left; font-size: 12px;
+	margin: 4px 0px 4px 20px;
+	word-wrap: break-word;
+}
+/* optionsgridcell_37 */
+.optionsgridcell4 {
+	padding: 2px 2px 2px 2px;
+}
+.optionsgridcell4 > .optionscell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* optionslabel_59 */
+.optionslabel7 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: center;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+}
+/* optionslabel_60 */
+.optionslabel8 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: center; font-size: 10px;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+}
+/* optionsgridcell_31 */
+.optionsgridcell2 {
+	padding: 2px 2px 2px 2px;
+}
+.optionsgridcell2 > .optionscell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* optionslabel_41 */
+.optionslabel3 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: left;
+	margin: 4px 0px 4px 10px;
+	word-wrap: break-word;
+}
+/* optionslabel_48 */
+.optionslabel4 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: left; font-size: 12px;
+	margin: 4px 0px 4px 20px;
+	word-wrap: break-word;
+}
+/* optionsgridcell_38 */
+.optionsgridcell5 {
+	padding: 2px 2px 2px 2px;
+}
+.optionsgridcell5 > .optionscell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* optionslabel_57 */
+.optionslabel9 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: center;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+}
+/* optionslabel_58 */
+.optionslabel10 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: center; font-size: 10px;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+}
+/* optionsgridcell_33 */
+.optionsgridcell3 {
+	padding: 2px 2px 2px 2px;
+}
+.optionsgridcell3 > .optionscell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* optionslabel_42 */
+.optionslabel5 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: left;
+	margin: 4px 0px 4px 10px;
+	word-wrap: break-word;
+}
+/* optionslabel_49 */
+.optionslabel6 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: left; font-size: 12px;
+	margin: 4px 0px 4px 20px;
+	word-wrap: break-word;
+}
+/* optionsgridcell_39 */
+.optionsgridcell6 {
+	padding: 2px 2px 2px 2px;
+}
+.optionsgridcell6 > .optionscell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+
+/* optionsgridcell_39 */
+.optionsgridcell11 {
+	width: 50% !important;
+	padding: 2px 2px 2px 2px;
+}
+.optionsgridcell11 > .optionscell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* optionslabel_55 */
+.optionslabel11 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: center;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+}
+/* optionslabel_56 */
+.optionslabel12 {
+	font-weight: normal; font-style: italic; color: #474DA8; text-align: center; font-size: 10px;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+}
+
+/* optionsgridcell_61 */
+.optionsgridcell7 {
+	padding: 2px 2px 2px 2px;
+}
+.optionsgridcell7 > .optionscell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* optionsbutton_63 */
+.ui-btn.optionsbutton1 {
+	margin: 4px 5px 4px 5px;
+}
+/* optionsgridcell_62 */
+.optionsgridcell8 {
+	padding: 2px 2px 2px 2px;
+}
+.optionsgridcell8 > .optionscell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+.leaf{
+	color: white;
+	/*font-weight: bold;*/
+	padding: 20px;
+	border-bottom: 1px solid black;
+}
+.info{
+	/*height: 200px;*/
+	/*top: 20px !important;*/
+	/*width: 500px;*/
+}
+
+.time{
+	color: white;
+}
+
+.crime{
+	color: white;
+}
+.leaf:hover{
+	background-color: green;
+}
+.side_text{
+	text-align: right;
+ 	/*position: absolute;*/
+}
