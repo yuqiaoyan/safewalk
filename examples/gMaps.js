@@ -38,6 +38,18 @@ function updateRouteRenderer(start, end) {
         travelMode: google.maps.DirectionsTravelMode.WALKING
    };
 
+   var requestString = "http://blah/blah";
+   var temp;
+
+   for(var key in request){
+    if(request.hasOwnProperty(key)){
+      temp = key + "=" + request(key);
+      requestString += temp; 
+    }
+   }
+
+
+
   function checkResponse(response,status){
       if (status == google.maps.DirectionsStatus.OK) {
         console.log("hi bonnie");

@@ -1,31 +1,30 @@
 var currentRouteNum = -1;
 var loaded = false;
 
+if(debug){
+
+	//if we need to debug print out statistics about our code
+	console.log("Route Crime Array Object: ");
+	console.log(routeCrimePts);
+	console.log("Total minimum crimes is " + routeCrimePts[0].totalCrimes);
+};
+
 function submit() {
 	
 }
-var bestRoute;
 
 function getBestRoute() {
-	sortCrime();
+	console.log("+getBestRoute");
 
-	var start = $(".start").val();
-	var end = $(".end").val();
-	var minCrimes = routeCrimePts[0].totalCrimes;
-	bestRoute = 0;
-	console.log("Total crimes is " + routeCrimePts[0].totalCrimes);
+	//sort routeCrimePts to ascending order
+	routeCrimePts.sort(function(value1,value2){
+		return value1.totalCrimes - value2.totalCrimes;
+	})
 
-	for (var i = 1; i < routeCrimePts.length; i++) {
-		if (minCrimes > routeCrimePts[i].totalCrimes) {
-			bestRoute = i;
-			minCrimes = routeCrimePts[i].totalCrimes;
-		}
-	};
 
-	console.log("Max Crimes " + minCrimes);
-	console.log("bestRoute " + bestRoute);
-	currentRouteNum = bestRoute;
-
+	
+	currentRouteNum = 0;
+	console.log("-getBestRoute");
 
 }
 
@@ -40,19 +39,6 @@ function chooseRoute(number) {
 }
 
 
-
-function sortCrime() {
-	var temp;
-	for (var i = 0; i < routeCrimePts.length - 1; i++) {
-		for (var j = i + 1; j < routeCrimePts.length; j++) {
-			if (routeCrimePts[i].totalCrimes > routeCrimePts[j].totalCrimes) {
-				temp = routeCrimePts[j];
-				routeCrimePts[j] = routeCrimePts[i];
-				routeCrimePts[i] = temp;
-			}
-		}
-	}
-}
 
 $(window).resize(function() {
 	var start = $(".start").val();
