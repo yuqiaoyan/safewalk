@@ -1,15 +1,28 @@
 var database = [];
 
-$(document).ready(function() {
+function initData(dataLocation){
+	/*if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+		    xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+		    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open("GET",dataLocation,false);
+		xmlhttp.send();
+		xmlDoc=xmlhttp.responseText;
+		processData(xmlDoc);*/
+
 	$.ajax({
 		type: "GET",
-		url: "data/data_2.txt",
+		url: dataLocation,
 		dataType: "text",
 		success: function(data) {
 			processData(data);
 		}
 	});
-});
+}
 
 
 function processData(allText) {

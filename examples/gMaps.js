@@ -38,29 +38,34 @@ function updateRouteRenderer(start, end) {
         travelMode: google.maps.DirectionsTravelMode.WALKING
    };
 
-  directionsService.route(request, function(response, status) {
-    if (status == google.maps.DirectionsStatus.OK) {
+  function checkResponse(response,status){
+      if (status == google.maps.DirectionsStatus.OK) {
         console.log("hi bonnie");
         test = 12;
         directionsDisplay.setDirections(response);
         google.maps.event.trigger(map, 'resize'); }
-  });
 
+  }
+
+  directionsService.route(request, checkResponse);
 
 }
+
+
+
+
+
        
 google.maps.event.addDomListener(window, 'load', initialize);
 
   console.log("-ajax complete");
   console.log(test);
-$(document).ajaxComplete(function(){
+$(document).ajax(function(){
   console.log("ajax complete");
   console.log(test);
 });
 
-google.maps.event.addListenerOnce(map, 'idle', function(){
-    console.log("helloo");
-});
+
 /*
 google.maps.event.addListenerOnce(directionsService, 'idle', function(){
     console.log("bye");
