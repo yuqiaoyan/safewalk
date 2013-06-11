@@ -8,7 +8,7 @@ var bestRoute;
 
 function getBestRoute() {
 	sortCrime();
-	
+
 	var start = $(".start").val();
 	var end = $(".end").val();
 	var minCrimes = routeCrimePts[0].totalCrimes;
@@ -25,19 +25,6 @@ function getBestRoute() {
 	console.log("Max Crimes " + minCrimes);
 	console.log("bestRoute " + bestRoute);
 	currentRouteNum = bestRoute;
-	
-	updateRouteRenderer(start, end, currentRouteNum);
-	// calcRoute(start, end, bestRoute, false)
-
-	for (var i = 0; i < routeCrimePts.length; i++) {
-		if (i == 0) {
-			$(".leaf1").html(renderRoute(i));
-		} else if (i == 1) {
-			$(".leaf2").html(renderRoute(i));
-		} else {
-			$(".leaf3").html(renderRoute(i));
-		}
-	}
 
 
 }
@@ -52,15 +39,7 @@ function chooseRoute(number) {
 
 }
 
-function renderRoute(routeNum) {
-	var routeDiv = "<div class = 'route'> "
-	routeDiv += routeCrimePts[routeNum].via
-	routeDiv += "<div class = 'side_text'><span class = 'time'>" + routeCrimePts[routeNum].duration + "</span> - "
-	routeDiv += " <span class = 'crime'> "
-	routeDiv += routeCrimePts[routeNum].totalCrimes + "\t crimes </span> reported</div> "
-	routeDiv += "</div>";
-	return routeDiv;
-}
+
 
 function sortCrime() {
 	var temp;

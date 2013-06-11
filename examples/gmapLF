@@ -1,0 +1,232 @@
+/**
+ * Callback aufrufen
+ */
+function loadMaps() {
+	google.load("maps", "2.x", {"callback" : mapsLoaded, "language" : "de"});J
+}
+
+/**
+ * Google API dynamisch laden (Script Attribut per JS zum <head> hinzufügen
+ */
+function initMap() {
+	var script = document.createElement("script");
+	script.src = "http://www.google.com/jsapi?key=AIzaSyCwWAUGDrG_XA2oeXKdMZ2uK6YsHF7ZY-0&callback=loadMaps&hl=de";
+	script.type = "text/javascript";
+	document.getElementsByTagName("head")[0].appendChild(script);
+}
+
+/**
+ * Erstellt einen neuen Marker an den übergebenen Koordinaten (rot)
+ */
+function newMarker(point) {
+	// Basis-Icon erstellen
+	var baseIcon = new GIcon();
+	baseIcon.shadow = '/images/icons/gmap_shadow.png';
+	baseIcon.iconSize = new GSize(12, 20);
+	baseIcon.shadowSize = new GSize(22, 20);
+	baseIcon.iconAnchor = new GPoint(6, 20);
+
+	// Icon mit eigenem Bild erstellen
+	var icon = new GIcon(baseIcon);
+	icon.image = '/images/icons/gmaps_red.png';
+
+	var marker = new GMarker(point, {"icon": icon, draggable: true, "title": "Position verschieben"});
+	GEvent.addListener(marker, "dragend", function(point) {
+		document.getElementById(name_format + "_latitude").value = point.lat();
+		document.getElementById(name_format + "_longitude").value = point.lng();
+	});
+	return marker;	
+}
+
+/**
+ * Löst die übergebene Adresse in Geokoordinaten auf
+ */
+function geocode(street, zip, city) {
+	if (street || zip || city) {
+		var geocoder = new GClientGeocoder();
+		var address = street + ', ' + zip + ' ' + city;
+		map.clearOverlays();
+		geocoder.getLatLng(
+			address,
+			function(point) {
+				// Wenn keine Adresse ermittelt werden konnte
+				if (!point) {
+					alert('Die Adresse "'+address+'" wurde nicht gefunden.');
+				}
+				else {
+					// Marker für die Karte erstellen
+					var marker = newMarker(point);
+					GEvent.addListener(marker, "click", function() {
+						map.openInfoWindowHtml(point, address, {"maxWidth":520});
+					});
+					map.addOverlay(marker);
+					map.setCenter(point, 15);
+					// Nach Klick die aktuellen Koordinaten erstmalig eintragen
+					document.getElementById(name_format + "_latitude").value = point.lat();
+					document.getElementById(name_format + "_longitude").value = point.lng();
+				}
+			}
+		);
+	}
+	else {
+		alert("Bitte geben Sie Straße, Postleitzahl oder Ort ein.");
+	}
+}
+
+/*
+ * Allgemeine Funktionen (unabhängig von Karte, aber überall notwendig)
+ *
+ */
+// Funktion zum Togglen des "Mehr" Buttons (z.B. bei Anfrageformular, Feedback (Highlights)
+function toogleClassName(e) {
+	var classes = e.className.split(' ');
+	
+	for (var i=0; i<classes.length; i++) {
+		if (classes[i] == 'add') classes[i] = 'minus';
+		else if (classes[i] == 'minus') classes[i] = 'add';
+	}
+	
+	e.className = classes.join(' ');
+}
+
+
+// Directions
+function handleErrors(){
+	if (gdir.getStatus().code == G_GEO_UNKNOWN_ADDRESS)
+		alert("No corresponding geographic location could be found for one of the specified addresses. This may be due to the fact that the address is relatively new, or it may be incorrect.\nError code: " + gdir.getStatus().code);
+	else if (gdir.getStatus().code == G_GEO_SERVER_ERROR)
+		alert("A geocoding or directions request could not be successfully processed, yet the exact reason for the failure is not known.\n Error code: " + gdir.getStatus().code);
+	else if (gdir.getStatus().code == G_GEO_MISSING_QUERY)
+		alert("The HTTP q parameter was either missing or had no value. For geocoder requests, this means that an empty address was specified as input. For directions requests, this means that no query was specified in the input.\n Error code: " + gdir.getStatus().code);
+	else if (gdir.getStatus().code == G_GEO_BAD_KEY)
+		alert("The given key is either invalid or does not match the domain for which it was given. \n Error code: " + gdir.getStatus().code);
+	else if (gdir.getStatus().code == G_GEO_BAD_REQUEST)
+		alert("A directions request could not be successfully parsed.\n Error code: " + gdir.getStatus().code);
+	else alert("An unknown error occurred.");
+}
+
+function onGDirectionsLoad(){
+  // Use this function to access information about the latest load()
+  // results.
+
+  // e.g.
+  // document.getElementById("getStatus").innerHTML = gdir.getStatus().code;
+  // and yada yada yada...
+}
+
+// GMAP CLOSEBUT HACK
+//if (document.getElementById('gmap')) {
+//	var mapisloded = 0;
+//	var mapclosefinish = 0;
+//
+//	Event.observe(window, 'mousemove', function() {
+//		var ims=$$('#gmap .gmnoprint img');
+//
+//		for (i=0;i<ims.length;i++) {
+//			if(ims[i].src.indexOf('iw_close.gif') !=-1 && mapclosefinish == 0) {
+//				ims[i].src='/images/icons/bubble_close.gif';
+//				ims[i].style.border='none';
+//				ims[i].style.width='15px';
+//				ims[i].style.height='15px';
+//			}
+//			mapisloded=1;
+//		}
+//
+//		if(mapisloded == 1) {
+//			mapclosefinished = 1;
+//		}
+//	});
+//}
+
+
+function initCategoryControl(map, categorys)
+{
+	// Eigene GMapControl hinzufügen
+	CategorySelectionControl.prototype = new GControl();
+	function CategorySelectionControl() {}
+
+	CategorySelectionControl.prototype.initialize = function(map) {
+		var container = jQuery('#map_category_control');
+		map.getContainer().appendChild(container);
+		return container;
+	}
+
+	CategorySelectionControl.prototype.getDefaultPosition = function() {
+		return new GControlPosition(G_ANCHOR_BOTTOM_RIGHT, new GSize(7, 21));
+	}
+	map.addControl(new CategorySelectionControl()); // Zur Karte hinzufügen
+}
+
+// Versteckt die Marker der übergebenen Kategorie
+function hideMarkers(c) {
+	for (var i=0; i<mcs[c].length; i++) {
+		mcs[c][i].setVisible(false);
+	}
+}
+// Zeigt die Marker der übergebenen Kategorie
+function showMarkers(c) {
+	// Alle sichtbaren Marker durchlaufen
+	for (var i=0; i<mcs[c].length; i++) {
+		mcs[c][i].setVisible(true);
+	}
+}
+// Ein Button wurde geklickt
+function clickButton(e) {
+	var cid = e.id.split('_').pop(); // Category bestimmen (letzter Teil der ID)
+	// Aktuellen Status bestimmen
+	if (jQuery('#'+e.id).hasClass('active')) {
+		hideMarkers(cid);
+	} else {
+		showMarkers(cid); // Marker dieser Kategorie anzeigen
+	}
+	jQuery('#'+e.id).toggleClass('active'); // CSS-Klasse "active" hinzufügen oder entfernen
+}
+
+/** Resize InfoWindow **/
+function resizeInfoWindow(contentElementId) {
+    // Get the current open infowindow from the map
+    var infoWindow = map.getInfoWindow();
+
+    // Get the point this infowindow belongs to
+    var point = infoWindow.getPoint();
+
+    // Get the size of the content block so to make the info window the correct size to hold it
+    var width = jQuery(contentElementId).width();
+    var height = jQuery(contentElementId).height();
+    infoWindow.reset(point, infoWindow.getTabs(), new GSize(width,height));
+}
+/** (END) Resize InfoWindow **/
+
+/**
+ * Funktion zum Vergrößern der Kartendarstellung
+ */
+var map_height = 350; // Default: 350px
+function ZoomMap() {
+	var max_height = 700;
+	var zoomfactor = 8;
+	var curr_height = jQuery('#gmap').height();
+	
+	if (!curr_height) {
+		curr_height = map_height;
+	}
+
+	if (curr_height < max_height) {
+		map_height = curr_height; // Originalgröße speichern
+		jQuery('#gmap').height(max_height);
+		jQuery('#mapzoomer').addClass('mapdezoom tdn');
+		jQuery('#mapzoomer').removeClass('mapzoom');
+		jQuery('#mapzoomer').attr('title', '- Karte verkleinern ...');
+		zoomfactor = 9;
+	} else {
+		jQuery('#gmap').height(map_height);
+		jQuery('#mapzoomer').addClass('mapzoom tdn');
+		jQuery('#mapzoomer').removeClass('mapdezoom');
+		jQuery('#mapzoomer').attr('title', '&oplus; Karte vergrößern ...'); // title umsetzen
+		zoomfactor = 8;
+	}
+	
+	jQuery('#mapmsg').html(jQuery('#mapzoomer').attr('title')); // title umsetzen in MSG-Box
+	google.maps.event.trigger(map, "resize");
+	map.setCenter(map.getCenter(), zoomfactor);
+	mapsLoaded();
+}
