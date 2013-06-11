@@ -13,7 +13,9 @@ var hasMapInit = false;
 var geoCode;
 
 function init(){
+	console.log("+data processing");
 	initData("data/data_2.txt");
+	console.log("-data processing");
 
 }
 

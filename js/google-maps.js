@@ -1,15 +1,3 @@
-var directionsDisplay;
-var directionsService = new google.maps.DirectionsService();
-var infowindow;
-var map;
-var routes;
-var routeResponse;
-var routeCrimePts = [];
-var markersArray = [];
-var clusterArray = [];
-var hasMapInit = false;
-var geoCode;
-
 /**
  * Initializes Google Maps
  * @param  {double}   lat      Latitude in start input
@@ -18,6 +6,8 @@ var geoCode;
  */
 
 function initialize(lat, lng, callback) {
+	console.log("+google-maps initialize");
+
 
 	var polyOption = {
 		strokeColor: "red"
@@ -39,7 +29,7 @@ function initialize(lat, lng, callback) {
 	directionsDisplay.setMap(map);
 
 	callback();
-
+	console.log("-google-maps initialize");
 }
 
 
@@ -61,6 +51,7 @@ function ftToMi(distanceFt) {
  */
 
 function calcRoute(start, end) {
+	console.log("+calcRoute");
 
 	var request = {
 		origin: start,
@@ -84,6 +75,8 @@ function calcRoute(start, end) {
 		//add error code
 
 	});
+
+	console.log("-calcRoute");
 
 }
 
