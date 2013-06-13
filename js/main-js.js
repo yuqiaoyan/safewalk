@@ -1,5 +1,3 @@
-var currentRouteNum = -1;
-var loaded = false;
 
 if(debug){
 

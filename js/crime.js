@@ -1,6 +1,6 @@
-var database = [];
 
-function initData(dataLocation){
+
+function initData(dataLocation, callback){
 	/*if (window.XMLHttpRequest)
 		{// code for IE7+, Firefox, Chrome, Opera, Safari
 		    xmlhttp=new XMLHttpRequest();
@@ -20,6 +20,7 @@ function initData(dataLocation){
 		dataType: "text",
 		success: function(data) {
 			processData(data);
+			callback();
 		}
 	});
 }

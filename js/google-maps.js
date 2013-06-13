@@ -5,7 +5,7 @@
  * @param  {Function} callback Call function after map loads
  */
 
-function initialize(lat, lng, callback) {
+function initMap(lat, lng, callback) {
 	console.log("+google-maps initialize");
 
 
@@ -283,26 +283,6 @@ function clearOverlays() {
 		cluster.clearMarkers();
 	};
 }
-
-$(document).delegate('#page3', 'pageshow', function() {
-	var lat = 37.7750;
-	var lng = -122.4183;
-	var start = $(".start").val();
-	var end = $(".end").val();
-
-	if (!hasMapInit) {
-		initialize(lat, lng, function() {
-			calcRoute(start, end);
-			/*updateRouteRenderer(start, end, currentRouteNum);
-			renderRoutes();*/
-		});
-		hasMapInit = true;
-	} else {
-		calcRoute(start, end);
-		/*updateRouteRenderer(start, end, currentRouteNum);
-		renderRoutes();*/
-	}
-});
 
 $(document).ready(function() {
 	navigator.geolocation.getCurrentPosition(userLocation, e);
