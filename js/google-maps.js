@@ -284,10 +284,6 @@ function clearOverlays() {
 	};
 }
 
-$(document).ready(function() {
-	navigator.geolocation.getCurrentPosition(userLocation, e);
-});
-
 
 function findAddress(lat, lng) {
 	var latlng = new google.maps.LatLng(lat, lng);

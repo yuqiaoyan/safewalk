@@ -15,8 +15,9 @@ $(document).ready(function() {
 	if(debugValue.length > 1){
 		debug = debugValue[1]; //set a debug value to print out useful information
 	}
-
+	navigator.geolocation.getCurrentPosition(userLocation, e);
 	init();
+	
 });
 
 $(document).delegate('#page3', 'pageshow', function() {
