@@ -3,6 +3,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css"/>
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2OydZynp2KMPL3u3_9fBsDxGXZIyHA8w&amp;sensor=true"></script>
 	<script type="text/javascript" src="js/init.js"></script>
@@ -21,26 +22,27 @@
 	<!-- Home -->
 
 	<div data-role="page" id="page1" class= "back">
-		<div data-theme="c" data-role="header">
-			<h3>Safe Walk</h3>
+		<div data-theme="p" data-role="header">
+			<h3></h3>
 		</div>
 
 		<div data-role="content" class="content_area">
-			<img src="img/safeWalk_no_icon.png" class="logo">
-			<img src="img/safeWalk_no_icon.png" class="filler" style="opacity: 0">
-
-			<div class="but_area">
-				<div data-role="fieldcontain" class = "input_field">
-					<input class = "Start" type="text" value="Civic Center/Un Plaza San Francisco, CA" tabIndex="7" data-theme="d" class='inputA' placeholder="start"/>
-				</div>
-				<div data-role="fieldcontain" class = "input_field" >
-					<input class ="end" type="text" value="Powell St San Francisco, CA" tabIndex="7" data-theme="d" class='inputB' placeholder="end"/>
-				</div>
-
-				<div class="homeSubmit">
-					<a href="#page3" onclick= "javascript:submit()"data-role="button" class="submit ui-disabled" data-corners="true" data-mini="true" data-theme="d" tabIndex="9">Find a Safe Route!</a>
-				</div>
+			<img src="img/hippo.png" class="logo">
+			<img src="img/title.png" class="logo_title">
+			<!-- <img src="img/hippo.png" class="filler" style="opacity: 0">
+			-->
+		
+			<div data-role="fieldcontain" class = "input_field">
+				<input type="text" class="start" value="Civic Center/Un Plaza San Francisco, CA" tabIndex="7" placeholder="start"/>
 			</div>
+			<div data-role="fieldcontain" class = "input_field" >
+				<input type="text" class ="end" value="Powell St San Francisco, CA" tabIndex="7"  placeholder="end"/>
+			</div>
+
+			<div class="homeSubmit">
+				<a href="#page3" onclick= "javascript:submit()" data-corners="false" data-role="button" class="submit ui-disabled" data-mini="true" data-theme="d" tabIndex="9">Find a Safe Route!</a>
+			</div>
+			
 			<div data-role="popup" id="popupOptions" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
 				<div class="options"></div>
 				<div class="options"></div>
@@ -48,16 +50,15 @@
 			</div>
 
 		</div>
-		<div data-theme="d" data-role="footer" data-position="fixed">
+		<div data-theme="p" data-role="footer" data-position="fixed">
 			<h3></h3>
-
 
 		</div>
 
 	</div>
 
 	<div data-role="page" id="page3">
-		<div data-theme="d" data-role="header">
+		<div data-theme="p" data-role="header">
 			<a data-role="button" data-transition="slide" data-theme="d" href="#page1"
           data-icon="back" data-iconpos="left" class="ui-btn-left">Back</a>
 			<h3>Safe Walk</h3>
@@ -67,7 +68,7 @@
 			<div id="map-canvas"></div>
 			<div id="wrapper"></div>
 			<div data-role="popup" id="popupOptions" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
-				
+
 				<div class="optionsgrid1_wrapper info">
 					<div class="leaf1 leaf" onclick="javascript:chooseRoute(0)"></div>
 					<div class="leaf2 leaf" onclick="javascript:chooseRoute(1)"></div>
@@ -76,10 +77,10 @@
 			</div>
 
 		</div>
-		<div data-theme="d" data-role="footer" data-position="fixed">
-			<a href="#popupOptions" class="openOptions" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Routes</a>
+		<div data-theme="p" data-role="footer" data-position="fixed">
+			<a href="#popupOptions" class="openOptions" data-theme="d" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Routes</a>
 		</div>
-		
+
 	</div>
 </body>
 </html>
