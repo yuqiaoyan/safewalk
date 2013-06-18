@@ -1,0 +1,6 @@
+*.zip
+*.svg
+*.exe
+*.dll
+
+.DS_Store
