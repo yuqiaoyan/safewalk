@@ -70,6 +70,9 @@ function calcRoute(start, end) {
 			updateRouteRenderer(start, end, currentRouteNum);
 	
 			renderRoutes();
+
+			//temporarily placing it here
+			renderUser(); //render user marker
 		}
 
 		//add error code
@@ -293,6 +296,7 @@ function findAddress(lat, lng) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			if (results[1]) {
 				var street = results[1].formatted_address;
+				console.log("User street: " + street);
 				// alert(street);
 				if (street.indexOf("San Francisco") !== -1) {
 					$(".start").val(street);
@@ -365,23 +369,3 @@ function generateInfo(data) {
 	return text;
 }
 
-/**
- * Find your lat and lng
- * @param  {object} pos required to find your geolocation
- */
-var userLocation = function(pos) {
-	var lat = pos.coords.latitude;
-	var long = pos.coords.longitude;
-	geocoder = new google.maps.Geocoder();
-	findAddress(lat, long);
-}
-
-/**
- * Error if your location is not found
- * @param  {object} error error object
- */
-var e = function(error) {
-	if (error.code === 1) {
-		alert('Unable to get location');
-	}
-}

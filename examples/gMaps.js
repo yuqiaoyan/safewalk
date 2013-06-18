@@ -29,39 +29,6 @@ function initialize() {
         updateRouteRenderer(start,end)
     
 }
-var test;
-function updateRouteRenderer(start, end) {
-    var request = {
-        origin: start,
-        destination: end,
-        provideRouteAlternatives: true,
-        travelMode: google.maps.DirectionsTravelMode.WALKING
-   };
-
-   var requestString = "http://blah/blah";
-   var temp;
-
-   for(var key in request){
-    if(request.hasOwnProperty(key)){
-      temp = key + "=" + request(key);
-      requestString += temp; 
-    }
-   }
-
-
-
-  function checkResponse(response,status){
-      if (status == google.maps.DirectionsStatus.OK) {
-        console.log("hi bonnie");
-        test = 12;
-        directionsDisplay.setDirections(response);
-        google.maps.event.trigger(map, 'resize'); }
-
-  }
-
-  directionsService.route(request, checkResponse);
-
-}
 
 
 
@@ -70,17 +37,6 @@ function updateRouteRenderer(start, end) {
        
 google.maps.event.addDomListener(window, 'load', initialize);
 
-  console.log("-ajax complete");
-  console.log(test);
-$(document).ajax(function(){
-  console.log("ajax complete");
-  console.log(test);
-});
-
-
-/*
-google.maps.event.addListenerOnce(directionsService, 'idle', function(){
-    console.log("bye");
-});*/
+  
 
 console.log("end");

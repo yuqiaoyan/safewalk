@@ -6,21 +6,32 @@
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
       #map-canvas { height: 100% }
+      #results{
+        background-color: black;
+        color: white;
+        font-size: 24px;
+
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+
+        opacity: 0.85;
+
+      }
+
+      .result{
+        padding: 5px 5px 5px 65px;
+      }
+
     </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqRIniM27EYi_LnkCO57DxBVTcD1lmdB4&sensor=true">
-    </script>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src ="gMaps.js">
-      
-    </script>
   </head>
   <body>
-    <div id="map-canvas"/>
-    text
-  </div>
-  <div>
-    test
-  </div>
+
+    <div id = "results">
+      <div class = "result">
+      Walk towards Geary St.
+    </div>
+    </div>
   </body>
 </html>

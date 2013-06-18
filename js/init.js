@@ -15,8 +15,14 @@ $(document).ready(function() {
 	if(debugValue.length > 1){
 		debug = debugValue[1]; //set a debug value to print out useful information
 	}
-	navigator.geolocation.getCurrentPosition(userLocation, e);
+;
+	
+	//console.log("userLocation is " + userLocation);
+	
 	init();
+
+
+
 	
 });
 

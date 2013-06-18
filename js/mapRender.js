@@ -1,5 +1,16 @@
 /* contains all functions for rendering */
 
+function renderUser(){
+	console.log("+renderUser");
+	console.log("user Location: ");
+	console.log(aUser);
+	console.log("Lat: " + aUser.getLat());
+	console.log("Long: " + aUser.getLon());
+	//createMark(user.lat,user.long);
+
+	console.log("-renderUser");
+}
+
 function renderRoute(routeNum) {
 /* HTML for drawing a single routeInfo
 REQUIRES: routeCrimePts and totalCrimes
