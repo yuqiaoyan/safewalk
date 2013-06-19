@@ -68,7 +68,7 @@ function calcRoute(start, end) {
 			getBestRoute(); //sorts routeCrimePts and 
 
 			updateRouteRenderer(start, end, currentRouteNum);
-	
+
 			renderRoutes();
 
 			//temporarily placing it here
@@ -198,12 +198,20 @@ function routeInfo(response, routeNum) {
  * @return {object}     markerObject
  */
 
-function createMark(lat, lng) {
+function createMark(lat, lng, icon) {
+	var pinIcon = new google.maps.MarkerImage(
+		icon,
+		null, /* size is determined at runtime */
+		null, /* origin is 0,0 */
+		null, /* anchor is bottom center of the scaled image */
+		new google.maps.Size(30, 20));
 
 	var marker = new google.maps.Marker({
 		map: map,
 		position: new google.maps.LatLng(lat, lng),
-		zIndex: 1
+		zIndex: 1,
+		shadow: pinIcon,
+		icon: pinIcon
 	});
 	markersArray.push(marker);
 	return marker;
@@ -287,7 +295,9 @@ function clearOverlays() {
 	};
 }
 
+function findLatLng(address){
 
+}
 function findAddress(lat, lng) {
 	var latlng = new google.maps.LatLng(lat, lng);
 	geocoder.geocode({
@@ -368,4 +378,3 @@ function generateInfo(data) {
 	text += '</div>'
 	return text;
 }
-

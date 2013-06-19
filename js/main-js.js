@@ -33,6 +33,5 @@ function chooseRoute(number) {
 	updateRouteRenderer(start, end, number);
 	// calcRoute(start, end, number, false);
 
-
 }
 

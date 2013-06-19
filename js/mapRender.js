@@ -64,7 +64,6 @@ function updateRouteRenderer(start, end, number) {
 		}
 	});
 	google.maps.event.trigger(map, 'resize');
-
 	updateMarkers(number);
 }
 
@@ -81,8 +80,12 @@ function updateMarkers(number) {
 	// for (var i = 0; i < routeCrimePts[number].pathkb.length; i++) {
 	// 	createPath(routeCrimePts[number].pathjb[i], routeCrimePts[number].pathkb[i]);
 	// };
+	// 
+	console.log(routeCrimePts[number].array.length);
+	console.log(routeCrimePts[number].last);
+	
 	for (var i = routeCrimePts[number].last, j = 0; i < routeCrimePts[number].array.length; i++) {
-		markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X, number);
+		markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X, "img/hippo.png");
 		createInfoWindow(markers[j - 1], number, i);
 	}
 
