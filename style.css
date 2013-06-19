@@ -1,157 +1,147 @@
-body{ margin: 0; padding: 0; } 
+body {
+	margin: 0;
+	padding: 0;
 
-.content_area{
-	/*background-image: url('img/HomeBackground.png');*/
-	/*background-position: center;*/
-	/*background-repeat: no-repeat;*/
-	background-size: 100%;
-	
-	/*height: 100% !important;*/
-	padding: 0 !important;
-	/*margin-left: 0 auto !important;*/
-	/*margin-left: 0 auto !important;*/
 }
-.logo{
-	/*position: relative;*/
-	/*left: 30% !important;*/
-	/*top: 100%;*/
-	/*width: 80%;*/
+
+.content_area {
+	/*-webkit-background-size: 100%;
+	-moz-background-size: 100%;
+	background-size: 100%;*/
+	height: 100%;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(white),to(#b1aca7));
+	background-image: -webkit-linear-gradient(white,#b1aca7);
+	background-image: -moz-linear-gradient(white,#b1aca7);
+	background-image: -o-linear-gradient(white,#b1aca7);
+	background-image: -ms-linear-gradient(white,#b1aca7);
+	background-image: linear-gradient(white,#b1aca7);
+	padding: 0 !important;
+}
+#page1, #page2{
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.logo {
 	display: block;
 	height: 30%;
-	/*margin-bottom: 20% !important;*/
 	margin-top: 5%;
-	margin-right: auto; 
-	margin-left: auto; 
-	/*height: 50%;*/
-
+	margin-right: auto;
+	margin-left: auto;
 }
-.logo_title{
-	/*width: 80%;*/
+
+.logo_title {
 	display: block;
 	height: 8%;
-	margin-bottom: 20%;
-	/*margin-top: 10% !important;*/
-	margin-right: auto; 
-	margin-left: auto; 
+	margin-right: auto;
+	margin-left: auto;
 }
-/*.filler{
 
-	height: 50%;
-}*/
-/*.but_area{
-	top: 60%;
-	position: absolute;
-}*/
-.start{
-	/*height: 1px !important;*/
-	width: 100% !important;
-	font-size: 10px !important;
-	border-radius: 0 !important;
-
+.filler {
+	width: 100%;
+	height: 20%;
 }
-.end{
-	/*height: 1px !important;*/
+
+.start {
 	width: 100% !important;
 	font-size: 10px !important;
 	border-radius: 0 !important;
 }
+
+.end {
+	width: 100% !important;
+	font-size: 10px !important;
+	border-radius: 0 !important;
+}
+
 #text {
-    border-radius: 0 !important;
+	border-radius: 0 !important;
 }
+
 .ui-corner-all {
-    border-radius: 0 !important;
+	border-radius: 0 !important;
 }
-.input_field{
+
+.input_field {
 	padding: 0px !important;
-	/*max-height: none;*/
 	width: 90% !important;
 	margin: auto !important;
 	border-radius: 0 !important;
 }
 
-.ui-field-contain div.ui-input-text{
-	/*width: 90% !important;
+.ui-field-contain div.ui-input-text {
 	margin-left: auto !important;
-	margin-right: auto !important;*/
+	margin-right: auto !important;
 }
-.back{
-	/*background-image: url('img/HomeBackground.png') !important;*/
-	background-image: linear-gradient(white,#b1aca7) !important;
-	/*background-color: black !important;*/
-	background-position: center !important;
-	background-repeat: repeat !important;
-	background-size: 100% 100%!important;
-}
-#map-canvas{
-	width: 100%; 
-	height: 100%; 
-	position: absolute;
+
+
+#map-canvas {
+	width: 100%;
+	height: 100%;
+	/*position: absolute;*/
 	z-index: 0;
 }
-.map_back{
+
+.map_back {
 	padding: 0px !important;
 }
 
-
-#bestRoute{
+#bestRoute {
 	background: #ebf2fc;
 	font-weight: bold;
 }
 
-
 #popupOptions-popup {
-    right: 0 !important;
-    left: auto !important;
+	right: 0 !important;
+	left: auto !important;
 }
+
 #popupOptions {
 	position: relative;
-	/*top: 80% !important;*/
 	width: 100%;
 	border: 1px solid #000;
 	border-right: none;
 	background: rgba(0,0,0,.4);
 	margin: -1px 0;
 }
+
 #popupOptions .ui-btn {
 	margin: 2em 15px;
 }
 
-.leaf{
+.leaf {
 	color: white;
-	/*font-weight: bold;*/
 	padding: 20px;
 	border-bottom: 1px solid black;
 }
-.info{
-	/*height: 200px;*/
-	/*top: 20px !important;*/
-	/*width: 500px;*/
-}
 
-.time{
+.time {
 	color: white;
 }
 
-.crime{
+.crime {
 	color: white;
 }
-.leaf:hover{
+
+.leaf:hover {
 	background-color: green;
 }
-.side_text{
+
+.side_text {
 	text-align: right;
- 	/*position: absolute;*/
 }
-.ui-bar-p{
+
+.ui-bar-p {
 	font-family: Helvetica,Arial,sans-serif;
 	background: #B87BB4;
 	color: #fff;
 	font-weight: 700;
 	text-shadow: 0 -1px 0 #000;
 	border: 1px solid #B87BB4 !important;
+
+	background-image: -webkit-linear-gradient(#d3b2d1,#B87BB4) !important;
+	background-image: -moz-linear-gradient(#d3b2d1,#B87BB4) !important;
+	background-image: -o-linear-gradient(#d3b2d1,#B87BB4) !important;
+	background-image: -ms-linear-gradient(#d3b2d1,#B87BB4) !important;
 	background-image: linear-gradient(#d3b2d1,#B87BB4) !important;
-}
-.submit{
-	width: 90% !important;
-	margin: auto !important;
 }

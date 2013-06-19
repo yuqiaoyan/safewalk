@@ -23,9 +23,8 @@
 	<title>Safewalk</title>
 </head>
 <body>
-	<!-- Home -->
-
-	<div data-role="page" id="page1" class= "back">
+	
+	<div data-role="page" id="page1" class="page1">
 		<div data-theme="p" data-role="header">
 			<h3></h3>
 		</div>
@@ -33,18 +32,15 @@
 		<div data-role="content" class="content_area">
 			<img src="img/hippo.png" class="logo">
 			<img src="img/title.png" class="logo_title">
-			<!-- <img src="img/hippo.png" class="filler" style="opacity: 0">
-			-->
+			<div class="filler"></div>
+			
 		
 			<div data-role="fieldcontain" class = "input_field">
-				<input type="text" class="start" value="Civic Center/Un Plaza San Francisco, CA" tabIndex="7" placeholder="start"/>
-			</div>
-			<div data-role="fieldcontain" class = "input_field" >
-				<input type="text" class ="end" value="Powell St San Francisco, CA" tabIndex="7"  placeholder="end"/>
-			</div>
-
-			<div class="homeSubmit">
-				<a href="#page3" onclick= "javascript:submit()" data-corners="false" data-role="button" class="submit ui-disabled" data-mini="true" data-theme="d" tabIndex="9">Find a Safe Route!</a>
+				<input type="text" class="start" value="Civic Center/Un Plaza San Francisco, CA" tabIndex="7" placeholder="start"/>			
+				<input type="text" class ="end" value="Powell St San Francisco, CA" tabIndex="7"  placeholder="end"/>			
+				<div class="homeSubmit">
+					<a href="#page2" onclick= "javascript:submit()" data-corners="false" data-role="button" class="submit ui-disabled" data-mini="true" data-theme="d" tabIndex="9">Find a Safe Route!</a>
+				</div>
 			</div>
 			
 			<div data-role="popup" id="popupOptions" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
@@ -54,37 +50,35 @@
 			</div>
 
 		</div>
-		<div data-theme="p" data-role="footer" data-position="fixed">
-			<h3></h3>
 
+		<div data-theme="p" data-role="footer" data-position="fixed" >
+			<h3></h3>
 		</div>
 
 	</div>
 
-	<div data-role="page" id="page3">
+	<div data-role="page" id="page2">
 		<div data-theme="p" data-role="header">
 			<a data-role="button" data-transition="slide" data-theme="d" href="#page1"
           data-icon="back" data-iconpos="left" class="ui-btn-left">Back</a>
 			<h3>Safe Walk</h3>
 		</div>
-		<div data-role="content" class="map_back">
+		<div data-role="content" class="content_area" >
 
 			<div id="map-canvas"></div>
-			<div id="wrapper"></div>
 			<div data-role="popup" id="popupOptions" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
-
 				<div class="optionsgrid1_wrapper info">
 					<div class="leaf1 leaf" onclick="javascript:chooseRoute(0)"></div>
 					<div class="leaf2 leaf" onclick="javascript:chooseRoute(1)"></div>
 					<div class="leaf3 leaf" onclick="javascript:chooseRoute(2)"></div>
 				</div>
 			</div>
-
 		</div>
 		<div data-theme="p" data-role="footer" data-position="fixed">
-			<a href="#popupOptions" class="openOptions" data-theme="d" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Routes</a>
+			<h3><a href="#popupOptions" class="openOptions ui-btn-left" data-theme="d" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Routes</a></h3>
 		</div>
 
 	</div>
+
 </body>
 </html>

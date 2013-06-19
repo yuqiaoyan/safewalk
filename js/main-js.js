@@ -36,13 +36,3 @@ function chooseRoute(number) {
 
 }
 
-
-
-$(window).resize(function() {
-	var start = $(".start").val();
-	var end = $(".end").val();
-	if (currentRouteNum != -1) {
-		updateRouteRenderer(start, end, currentRouteNum);
-	}
-
-});
