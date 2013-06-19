@@ -4,9 +4,17 @@ function renderUser(){
 	console.log("+renderUser");
 	console.log("user Location: ");
 	console.log(aUser);
-	console.log("Lat: " + aUser.getLat());
-	console.log("Long: " + aUser.getLon());
-	//createMark(user.lat,user.long);
+	
+	var point = aUser.getPt();
+
+	var marker = new google.maps.Marker({
+          position: point,
+          map: map,
+          title: "Me!",
+          icon:"img/blue_MarkerA.png",
+          zIndex:2
+
+    })
 
 	console.log("-renderUser");
 }
@@ -62,6 +70,9 @@ function updateRouteRenderer(start, end, number) {
 			directionsDisplay.setDirections(response);
 			directionsDisplay.setRouteIndex(routeCrimePts[number].routeNum);
 		}
+		else{
+			console.log("Unable to get directionService information");
+		}
 	});
 	google.maps.event.trigger(map, 'resize');
 
@@ -81,6 +92,11 @@ function updateMarkers(number) {
 	// for (var i = 0; i < routeCrimePts[number].pathkb.length; i++) {
 	// 	createPath(routeCrimePts[number].pathjb[i], routeCrimePts[number].pathkb[i]);
 	// };
+
+	console.log("+updateMarkers");
+	console.log("array length: " + routeCrimePts[number].array.length);
+	console.log("routeCrimePts[number].last " + routeCrimePts[number].last);
+
 	for (var i = routeCrimePts[number].last, j = 0; i < routeCrimePts[number].array.length; i++) {
 		markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X, number);
 		createInfoWindow(markers[j - 1], number, i);

@@ -1,38 +1,49 @@
+var SUPPORTED_CITIES = {"San Francisco":1};
+
 function user(){
 	console.log("+user")
 
 	//GLOBAL PRIVATE VARIABLES
 	var lat = null;
-	var lon = null;
+	var lng = null;
+	var point = null;
+	var city = null;
 
 	this.initialize = initialize;
 	this.getLat = getLat;
-	this.getLon = getLon;
+	this.getLng = getLng;
+	this.getPt = getPt;
 	this.setLocation = setLocation;
 	
+	//------- GETTER FUNCTIONS -----------//
 	function getLat(){
 		console.log("+getLat");
 		return lat;
 	}
 
-	function getLon(){
+	function getLng(){
 		console.log("+getLon");
-		return lon;
+		return lng;
 	}
 
+	function getPt(){
+		console.log("+getPt");
+		return point;
+	}
 
+	//------- SETTER FUNCTIONS -----------//
 	function setLocation(){
-	//sets user lat and lon based on their current location
+	//sets user lat and lng based on their current location
 
 		var userLocation = function(pos) {
 			// "this" is the instance of the function itself i believe
 			console.log("------ geolocate success ------");
-			lat = pos.coords.latitude;
-			lon = pos.coords.longitude;
+			lat = parseFloat(pos.coords.latitude);
+			lng = parseFloat(pos.coords.longitude);
+			point = new google.maps.LatLng(lat, lng);
 			console.log("lat: " + getLat());
-			console.log("long: " + getLon());
-			geocoder = new google.maps.Geocoder();
-			findAddress(lat, lon);
+			console.log("long: " + getLng());
+			findAddress(lat, lng);
 		};
 
 		/**
@@ -48,6 +59,7 @@ function user(){
 	}
 
 
+	//------- INITIALIZE -----------//
 	function initialize(){
 		console.log("+initialize")
 	
@@ -75,9 +87,12 @@ var routeCrimePts = [];
 var markersArray = [];
 var clusterArray = [];
 var hasMapInit = false;
+var geocoder = new google.maps.Geocoder();
+
+/*
 var geoCode;
 var lat = 37.7750;
-var lng = -122.4183;
+var lng = -122.4183;*/
 
 /* end google-map related globals */
 
