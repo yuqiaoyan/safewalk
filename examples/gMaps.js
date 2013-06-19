@@ -23,10 +23,20 @@ function initialize() {
         };
         map= new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
-        directionsDisplay = new google.maps.DirectionsRenderer();
+        /*directionsDisplay = new google.maps.DirectionsRenderer();
         directionsDisplay.setMap(map)
         directionsService = new google.maps.DirectionsService();
-        updateRouteRenderer(start,end)
+        updateRouteRenderer(start,end)*/
+
+        var point = new google.maps.LatLng(-34.397, 150.644);
+        var marker = new google.maps.Marker({
+          position: point,
+          map: map,
+          title: "me",
+          icon:"../img/blue_MarkerA.png",
+          zIndex:2
+
+        })
     
 }
 

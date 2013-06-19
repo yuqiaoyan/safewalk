@@ -33,10 +33,44 @@ $(document).delegate('#page2', 'pageshow', function() {
     $(this).height($(window).height()).find('[data-role="content"]').height(the_height);
 	var start = $(".start").val();
 	var end = $(".end").val();
+
+	//ASSUME START & END LOCATION IS IN A SUPPORTED CITY
+	//TODO: WRITE A TEST CASE FOR NOT SUPPORTED CITIES
+	//TODO: CHECK THE END POINT
+
+	var validRoute = true; //keeps track of valid routes
+
+	console.log("(--------- VALIDATE START AND END ---------")
+	if(validateCity(start) && validateCity(end))
+		validRoute = true;
+	else
+		validRoute = false;
+
+	console.log("Valid Route: ")
+	console.log(validRoute);
+
+	console.log("(--------- INITIALIZE MAP ---------")
 	if (!hasMapInit) {
-		initMap(lat, lng, function() {
-			calcRoute(start, end);
-		});
+		
+		//User did not give us permission to geocode
+		if(!aUser.getLat()){
+			console.log("User lat information is not available so map not initiating ")
+		}
+
+		//START OR END IS NOT SUPPORTED
+		else if(!validRoute){
+			console.log("Sorry we do not support this city. Here are the results from Google Maps");
+			initMap(aUser.getLat(),aUser.getLng(),function(){
+				//TODO: RENDER RESULTS FROM GOOGLE MAPS
+			});
+		}
+
+		else{
+			//initiates the map
+			initMap(aUser.getLat(), aUser.getLng(), function() {
+				calcRoute(start, end);
+			});
+		}
 		hasMapInit = true;
 	} else {
 		calcRoute(start, end);

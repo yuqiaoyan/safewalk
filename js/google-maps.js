@@ -74,6 +74,9 @@ function calcRoute(start, end) {
 			//temporarily placing it here
 			renderUser(); //render user marker
 		}
+		else{
+			console.log("Unable to get directionService information");
+		}
 
 		//add error code
 
@@ -231,7 +234,7 @@ function createInfoWindow(marker, number, i) {
 }
 
 function createPath(lat, lng) {
-
+	console.log("+createPath");
 	var marker = new google.maps.Marker({
 		icon: "img/blue_MarkerA.png",
 		map: map,
@@ -240,6 +243,7 @@ function createPath(lat, lng) {
 	});
 	markersArray.push(marker);
 	return marker;
+	console.log("-createPath");
 
 }
 
@@ -303,6 +307,7 @@ function findAddress(lat, lng) {
 	geocoder.geocode({
 		'latLng': latlng
 	}, function(results, status) {
+		console.log(results);
 		if (status == google.maps.GeocoderStatus.OK) {
 			if (results[1]) {
 				var street = results[1].formatted_address;
@@ -324,7 +329,7 @@ function findAddress(lat, lng) {
 /**
  * Get information about current Day and Time
  * @return {Object} return day, prevDay, nextDay, and time
- */
+ */		
 
 function getDate() {
 	var date = new Object;
