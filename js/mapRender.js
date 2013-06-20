@@ -36,9 +36,11 @@ REQUIRES: routeCrimePts and totalCrimes
 
 function renderRoutes(){
 //Draws the 3 routes on the result page
-	$('.info').html('');
+	console.log("<--render routes-->");
+	$('.leaf').remove();
+	console.log("size - ", routeCrimePts.length);
 	for (var i = 0; i < routeCrimePts.length; i++) {
-		$('.info').append("<div class = 'leaf' onclick='javascript:chooseRoute("+ i +")' >"+renderRoute(i)+"</div>");
+		$('.info').append("<div class='leaf' onclick='javascript:chooseRoute("+ i +")' >"+renderRoute(i)+"</div>");
 	}
 }
 

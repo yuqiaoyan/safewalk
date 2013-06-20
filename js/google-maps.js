@@ -62,6 +62,7 @@ function calcRoute(start, end) {
 
 	directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
+			routeCrimePts = [];
 			for (var i = 0; i < response.routes.length; i++) {
 				routeInfo(response, i)
 			};

@@ -58,7 +58,6 @@ function getBestRoute() {
 		return value1.totalCrimes - value2.totalCrimes;
 	})
 
-
 	
 	currentRouteNum = 0;
 	console.log("-getBestRoute");
