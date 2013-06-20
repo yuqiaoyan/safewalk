@@ -4,6 +4,15 @@ body {
 
 }
 
+#popupError{
+	width: 40% !important;
+	margin: auto !important;
+	padding: 5% !important;
+	background-image: linear-gradient(#f9f9f9,#b1aca7) !important;
+	font-weight: bold;
+	font-size: 10px;
+}
+
 .content_area {
 	/*-webkit-background-size: 100%;
 	-moz-background-size: 100%;
@@ -145,3 +154,4 @@ body {
 	background-image: -ms-linear-gradient(#d3b2d1,#B87BB4) !important;
 	background-image: linear-gradient(#d3b2d1,#B87BB4) !important;
 }
+

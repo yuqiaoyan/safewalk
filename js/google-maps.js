@@ -78,7 +78,6 @@ function calcRoute(start, end) {
 		else{
 			console.log("Unable to get directionService information");
 		}
-
 		//add error code
 
 	});

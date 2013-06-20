@@ -72,8 +72,10 @@ function updateRouteRenderer(start, end, number) {
 	google.maps.event.trigger(map, 'resize');
 	if(validRoute)
 		updateMarkers(number);
-	else
-		console.log("Sorry we do not support this city. Here are the results from Google Maps");
+	else{
+	$(".errormsg").html("Sorry! We currently do not support this city. Our team of hippos are working hard on it");
+		$( "#popupError" ).popup( "open" )
+	}
 }
 
 /**
@@ -95,7 +97,7 @@ function updateMarkers(number) {
 	console.log("routeCrimePts[number].last " + routeCrimePts[number].last);
 
 	for (var i = routeCrimePts[number].last, j = 0; i < routeCrimePts[number].array.length; i++) {
-		markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X, "img/hippo.png");
+	markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X, "img/hippo.png");
 		createInfoWindow(markers[j - 1], number, i);
 	}
 
