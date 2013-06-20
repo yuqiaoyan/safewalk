@@ -41,11 +41,29 @@ $(document).delegate('#page2', 'pageshow', function() {
 	var validRoute = true; //keeps track of valid routes
 
 	console.log("(--------- VALIDATE START AND END ---------")
-	if(validateCity(start) && validateCity(end))
-		validRoute = true;
-	else
-		validRoute = false;
+	validateCity(start,function(validRouteA){
+		if(validRouteA){
+			validateCity(end, function(validRouteB){
+				if(validRouteB){
+					validRoute = true;
+				}else{
+					validRoute = false;
+				}
+				runMap(validRoute);
+			});
+		}else{
+			validRoute = false;
+			runMap(validRoute);
+		}
+	});
 
+	// if(validateCity(start) && validateCity(end))
+	// 	validRoute = true;
+	// else
+	// 	validRoute = false;
+});
+
+function runMap(validRoute){
 	console.log("Valid Route: ")
 	console.log(validRoute);
 
@@ -75,7 +93,7 @@ $(document).delegate('#page2', 'pageshow', function() {
 	} else {
 		calcRoute(start, end);
 	}
-});
+}
 
 $(window).resize(function() {
 	var the_height = ($(window).height() - $('#page1').find('[data-role="header"]').height() - $('#page1').find('[data-role="footer"]').height());

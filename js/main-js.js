@@ -11,10 +11,12 @@ function submit() {
 	
 }
 
-function validateCity(address){
+function validateCity(address, cb){
 	/* REQUIRES STRING STREET ADDRESS LOCATION
 	RETURNS TRUE IF CITY IS SUPPORTED OTHERWISE RETURN FALSE
 	*/
+
+	var validRoute = true;
 
 	geocoder.geocode({'address': address}, function(results,status){
 		if(status == google.maps.GeocoderStatus.OK){
@@ -24,17 +26,19 @@ function validateCity(address){
 			if(!SUPPORTED_CITIES[city]){
 				console.log("Not supported city");
 				console.log("start city: " + city);
-				return false;
+				validRoute = false;
 			}
+			else
+				validRoute = true;
+			cb(validRoute);
 		}
 		else{
 			console.log("Google API RESULT ERROR");
 			console.log("Status" + google.maps.GeocoderStatus.OK);
 		}
+		
 	})	
-
-	return true;
-
+	
 }
 
 function getBestRoute() {
