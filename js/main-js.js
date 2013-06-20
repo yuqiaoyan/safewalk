@@ -20,16 +20,25 @@ function validateCity(address, cb){
 
 	geocoder.geocode({'address': address}, function(results,status){
 		if(status == google.maps.GeocoderStatus.OK){
-			var city = results[0].address_components[3].long_name; 
-			
+			var city;
+			for (var i = 0; i < results[0].address_components.length; i++) {
+				if(results[0].address_components[i].types[0] == "locality"){
+					city = results[0].address_components[i].long_name;
+					break;
+				}
+			};
+			 
 			//if the city is not supported then this is not a valid route
 			if(!SUPPORTED_CITIES[city]){
 				console.log("Not supported city");
 				console.log("start city: " + city);
 				validRoute = false;
 			}
-			else
+			else{
+				console.log("supported city");
+				console.log("start city: " + city);
 				validRoute = true;
+			}
 			cb(validRoute);
 		}
 		else{

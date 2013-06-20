@@ -56,7 +56,7 @@ function renderRoutes(){
  * @param  {int} number index of current route
  */
 
-function updateRouteRenderer(start, end, number) {
+function updateRouteRenderer(start, end, number, validRoute) {
 
 	var request = {
 		origin: start,
@@ -75,7 +75,10 @@ function updateRouteRenderer(start, end, number) {
 		}
 	});
 	google.maps.event.trigger(map, 'resize');
-	updateMarkers(number);
+	if(validRoute)
+		updateMarkers(number);
+	else
+		console.log("Sorry we do not support this city. Here are the results from Google Maps");
 }
 
 /**
