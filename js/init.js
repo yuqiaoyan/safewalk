@@ -36,7 +36,7 @@ $(document).delegate('#page2', 'pageshow', function() {
 	//TODO: WRITE A TEST CASE FOR NOT SUPPORTED CITIES
 	//TODO: CHECK THE END POINT
 
-	var validRoute = true; //keeps track of valid routes
+	validRoute = true; //keeps track of valid routes
 
 	console.log("(--------- VALIDATE START AND END ---------")
 	validateCity(start, function(validRouteA) {
@@ -49,18 +49,18 @@ $(document).delegate('#page2', 'pageshow', function() {
 				} else {
 					validRoute = false;
 				}
-				runMap(validRoute, start, end);
+				runMap(start, end);
 			});
 		} else {
 			validRoute = false;
-			runMap(validRoute, start, end);
+			runMap(start, end);
 		}
 
 	});
 
 });
 
-function runMap(validRoute, start, end) {
+function runMap(start, end) {
 	console.log("Valid Route: ")
 	console.log(validRoute);
 
@@ -77,12 +77,12 @@ function runMap(validRoute, start, end) {
 			//initiates the map
 			initMap(aUser.getLat(), aUser.getLng(), function() {
 				hasMapInit = true;
-				calcRoute(start, end, validRoute);
+				calcRoute(start, end);
 			});
 		}
 
 	} else {
-		calcRoute(start, end, validRoute);
+		calcRoute(start, end);
 	}
 }
 

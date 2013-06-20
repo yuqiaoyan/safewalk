@@ -50,7 +50,7 @@ function ftToMi(distanceFt) {
  * @param  {string} end   lat and lng of destination
  */
 
-function calcRoute(start, end, validRoute) {
+function calcRoute(start, end) {
 	console.log("+calcRoute");
 
 	var request = {
@@ -67,7 +67,7 @@ function calcRoute(start, end, validRoute) {
 			};
 			getBestRoute(); //sorts routeCrimePts and 
 
-			updateRouteRenderer(start, end, currentRouteNum, validRoute);
+			updateRouteRenderer(start, end, currentRouteNum);
 
 			renderRoutes();
 

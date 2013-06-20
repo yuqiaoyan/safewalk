@@ -88,7 +88,7 @@ var markersArray = [];
 var clusterArray = [];
 var hasMapInit = false;
 var geocoder = new google.maps.Geocoder();
-
+var validRoute;
 
 var geoCode;
 var lat = 37.7750;

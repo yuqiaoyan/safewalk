@@ -36,17 +36,10 @@ REQUIRES: routeCrimePts and totalCrimes
 
 function renderRoutes(){
 //Draws the 3 routes on the result page
-
+	$('.info').html('');
 	for (var i = 0; i < routeCrimePts.length; i++) {
-		if (i == 0) {
-			$(".leaf1").html(renderRoute(i));
-		} else if (i == 1) {
-			$(".leaf2").html(renderRoute(i));
-		} else {
-			$(".leaf3").html(renderRoute(i));
-		}
+		$('.info').append("<div class = 'leaf' onclick='javascript:chooseRoute("+ i +")' >"+renderRoute(i)+"</div>");
 	}
-
 }
 
 /**
@@ -56,7 +49,7 @@ function renderRoutes(){
  * @param  {int} number index of current route
  */
 
-function updateRouteRenderer(start, end, number, validRoute) {
+function updateRouteRenderer(start, end, number) {
 
 	var request = {
 		origin: start,
