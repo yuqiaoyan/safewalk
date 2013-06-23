@@ -6,7 +6,7 @@
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2OydZynp2KMPL3u3_9fBsDxGXZIyHA8w&amp;sensor=true"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 	<!-- INTERNAL JS -->
 	<script type="text/javascript" src="js/global.js"></script>
@@ -33,8 +33,11 @@
 			<div class="filler"></div>
 
 			<div data-role="fieldcontain" class = "input_field">
-				<input type="text" class="start" value="13702 NE 28th St. Bellevue WA" tabIndex="7" placeholder="start"/>
-				<input type="text" class ="end" value="9031 161st PL NE Redmond WA" tabIndex="7"  placeholder="end"/>
+				<input type="text" class="start" value="Un Plaza/Civic Center SF CA" tabIndex="7" placeholder="start"/>
+				<input type="text" class ="end" value="Pioneer Elementary School Union City CA" tabIndex="7"  placeholder="end"/>
+				<!-- Pioneer Elementary School Union City CA -->
+				<!-- 13702 NE 28th St. Bellevue WA -->
+				<!-- 9031 161st PL NE Redmond WA -->
 				<div class="homeSubmit">
 					<a href="#page2" onclick= "javascript:submit()" data-corners="false" data-role="button" class="submit ui-disabled" data-mini="true" data-theme="d" tabIndex="9">Find a Safe Route!</a>
 				</div>
@@ -56,7 +59,7 @@
 
 	<div data-role="page" id="page2">
 		<div data-theme="p" data-role="header">
-			<a data-role="button" data-transition="slide" data-theme="d" href="#page1"
+			<a data-role="button" data-transition="slide" data-theme="d" href="#page1" onclick='javascript:isTracking = false;'
           data-icon="back" data-iconpos="left" class="ui-btn-left">Back</a>
 			<h3>Safe Walk</h3>
 		</div>
@@ -65,10 +68,6 @@
 			<div id="map-canvas"></div>
 			<div data-role="popup" id="popupOptions" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
 				<div class="info">
-					<!-- <div class="leaf1 leaf" onclick="javascript:chooseRoute(0)"></div>
-				<div class="leaf2 leaf" onclick="javascript:chooseRoute(1)"></div>
-				<div class="leaf3 leaf" onclick="javascript:chooseRoute(2)"></div>
-				-->
 			</div>
 			<div data-role="popup" id="popupError" data-overlay-theme="a">
 				<label class="errormsg"></label>

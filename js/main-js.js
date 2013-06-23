@@ -68,6 +68,7 @@ function chooseRoute(number) {
 	
 	var start = $(".start").val();
 	var end = $(".end").val();
+	updateMarkers(number)
 	updateRouteRenderer(start, end, number);
 	// calcRoute(start, end, number, false);
 
