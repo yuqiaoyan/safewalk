@@ -8,28 +8,36 @@ function user(){
 	var lng = null;
 	var point = null;
 	var city = null;
+	var today = null;
 
 	this.initialize = initialize;
 	this.getLat = getLat;
 	this.getLng = getLng;
 	this.getPt = getPt;
 	this.setLocation = setLocation;
+	this.getToday = getToday; //from 0-6
 	
 	//------- GETTER FUNCTIONS -----------//
 	function getLat(){
-		console.log("+getLat");
 		return lat;
 	}
 
 	function getLng(){
-		console.log("+getLon");
 		return lng;
 	}
 
 	function getPt(){
-		console.log("+getPt");
 		return point;
 	}
+
+	function getToday(){
+		var date = new Date();
+		today = date.getDay(); 
+		console.log("user date: ")
+		console.log(today);
+		return today
+	}
+
 
 	//------- SETTER FUNCTIONS -----------//
 	function setLocation(){

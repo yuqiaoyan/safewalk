@@ -1,6 +1,16 @@
 function init() {
+	//TODO: MOVE INIT TO AFTER THE USER CLICKS SUBMIT
+
+	var localURL = "data/data_2.txt" 
+	var requestURL = "http://localhost:5000/?"
+	var parameters = "date=" + aUser.getToday() + "city=" + "SanFrancisco";
+	requestURL = requestURL + parameters;
+	console.log("requestURL",requestURL)
+
+	//TODO: Debug Flask cross domain
+
 	console.log("+data processing");
-	initData("data/data_2.txt", function() {
+	initData(requestURL, function() {
 		$('.submit').removeClass('ui-disabled')
 	});
 	console.log("-data processing");

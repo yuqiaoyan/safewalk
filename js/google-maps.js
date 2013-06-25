@@ -99,7 +99,7 @@ function routeInfo(response, routeNum) {
 	selectedLines.pathjb = [];
 	selectedLines.pathkb = [];
 	selectedLines.routeNum = routeNum;
-	selectedLines.array = [];
+	selectedLines.array = []; //array contains all crime data info with respect to day, time, and location
 	selectedLines.last = 0;
 	selectedLines.via;
 	selectedLines.duration;
@@ -162,6 +162,8 @@ function routeInfo(response, routeNum) {
 			index += 24;
 		}
 		for (var k = 0; k < database[key][index].length; k++) {
+			
+			/* GET THE X and Y COORDINATE OF ALL THE RELEVANT DATA*/
 			if (haversine(midJB, midKB, database[key][index][k].Y, database[key][index][k].X, radiusMi)) {
 				selectedLines.array[nIndex++] = database[key][index][k];
 			}
@@ -299,9 +301,6 @@ function clearOverlays() {
 	};
 }
 
-function findLatLng(address){
-
-}
 function findAddress(lat, lng) {
 	var latlng = new google.maps.LatLng(lat, lng);
 	geocoder.geocode({

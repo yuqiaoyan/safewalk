@@ -19,6 +19,7 @@ function initData(dataLocation, callback){
 		url: dataLocation,
 		dataType: "text",
 		success: function(data) {
+			console.log("request data from server")
 			processData(data);
 			callback();
 		}
@@ -78,8 +79,10 @@ function processData(allText) {
 			}
 		}
 	}
+	console.log(database["Sunday".hashCode()])
 }
 
+//Extending String object to include a hashfunction
 String.prototype.hashCode = function() {
 	var hash = 0,
 		i, char;
