@@ -27,7 +27,7 @@ function initMap(lat, lng, callback) {
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
 	directionsDisplay.setMap(map);
-
+	// createMark(lat,lng,"img/hippo.png");
 	callback();
 	console.log("-google-maps initialize");
 }
@@ -63,19 +63,32 @@ function calcRoute(start, end) {
 	directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
 			routeCrimePts = [];
-			for (var i = 0; i < response.routes.length; i++) {
-				routeInfo(response, i)
-			};
-			getBestRoute(); //sorts routeCrimePts and 
+			if(currentAddress == start){
+				isTracking = true;
+			}else{
+				isTracking = false;
+			}
+
+			if (validRoute) {
+				$('.openOptions').removeClass('ui-disabled')
+				for (var i = 0; i < response.routes.length; i++) {
+					routeInfo(response, i)
+				};
+				getBestRoute(); //sorts routeCrimePts and 
+				renderRoutes();
+				updateMarkers(currentRouteNum);
+			} else {
+				$('.openOptions').addClass('ui-disabled')
+				$(".errormsg").html("Sorry! We currently do not support this city. Our team of hippos are working hard on it");
+				$("#popupError").popup("open")
+			}
 
 			updateRouteRenderer(start, end, currentRouteNum);
 
-			renderRoutes();
-
 			//temporarily placing it here
-			renderUser(); //render user marker
-		}
-		else{
+			if(isTracking)
+				renderUser(); //render user marker
+		} else {
 			console.log("Unable to get directionService information");
 		}
 		//add error code
@@ -204,20 +217,28 @@ function routeInfo(response, routeNum) {
  */
 
 function createMark(lat, lng, icon) {
-	var pinIcon = new google.maps.MarkerImage(
-		icon,
-		null, /* size is determined at runtime */
-		null, /* origin is 0,0 */
-		null, /* anchor is bottom center of the scaled image */
-		new google.maps.Size(30, 20));
+	if (icon) {
+		var pinIcon = new google.maps.MarkerImage(
+			icon,
+			null, /* size is determined at runtime */
+			null, /* origin is 0,0 */
+			null, /* anchor is bottom center of the scaled image */
+			new google.maps.Size(30, 20));
 
-	var marker = new google.maps.Marker({
-		map: map,
-		position: new google.maps.LatLng(lat, lng),
-		zIndex: 1,
-		shadow: pinIcon,
-		icon: pinIcon
-	});
+		var marker = new google.maps.Marker({
+			map: map,
+			position: new google.maps.LatLng(lat, lng),
+			zIndex: 1,
+			icon: pinIcon
+		});
+	} else {
+		var marker = new google.maps.Marker({
+			map: map,
+			position: new google.maps.LatLng(lat, lng),
+			zIndex: 1
+		});
+	}
+
 	markersArray.push(marker);
 	return marker;
 
@@ -301,6 +322,10 @@ function clearOverlays() {
 	};
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bd65199268beff6855cc7ce194976eb154ac4839
 function findAddress(lat, lng) {
 	var latlng = new google.maps.LatLng(lat, lng);
 	geocoder.geocode({
@@ -308,14 +333,15 @@ function findAddress(lat, lng) {
 	}, function(results, status) {
 		console.log(results);
 		if (status == google.maps.GeocoderStatus.OK) {
-			if (results[1]) {
-				var street = results[1].formatted_address;
+			if (results[0]) {
+				var street = results[0].formatted_address;
 				console.log("User street: " + street);
 				// alert(street);
+				currentAddress = street;
 				if (street.indexOf("San Francisco") !== -1) {
 					$(".start").val(street);
 				}
-
+				$(".start").val(street);
 			} else {
 				alert('No results found');
 			}
@@ -328,7 +354,7 @@ function findAddress(lat, lng) {
 /**
  * Get information about current Day and Time
  * @return {Object} return day, prevDay, nextDay, and time
- */		
+ */
 
 function getDate() {
 	var date = new Object;

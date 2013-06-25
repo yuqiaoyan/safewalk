@@ -97,14 +97,13 @@ var clusterArray = [];
 var hasMapInit = false;
 var geocoder = new google.maps.Geocoder();
 var validRoute;
-
 var geoCode;
-var lat = 37.7750;
-var lng = -122.4183;
+
 
 /* end google-map related globals */
 
 var debug = false;
+var currentAddress;
 
 /* main-js globals */
 
@@ -114,3 +113,7 @@ var loaded = false;
 /* crime.js globals */
 
 var database = [];
+
+/*map render globals */
+var userMarker = null;
+var isTracking = false;

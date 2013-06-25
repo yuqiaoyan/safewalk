@@ -1,29 +1,43 @@
 /* contains all functions for rendering */
 
-function renderUser(){
+function renderUser() {
 	console.log("+renderUser");
 	console.log("user Location: ");
-	console.log(aUser);
-	
-	var point = aUser.getPt();
+	// console.log(aUser);
 
-	var marker = new google.maps.Marker({
-          position: point,
-          map: map,
-          title: "Me!",
-          icon:"img/blue_MarkerA.png",
-          zIndex:2
+	// var point = aUser.getPt();
+	navigator.geolocation.getCurrentPosition(function(position) {
+		var point = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		if (userMarker) {
+			userMarker.setPosition(point);
+		} else {
+			console.log("create hippo icon");
+			var pinIcon = new google.maps.MarkerImage(
+				"img/hippo.png",
+				null, /* size is determined at runtime */
+				null, /* origin is 0,0 */
+				null, /* anchor is bottom center of the scaled image */
+				new google.maps.Size(30, 20));
 
-    })
+			userMarker = new google.maps.Marker({
+				position: point,
+				map: map,
+				title: "Me!",
+				icon: pinIcon,
+				zIndex: 2
 
+			});
+		}
+		// map.setCenter(point);
+	});
 	console.log("-renderUser");
+	if (isTracking)
+		setTimeout(renderUser, 5000);
 }
 
 function renderRoute(routeNum) {
-/* HTML for drawing a single routeInfo
-REQUIRES: routeCrimePts and totalCrimes
-
-*/
+	/* HTML for drawing a single routeInfo
+	REQUIRES: routeCrimePts and totalCrimes*/
 
 	var routeDiv = "<div class = 'route'> "
 	routeDiv += routeCrimePts[routeNum].via
@@ -34,13 +48,13 @@ REQUIRES: routeCrimePts and totalCrimes
 	return routeDiv;
 }
 
-function renderRoutes(){
-//Draws the 3 routes on the result page
+function renderRoutes() {
+	//Draws the 3 routes on the result page
 	console.log("<--render routes-->");
 	$('.leaf').remove();
 	console.log("size - ", routeCrimePts.length);
 	for (var i = 0; i < routeCrimePts.length; i++) {
-		$('.info').append("<div class='leaf' onclick='javascript:chooseRoute("+ i +")' >"+renderRoute(i)+"</div>");
+		$('.info').append("<div class='leaf' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(i) + "</div>");
 	}
 }
 
@@ -63,19 +77,13 @@ function updateRouteRenderer(start, end, number) {
 	directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
 			directionsDisplay.setDirections(response);
-			directionsDisplay.setRouteIndex(routeCrimePts[number].routeNum);
-		}
-		else{
+			if (validRoute) {
+				directionsDisplay.setRouteIndex(routeCrimePts[number].routeNum);
+			}
+		} else {
 			console.log("Unable to get directionService information");
 		}
 	});
-	google.maps.event.trigger(map, 'resize');
-	if(validRoute)
-		updateMarkers(number);
-	else{
-	$(".errormsg").html("Sorry! We currently do not support this city. Our team of hippos are working hard on it");
-		$( "#popupError" ).popup( "open" )
-	}
 }
 
 /**
@@ -84,8 +92,8 @@ function updateRouteRenderer(start, end, number) {
  */
 
 function updateMarkers(number) {
+
 	clearOverlays();
-	// console.log(routeCrimePts);
 	var markers = [];
 
 	// for (var i = 0; i < routeCrimePts[number].pathkb.length; i++) {
@@ -97,7 +105,7 @@ function updateMarkers(number) {
 	console.log("routeCrimePts[number].last " + routeCrimePts[number].last);
 
 	for (var i = routeCrimePts[number].last, j = 0; i < routeCrimePts[number].array.length; i++) {
-	markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X, "img/hippo.png");
+		markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X);
 		createInfoWindow(markers[j - 1], number, i);
 	}
 
@@ -107,4 +115,6 @@ function updateMarkers(number) {
 	};
 	var markerCluster = new MarkerClusterer(map, markers, mcOptions);
 	clusterArray.push(markerCluster);
+
+
 }
