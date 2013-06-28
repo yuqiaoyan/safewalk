@@ -1,44 +1,66 @@
-var currentRouteNum = -1;
-var loaded = false;
+
+if(debug){
+
+	//if we need to debug print out statistics about our code
+	console.log("Route Crime Array Object: ");
+	console.log(routeCrimePts);
+	console.log("Total minimum crimes is " + routeCrimePts[0].totalCrimes);
+};
 
 function submit() {
 	
 }
-var bestRoute;
+
+function validateCity(address, cb){
+	/* REQUIRES STRING STREET ADDRESS LOCATION
+	RETURNS TRUE IF CITY IS SUPPORTED OTHERWISE RETURN FALSE
+	*/
+
+	var validRoute = true;
+
+	geocoder.geocode({'address': address}, function(results,status){
+		if(status == google.maps.GeocoderStatus.OK){
+			var city;
+			for (var i = 0; i < results[0].address_components.length; i++) {
+				if(results[0].address_components[i].types[0] == "locality"){
+					city = results[0].address_components[i].long_name;
+					break;
+				}
+			};
+			 
+			//if the city is not supported then this is not a valid route
+			if(!SUPPORTED_CITIES[city]){
+				console.log("Not supported city");
+				console.log("start city: " + city);
+				validRoute = false;
+			}
+			else{
+				console.log("supported city");
+				console.log("start city: " + city);
+				validRoute = true;
+			}
+			cb(validRoute);
+		}
+		else{
+			console.log("Google API RESULT ERROR");
+			console.log("Status" + google.maps.GeocoderStatus.OK);
+		}
+		
+	})	
+	
+}
 
 function getBestRoute() {
-	sortCrime();
+	console.log("+getBestRoute");
+
+	//sort routeCrimePts to ascending order
+	routeCrimePts.sort(function(value1,value2){
+		return value1.totalCrimes - value2.totalCrimes;
+	})
+
 	
-	var start = $(".start").val();
-	var end = $(".end").val();
-	var minCrimes = routeCrimePts[0].totalCrimes;
-	bestRoute = 0;
-	console.log("Total crimes is " + routeCrimePts[0].totalCrimes);
-
-	for (var i = 1; i < routeCrimePts.length; i++) {
-		if (minCrimes > routeCrimePts[i].totalCrimes) {
-			bestRoute = i;
-			minCrimes = routeCrimePts[i].totalCrimes;
-		}
-	};
-
-	console.log("Max Crimes " + minCrimes);
-	console.log("bestRoute " + bestRoute);
-	currentRouteNum = bestRoute;
-	
-	updateRouteRenderer(start, end, currentRouteNum);
-	// calcRoute(start, end, bestRoute, false)
-
-	for (var i = 0; i < routeCrimePts.length; i++) {
-		if (i == 0) {
-			$(".leaf1").html(renderRoute(i));
-		} else if (i == 1) {
-			$(".leaf2").html(renderRoute(i));
-		} else {
-			$(".leaf3").html(renderRoute(i));
-		}
-	}
-
+	currentRouteNum = 0;
+	console.log("-getBestRoute");
 
 }
 
@@ -46,40 +68,9 @@ function chooseRoute(number) {
 	
 	var start = $(".start").val();
 	var end = $(".end").val();
+	updateMarkers(number)
 	updateRouteRenderer(start, end, number);
 	// calcRoute(start, end, number, false);
 
-
 }
 
-function renderRoute(routeNum) {
-	var routeDiv = "<div class = 'route'> "
-	routeDiv += routeCrimePts[routeNum].via
-	routeDiv += "<div class = 'side_text'><span class = 'time'>" + routeCrimePts[routeNum].duration + "</span> - "
-	routeDiv += " <span class = 'crime'> "
-	routeDiv += routeCrimePts[routeNum].totalCrimes + "\t crimes </span> reported</div> "
-	routeDiv += "</div>";
-	return routeDiv;
-}
-
-function sortCrime() {
-	var temp;
-	for (var i = 0; i < routeCrimePts.length - 1; i++) {
-		for (var j = i + 1; j < routeCrimePts.length; j++) {
-			if (routeCrimePts[i].totalCrimes > routeCrimePts[j].totalCrimes) {
-				temp = routeCrimePts[j];
-				routeCrimePts[j] = routeCrimePts[i];
-				routeCrimePts[i] = temp;
-			}
-		}
-	}
-}
-
-$(window).resize(function() {
-	var start = $(".start").val();
-	var end = $(".end").val();
-	if (currentRouteNum != -1) {
-		updateRouteRenderer(start, end, currentRouteNum);
-	}
-
-});

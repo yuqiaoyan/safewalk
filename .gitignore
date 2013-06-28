@@ -1,0 +1,9 @@
+/examples/*
+gMaps.html
+gMaps.js
+*.zip
+*.svg
+*.exe
+*.dll
+
+.DS_Store

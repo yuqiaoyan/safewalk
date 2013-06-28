@@ -1,15 +1,3 @@
-var directionsDisplay;
-var directionsService = new google.maps.DirectionsService();
-var infowindow;
-var map;
-var routes;
-var routeResponse;
-var routeCrimePts = [];
-var markersArray = [];
-var clusterArray = [];
-var hasMapInit = false;
-var geoCode;
-
 /**
  * Initializes Google Maps
  * @param  {double}   lat      Latitude in start input
@@ -17,7 +5,9 @@ var geoCode;
  * @param  {Function} callback Call function after map loads
  */
 
-function initialize(lat, lng, callback) {
+function initMap(lat, lng, callback) {
+	console.log("+google-maps initialize");
+
 
 	var polyOption = {
 		strokeColor: "red"
@@ -37,63 +27,12 @@ function initialize(lat, lng, callback) {
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
 	directionsDisplay.setMap(map);
-
+	// createMark(lat,lng,"img/hippo.png");
 	callback();
-
+	console.log("-google-maps initialize");
 }
 
-/**
- * Updates direction display
- * @param  {string} start  lat and lng of start location
- * @param  {string} end    lat and lng of destination
- * @param  {int} number index of current route
- */
 
-function updateRouteRenderer(start, end, number) {
-
-	var request = {
-		origin: start,
-		destination: end,
-		provideRouteAlternatives: true,
-		travelMode: google.maps.DirectionsTravelMode.WALKING
-	};
-
-	directionsService.route(request, function(response, status) {
-		if (status == google.maps.DirectionsStatus.OK) {
-			directionsDisplay.setDirections(response);
-			directionsDisplay.setRouteIndex(routeCrimePts[number].routeNum);
-		}
-	});
-	google.maps.event.trigger(map, 'resize');
-
-	updateMarkers(number);
-}
-
-/**
- * Updates rendering for markers
- * @param  {int} number index of current route
- */
-
-function updateMarkers(number) {
-	clearOverlays();
-	// console.log(routeCrimePts);
-	var markers = [];
-
-	// for (var i = 0; i < routeCrimePts[number].pathkb.length; i++) {
-	// 	createPath(routeCrimePts[number].pathjb[i], routeCrimePts[number].pathkb[i]);
-	// };
-	for (var i = routeCrimePts[number].last, j = 0; i < routeCrimePts[number].array.length; i++) {
-		markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X, number);
-		createInfoWindow(markers[j - 1], number, i);
-	}
-
-	var mcOptions = {
-		gridSize: 50,
-		maxZoom: 20
-	};
-	var markerCluster = new MarkerClusterer(map, markers, mcOptions);
-	clusterArray.push(markerCluster);
-}
 
 /**
  * Convert feet to mile
@@ -112,6 +51,7 @@ function ftToMi(distanceFt) {
  */
 
 function calcRoute(start, end) {
+	console.log("+calcRoute");
 
 	var request = {
 		origin: start,
@@ -122,12 +62,40 @@ function calcRoute(start, end) {
 
 	directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
-			for (var i = 0; i < response.routes.length; i++) {
-				routeInfo(response, i)
-			};
-			getBestRoute();
+			routeCrimePts = [];
+			if(currentAddress == start){
+				isTracking = true;
+			}else{
+				isTracking = false;
+			}
+
+			if (validRoute) {
+				$('.openOptions').removeClass('ui-disabled')
+				for (var i = 0; i < response.routes.length; i++) {
+					routeInfo(response, i)
+				};
+				getBestRoute(); //sorts routeCrimePts and 
+				renderRoutes();
+				updateMarkers(currentRouteNum);
+			} else {
+				$('.openOptions').addClass('ui-disabled')
+				$(".errormsg").html("Sorry! We currently do not support this city. Our team of hippos are working hard on it");
+				$("#popupError").popup("open")
+			}
+
+			updateRouteRenderer(start, end, currentRouteNum);
+
+			//temporarily placing it here
+			if(isTracking)
+				renderUser(); //render user marker
+		} else {
+			console.log("Unable to get directionService information");
 		}
+		//add error code
+
 	});
+
+	console.log("-calcRoute");
 
 }
 
@@ -144,7 +112,7 @@ function routeInfo(response, routeNum) {
 	selectedLines.pathjb = [];
 	selectedLines.pathkb = [];
 	selectedLines.routeNum = routeNum;
-	selectedLines.array = [];
+	selectedLines.array = []; //array contains all crime data info with respect to day, time, and location
 	selectedLines.last = 0;
 	selectedLines.via;
 	selectedLines.duration;
@@ -207,6 +175,8 @@ function routeInfo(response, routeNum) {
 			index += 24;
 		}
 		for (var k = 0; k < database[key][index].length; k++) {
+			
+			/* GET THE X and Y COORDINATE OF ALL THE RELEVANT DATA*/
 			if (haversine(midJB, midKB, database[key][index][k].Y, database[key][index][k].X, radiusMi)) {
 				selectedLines.array[nIndex++] = database[key][index][k];
 			}
@@ -246,13 +216,29 @@ function routeInfo(response, routeNum) {
  * @return {object}     markerObject
  */
 
-function createMark(lat, lng) {
+function createMark(lat, lng, icon) {
+	if (icon) {
+		var pinIcon = new google.maps.MarkerImage(
+			icon,
+			null, /* size is determined at runtime */
+			null, /* origin is 0,0 */
+			null, /* anchor is bottom center of the scaled image */
+			new google.maps.Size(30, 20));
 
-	var marker = new google.maps.Marker({
-		map: map,
-		position: new google.maps.LatLng(lat, lng),
-		zIndex: 1
-	});
+		var marker = new google.maps.Marker({
+			map: map,
+			position: new google.maps.LatLng(lat, lng),
+			zIndex: 1,
+			icon: pinIcon
+		});
+	} else {
+		var marker = new google.maps.Marker({
+			map: map,
+			position: new google.maps.LatLng(lat, lng),
+			zIndex: 1
+		});
+	}
+
 	markersArray.push(marker);
 	return marker;
 
@@ -271,7 +257,7 @@ function createInfoWindow(marker, number, i) {
 }
 
 function createPath(lat, lng) {
-
+	console.log("+createPath");
 	var marker = new google.maps.Marker({
 		icon: "img/blue_MarkerA.png",
 		map: map,
@@ -280,6 +266,7 @@ function createPath(lat, lng) {
 	});
 	markersArray.push(marker);
 	return marker;
+	console.log("-createPath");
 
 }
 
@@ -335,40 +322,26 @@ function clearOverlays() {
 	};
 }
 
-$(document).delegate('#page3', 'pageshow', function() {
-	var lat = 37.7750;
-	var lng = -122.4183;
-	var start = $(".start").val();
-	var end = $(".end").val();
+<<<<<<< HEAD
+=======
 
-	if (!hasMapInit) {
-		initialize(lat, lng, function() {
-			calcRoute(start, end);
-		});
-		hasMapInit = true;
-	} else {
-		calcRoute(start, end);
-	}
-});
-
-$(document).ready(function() {
-	navigator.geolocation.getCurrentPosition(userLocation, e);
-});
-
-
+>>>>>>> bd65199268beff6855cc7ce194976eb154ac4839
 function findAddress(lat, lng) {
 	var latlng = new google.maps.LatLng(lat, lng);
 	geocoder.geocode({
 		'latLng': latlng
 	}, function(results, status) {
+		console.log(results);
 		if (status == google.maps.GeocoderStatus.OK) {
-			if (results[1]) {
-				var street = results[1].formatted_address;
+			if (results[0]) {
+				var street = results[0].formatted_address;
+				console.log("User street: " + street);
 				// alert(street);
+				currentAddress = street;
 				if (street.indexOf("San Francisco") !== -1) {
 					$(".start").val(street);
 				}
-
+				$(".start").val(street);
 			} else {
 				alert('No results found');
 			}
@@ -434,25 +407,4 @@ function generateInfo(data) {
 	//   text += '<div class="check_in">Check In!</div> '
 	text += '</div>'
 	return text;
-}
-
-/**
- * Find your lat and lng
- * @param  {object} pos required to find your geolocation
- */
-var userLocation = function(pos) {
-	var lat = pos.coords.latitude;
-	var long = pos.coords.longitude;
-	geocoder = new google.maps.Geocoder();
-	findAddress(lat, long);
-}
-
-/**
- * Error if your location is not found
- * @param  {object} error error object
- */
-var e = function(error) {
-	if (error.code === 1) {
-		alert('Unable to get location');
-	}
 }

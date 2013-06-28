@@ -1,15 +1,30 @@
-var database = [];
 
-$(document).ready(function() {
+
+function initData(dataLocation, callback){
+	/*if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+		    xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+		    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open("GET",dataLocation,false);
+		xmlhttp.send();
+		xmlDoc=xmlhttp.responseText;
+		processData(xmlDoc);*/
+
 	$.ajax({
 		type: "GET",
-		url: "data/data_2.txt",
+		url: dataLocation,
 		dataType: "text",
 		success: function(data) {
+			console.log("request data from server")
 			processData(data);
+			callback();
 		}
 	});
-});
+}
 
 
 function processData(allText) {
@@ -64,8 +79,10 @@ function processData(allText) {
 			}
 		}
 	}
+	console.log(database["Sunday".hashCode()])
 }
 
+//Extending String object to include a hashfunction
 String.prototype.hashCode = function() {
 	var hash = 0,
 		i, char;
