@@ -1,4 +1,4 @@
-var SUPPORTED_CITIES = {"San Francisco":1};
+var SUPPORTED_CITIES = {"San Francisco":1,"Seattle":1};
 
 function user(){
 	console.log("+user")
@@ -16,25 +16,23 @@ function user(){
 	this.getPt = getPt;
 	this.setLocation = setLocation;
 	this.getToday = getToday; //from 0-6
+	this.getCity = getCity;
+	this.setCity=setCity;
 	
 	//------- GETTER FUNCTIONS -----------//
-	function getLat(){
-		return lat;
-	}
+	function getLat(){return lat;}
 
-	function getLng(){
-		return lng;
-	}
+	function getLng(){ return lng;}
 
-	function getPt(){
-		return point;
-	}
+	function getPt(){ return point;}
 
-	function getToday(){
-		var date = new Date();
-		today = date.getDay(); 
+	function getCity(){ return city;}
+
+	function getToday(){		
+		var date = getDate(); //object: prevDay, day, nextDay, time 
+		today = date.day; 
 		console.log("user date: ")
-		console.log(today);
+		console.log(date);
 		return today
 	}
 
@@ -64,6 +62,10 @@ function user(){
 			}
 		}
 		navigator.geolocation.getCurrentPosition(userLocation, e);
+	}
+
+	function setCity(parsedCity){
+		city = parsedCity;
 	}
 
 

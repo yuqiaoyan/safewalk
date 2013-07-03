@@ -19,7 +19,8 @@ function initData(dataLocation, callback){
 		url: dataLocation,
 		dataType: "text",
 		success: function(data) {
-			console.log("request data from server")
+			console.log("request data from server. DATA IS")
+			console.log(data)
 			processData(data);
 			callback();
 		}

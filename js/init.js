@@ -2,9 +2,16 @@ function init() {
 	//TODO: MOVE INIT TO AFTER THE USER CLICKS SUBMIT
 
 	var localURL = "data/data_2.txt" 
-	var requestURL = "http://localhost:5000/?"
-	var parameters = "date=" + aUser.getToday() + "city=" + "SanFrancisco";
-	requestURL = requestURL + parameters;
+	var amazonIP = "ec2-54-215-147-231"
+	var ip = "localhost"
+	var requestURL = "http://" + amazonIP + ":5000/?"
+	console.log("requestURL IS",requestURL)
+	var d = new Date();
+	time = d.getHours() + ":" + d.getMinutes(); 
+	
+	var parameters = "day=" + aUser.getToday() + "&city=" + "SF" + "&time=" + time;
+	var testParameters = "day=" + "Monday" + "&city=" + "SF" + "&time=" + time;
+	requestURL = requestURL + testParameters;
 	console.log("requestURL",requestURL)
 
 	//TODO: Debug Flask cross domain

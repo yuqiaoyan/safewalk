@@ -322,7 +322,10 @@ function clearOverlays() {
 	};
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> bd65199268beff6855cc7ce194976eb154ac4839
 function findAddress(lat, lng) {
 	var latlng = new google.maps.LatLng(lat, lng);
 	geocoder.geocode({
@@ -366,9 +369,9 @@ function getDate() {
 	weekday[6] = "Saturday";
 
 	if (d.getDay() == 0)
-		date.prevDay = weekday[6]
+		date.previousDay = weekday[6]
 	else
-		date.prevDay = weekday[d.getDay() - 1];
+		date.previousDay = weekday[d.getDay() - 1];
 	if (d.getDay() == 6)
 		date.nextDay = weekday[0]
 	else

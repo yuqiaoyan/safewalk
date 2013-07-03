@@ -24,6 +24,8 @@ function validateCity(address, cb){
 			for (var i = 0; i < results[0].address_components.length; i++) {
 				if(results[0].address_components[i].types[0] == "locality"){
 					city = results[0].address_components[i].long_name;
+					aUser.setCity(city);
+					console.log("User's city is: ", aUser.getCity())
 					break;
 				}
 			};
