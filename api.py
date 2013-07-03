@@ -5,8 +5,8 @@
 from crossDomain import *
 
 import sys
-#sys.path.append('/home/ubuntu/safewalk/dba')
-sys.path.append('/Users/bonnieyu/safewalk/dba')
+sys.path.append('/home/ubuntu/safewalk/dba')
+#sys.path.append('/Users/bonnieyu/safewalk/dba')
 
 from dbAccess import *
 
