@@ -2,15 +2,15 @@ function init() {
 	//TODO: MOVE INIT TO AFTER THE USER CLICKS SUBMIT
 
 	var localURL = "data/data_2.txt" 
-	var amazonIP = "ec2-54-215-147-231"
-	var ip = "localhost"
-	var requestURL = "http://" + amazonIP + ":5000/?"
+	var amazonIP = "54.215.147.231"
+	var IP = "localhost"
+	var requestURL = "http://" + IP + ":5000/?"
 	console.log("requestURL IS",requestURL)
 	var d = new Date();
 	time = d.getHours() + ":" + d.getMinutes(); 
 	
-	var parameters = "day=" + aUser.getToday() + "&city=" + "SF" + "&time=" + time;
-	var testParameters = "day=" + "Monday" + "&city=" + "SF" + "&time=" + time;
+	var parameters = "day=" + aUser.getToday() + "&city=" + "SanFrancisco" + "&time=" + time;
+	var testParameters = "day=" + "Monday" + "&city=" + "SanFrancisco" + "&time=" + time;
 	requestURL = requestURL + testParameters;
 	console.log("requestURL",requestURL)
 

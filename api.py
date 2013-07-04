@@ -5,12 +5,14 @@
 from crossDomain import *
 
 import sys
-sys.path.append('/home/ubuntu/safewalk/dba')
-#sys.path.append('/Users/bonnieyu/safewalk/dba')
+#sys.path.append('/home/ubuntu/safewalk/dba')
+sys.path.append('/Users/bonnieyu/safewalk/dba')
 
 from dbAccess import *
 
 from pymongo import MongoClient
+
+import simplejson
 import datetime
 from datetime import date
 
@@ -38,15 +40,24 @@ def connect(db_name,collection_name):
 @crossdomain(origin='*')
 def my_service():
 	#args = parser.parse_args()
-	print "this is request args",request.values
+	print "---- GETTING QUERY REQUEST FROM CLIENT ---"
+	#print "this is request args",request.values
 	dayOfWeek = request.args.get('day')
 	city = request.args.get('city')
 	time = request.args.get('time')
 
 	crimeList = GetData(client, city, dayOfWeek,time)
-	print "%s | %s | %s" % (city, dayOfWeek, time)
-	print "total crimes is ", len(crimeList)
-	return jsonify(foo='cross domain ftw')
+	totalCrimes = len(crimeList)
+	crimeJSON = simplejson.dumps(crimeList)
+
+	print "Query Parameters %s | %s | %s" % (city, dayOfWeek, time)
+	print "total crimes is ", totalCrimes
+	print crimeList[0]
+	#temp = [totalCrimes, crimeJSON]
+	return crimeJSON
+
+	#return simplejson.dumps(crimeList)
+	#return jsonify(foo=crimeList[0]['Category'])
 #class HelloWorld(restful.Resource):
 #    def get(self):
 #        return {'hello': 'world'}

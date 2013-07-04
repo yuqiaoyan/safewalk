@@ -150,6 +150,7 @@ function routeInfo(response, routeNum) {
 	var midJB = (initialStepJB + finalStepJB) / 2;
 	var midKB = (initialStepKB + finalStepKB) / 2;
 	var radiusMi = ftToMi(totalDistance);
+	var nIndex = 0;
 
 	// var selectedLines = [];
 	// console.log("total distance meters " + totalDistance);
@@ -157,12 +158,12 @@ function routeInfo(response, routeNum) {
 
 	/**
 	 * Haversine by day and time
-	 */
+	 
 	var key;
 	var date = getDate();
 	// key = date.day.hashCode();
 	var hour = Math.floor(date.time / 100);
-	var nIndex = 0;
+	
 	// for(var index = 0; index < 24; index++){
 	for (var n = hour - 4; n < hour + 4; n++) {
 		var index = n;
@@ -176,12 +177,26 @@ function routeInfo(response, routeNum) {
 		}
 		for (var k = 0; k < database[key][index].length; k++) {
 			
-			/* GET THE X and Y COORDINATE OF ALL THE RELEVANT DATA*/
+			/* GET THE X and Y COORDINATE OF ALL THE RELEVANT DATA
+
+			database.X
+			database.Y
+			
 			if (haversine(midJB, midKB, database[key][index][k].Y, database[key][index][k].X, radiusMi)) {
 				selectedLines.array[nIndex++] = database[key][index][k];
 			}
 		};
-	};
+	};*/
+
+	function set_selectedLines(crime,index,array){
+
+		if(haversine(midJB,midKB,crime.x,crime.y,radiusMi)){
+			console.log("CRIME PT : ",crime);
+			selectedLines.array[nIndex++] = crime;
+		}
+	}
+
+	database.forEach(set_selectedLines);
 
 	// console.log("total selected lines " + selectedLines.array.length);
 	selectedLines.last = selectedLines.array.length - 1;

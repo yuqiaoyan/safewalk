@@ -9,7 +9,7 @@ def GetData(client, city, dayOfWeek, timeOfDay) :
     db = client.crimedb;
     print db.collection_names();
     # Get collection for each city
-    collectionSF = db[city];
+    collectionSF = db[city]
     
     # Get time of day and find low and upper bounds to lookup
     #parts = timeOfDay.split(":");
@@ -20,7 +20,7 @@ def GetData(client, city, dayOfWeek, timeOfDay) :
     print collectionSF.find_one({"DayOfWeek": dayOfWeek});
 
     crimeList = [];
-    for crime in collectionSF.find({"DayOfWeek": dayOfWeek}):
+    for crime in collectionSF.find({"DayOfWeek": dayOfWeek},{'_id':0}):
         crimeList.append(crime);
         #print crime
 

@@ -14,14 +14,20 @@ function initData(dataLocation, callback){
 		xmlDoc=xmlhttp.responseText;
 		processData(xmlDoc);*/
 
+
+
 	$.ajax({
 		type: "GET",
 		url: dataLocation,
-		dataType: "text",
+		dataType: "json",
 		success: function(data) {
-			console.log("request data from server. DATA IS")
-			console.log(data)
-			processData(data);
+			console.log("-- REQUESTING CRIME DATA FROM SERVER --")
+			//console.log("Total Crimes: ", data[0])
+			
+			database = data;
+			//database = JSON.stringify(eval("("+data+")"));
+
+			//processData(data[1]);
 			callback();
 		}
 	});
@@ -38,24 +44,20 @@ function processData(allText) {
 
 		if (data.length == headers.length) {
 			var tarr = new Object();
-			tarr.IncidntNum = data[0]
-			tarr.Category = data[1]
-			tarr.Description = data[2]
-			tarr.DayOfWeek = data[3]
+			//tarr.IncidntNum = data[0]
+			tarr.Category = data[0]
+			//tarr.Description = data[2]
+			tarr.DayOfWeek = data[1]
 			tarr.Date = data[4]
-			var time = data[5].split(":");
+			var time = data[4].split(":");
 			tarr.Time = time[0] + time[1];
-			tarr.PdDistrict = data[6]
-			tarr.Resolution = data[7]
-			tarr.Address = data[8]
-			tarr.X = data[9]
-			tarr.Y = data[10]
-			tarr.Location = data[11]
+			//tarr.PdDistrict = data[6]
+			//tarr.Resolution = data[7]
+			//tarr.Address = data[8]
+			tarr.X = data[5]
+			tarr.Y = data[2]
+			//tarr.Location = data[11]
 			
-			// tarr.Date = data[0];
-			// tarr.PdDistrict = data[1];
-			// tarr.X = data[2];
-			// tarr.Y = data[3];
 			var key = tarr.DayOfWeek.hashCode();
 			if (database[key]) {
 				var hour = Math.floor(tarr.Time / 100);
