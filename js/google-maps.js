@@ -191,7 +191,7 @@ function routeInfo(response, routeNum) {
 	function set_selectedLines(crime,index,array){
 
 		if(haversine(midJB,midKB,crime.Y,crime.X,radiusMi)){
-			console.log("CRIME PT : ",crime);
+			//console.log("CRIME PT : ",crime);
 			selectedLines.array[nIndex++] = crime;
 		}
 	}
