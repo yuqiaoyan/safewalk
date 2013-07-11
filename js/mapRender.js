@@ -31,8 +31,8 @@ function renderUser() {
 		// map.setCenter(point);
 	});
 	console.log("-renderUser");
-	// if (isTracking)
-	// 	setTimeout(renderUser, 5000);
+	if (isTracking)
+		setTimeout(renderUser, 5000);
 }
 
 function renderRoute(routeNum) {
@@ -66,7 +66,7 @@ function renderRoutes() {
  */
 
 function updateRouteRenderer(start, end, number) {
-	console.log("THE NUMBER", number);
+
 	var request = {
 		origin: start,
 		destination: end,
@@ -81,35 +81,38 @@ function updateRouteRenderer(start, end, number) {
 			directionsDisplay.setDirections(response);
 
 			if (validRoute) {
-				var index = routeCrimePts[number].routeNum;
 
-				if (response.routes[index].legs[0].steps.length) {
-					var step = response.routes[index].legs[0].steps[0];
-					displaySteps(step) 
+				if (response.routes[routeCrimePts[number].routeNum].legs[0].steps.length) {
+					var step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[0];
+					$('.directions').append("<div class='ui-block-a blocks'></div>")
+					$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
+					$('.directions').append("<div class='ui-block-c blocks'>" + step.distance.text + '<br>' + step.duration.text + "</div>");
 					$('.pulldown').css('display', 'block');
 					$('.directions_box').addClass('dir_height');
 					initHeight = $('.directions_box').outerHeight(true);
 					$('.dir_height').css('height', initHeight + 'px');
-					for (var i = 1; i < response.routes[index].legs[0].steps.length; i++) {
-						step = response.routes[index].legs[0].steps[i];
-						displaySteps(step) 
-
+					for (var i = 1; i < response.routes[routeCrimePts[number].routeNum].legs[0].steps.length; i++) {
+						// console.log("waypoints - ", response.routes[0].legs[0].steps[i].instructions);
+						step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[i];
+						$('.directions').append("<div class='ui-block-a blocks'></div>")
+						$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
+						$('.directions').append("<div class='ui-block-c blocks'>" + step.distance.text + '<br>' + step.duration.text + "</div>");
 					};
 				}
 
-				directionsDisplay.setRouteIndex(index);
+				directionsDisplay.setRouteIndex(routeCrimePts[number].routeNum);
 			} else {
 
 				if (response.routes[0].legs[0].steps.length) {
-					var step = response.routes[0].legs[0].steps[0];
-					displaySteps(step) 
+					$('.directions').append("<div class='ui-block-a blocks'></div>")
+					$('.directions').append("<div class='ui-block-b blocks'>" + response.routes[0].legs[0].steps[0].instructions + "</div>");
 					$('.pulldown').css('display', 'block');
 					$('.directions_box').addClass('dir_height');
 					initHeight = $('.directions_box').outerHeight(true);
 					$('.dir_height').css('height', initHeight + 'px');
 					for (var i = 1; i < response.routes[0].legs[0].steps.length; i++) {
-						step = response.routes[0].legs[0].steps[i];
-						displaySteps(step)
+						$('.directions').append("<div class='ui-block-a blocks'></div>")
+						$('.directions').append("<div class='ui-block-b blocks'>" + response.routes[0].legs[0].steps[i].instructions + "</div>");
 					};
 				}
 			}
@@ -117,12 +120,6 @@ function updateRouteRenderer(start, end, number) {
 			console.log("Unable to get directionService information");
 		}
 	});
-}
-
-function displaySteps(step) {
-	$('.directions').append("<div class='ui-block-a blocks'></div>")
-	$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
-	$('.directions').append("<div class='ui-block-c blocks'>" + step.distance.text + '<br>' + step.duration.text + "</div>");
 }
 /**
  * Updates rendering for markers
@@ -143,7 +140,7 @@ function updateMarkers(number) {
 	console.log("routeCrimePts[number].last " + routeCrimePts[number].last);
 	console.log("Size - ", routeCrimePts[number].array.length);
 	console.log("Last - ", routeCrimePts[number].last);
-	for (var i = routeCrimePts[number].last + 1, j = 0; i < routeCrimePts[number].array.length; i++) {
+	for (var i = routeCrimePts[number].last+1, j = 0; i < routeCrimePts[number].array.length; i++) {
 		markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X);
 		createInfoWindow(markers[j - 1], number, i);
 	}
