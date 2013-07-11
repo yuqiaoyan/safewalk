@@ -76,16 +76,51 @@ function updateRouteRenderer(start, end, number) {
 
 	directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
+			$('.blocks').remove();
+			$('.directions_box').removeClass('dir_height');
 			directionsDisplay.setDirections(response);
+
 			if (validRoute) {
+
+				if (response.routes[routeCrimePts[number].routeNum].legs[0].steps.length) {
+					var step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[0];
+					$('.directions').append("<div class='ui-block-a blocks'></div>")
+					$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
+					$('.directions').append("<div class='ui-block-c blocks'>" + step.distance.text + '<br>' + step.duration.text + "</div>");
+					$('.pulldown').css('display', 'block');
+					$('.directions_box').addClass('dir_height');
+					initHeight = $('.directions_box').outerHeight(true);
+					$('.dir_height').css('height', initHeight + 'px');
+					for (var i = 1; i < response.routes[routeCrimePts[number].routeNum].legs[0].steps.length; i++) {
+						// console.log("waypoints - ", response.routes[0].legs[0].steps[i].instructions);
+						step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[i];
+						$('.directions').append("<div class='ui-block-a blocks'></div>")
+						$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
+						$('.directions').append("<div class='ui-block-c blocks'>" + step.distance.text + '<br>' + step.duration.text + "</div>");
+					};
+				}
+
 				directionsDisplay.setRouteIndex(routeCrimePts[number].routeNum);
+			} else {
+
+				if (response.routes[0].legs[0].steps.length) {
+					$('.directions').append("<div class='ui-block-a blocks'></div>")
+					$('.directions').append("<div class='ui-block-b blocks'>" + response.routes[0].legs[0].steps[0].instructions + "</div>");
+					$('.pulldown').css('display', 'block');
+					$('.directions_box').addClass('dir_height');
+					initHeight = $('.directions_box').outerHeight(true);
+					$('.dir_height').css('height', initHeight + 'px');
+					for (var i = 1; i < response.routes[0].legs[0].steps.length; i++) {
+						$('.directions').append("<div class='ui-block-a blocks'></div>")
+						$('.directions').append("<div class='ui-block-b blocks'>" + response.routes[0].legs[0].steps[i].instructions + "</div>");
+					};
+				}
 			}
 		} else {
 			console.log("Unable to get directionService information");
 		}
 	});
 }
-
 /**
  * Updates rendering for markers
  * @param  {int} number index of current route
@@ -103,8 +138,9 @@ function updateMarkers(number) {
 	console.log("+updateMarkers");
 	console.log("array length: " + routeCrimePts[number].array.length);
 	console.log("routeCrimePts[number].last " + routeCrimePts[number].last);
-
-	for (var i = routeCrimePts[number].last, j = 0; i < routeCrimePts[number].array.length; i++) {
+	console.log("Size - ", routeCrimePts[number].array.length);
+	console.log("Last - ", routeCrimePts[number].last);
+	for (var i = routeCrimePts[number].last+1, j = 0; i < routeCrimePts[number].array.length; i++) {
 		markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X);
 		createInfoWindow(markers[j - 1], number, i);
 	}
