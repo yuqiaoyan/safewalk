@@ -3,7 +3,7 @@ function init() {
 
 	var localURL = "data/data_2.txt" 
 	var amazonIP = "kebangg.com"
-	var IP = "127.0.0.1"
+	var IP = "localhost"
 	var requestURL = "http://" + IP + ":5000/?"
 	console.log("requestURL IS",requestURL)
 	var d = new Date();
