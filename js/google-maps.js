@@ -61,6 +61,7 @@ function calcRoute(start, end) {
 	};
 
 	directionsService.route(request, function(response, status) {
+		clearOverlays();
 		if (status == google.maps.DirectionsStatus.OK) {
 			routeCrimePts = [];
 			if(currentAddress == start){
