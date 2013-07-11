@@ -43,12 +43,6 @@
 				</div>
 			</div>
 
-			<div data-role="popup" id="popupOptions" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
-				<div class="options"></div>
-				<div class="options"></div>
-				<div class="options"></div>
-			</div>
-
 		</div>
 
 		<div data-theme="p" data-role="footer" data-position="fixed" >
@@ -61,25 +55,32 @@
 		<div data-theme="p" data-role="header">
 			<a data-role="button" data-transition="slide" data-theme="d" href="#page1" onclick='javascript:isTracking = false;'
           data-icon="back" data-iconpos="left" class="ui-btn-left">Back</a>
+          <a href="#popupOptions" class="openOptions ui-btn-right" data-theme="d" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Routes</a>
 			<h3>Safe Walk</h3>
 		</div>
 		<div data-role="content" class="content_area" >
+			
+			<div class='directions_box dir_height'>
+				<div class="pulldown min">Tap to Switch Views</div>
+				<div class="ui-grid-b directions"></div>
+			</div>
 
 			<div id="map-canvas"></div>
 			<div data-role="popup" id="popupOptions" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
-				<div class="info">
-			</div>
-			<div data-role="popup" id="popupError" data-overlay-theme="a">
-				<label class="errormsg"></label>
+				<div class="info"></div>
+				<div data-role="popup" id="popupError" data-overlay-theme="a">
+					<label class="errormsg"></label>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div data-theme="p" data-role="footer" data-position="fixed">
-		<h3>
-			<a href="#popupOptions" class="openOptions ui-btn-left" data-theme="d" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Routes</a>
-		</h3>
-	</div>
+		
+		<!-- <div data-theme="p" data-role="footer" data-position="fixed">
+			<h3>
+				
+			</h3>
+		</div> -->
 
+	</div>
 </div>
 
 </body>
