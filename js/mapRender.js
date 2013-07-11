@@ -84,9 +84,7 @@ function updateRouteRenderer(start, end, number) {
 
 				if (response.routes[routeCrimePts[number].routeNum].legs[0].steps.length) {
 					var step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[0];
-					$('.directions').append("<div class='ui-block-a blocks'></div>")
-					$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
-					$('.directions').append("<div class='ui-block-c blocks'>" + step.distance.text + '<br>' + step.duration.text + "</div>");
+					displaySteps(step)
 					$('.pulldown').css('display', 'block');
 					$('.directions_box').addClass('dir_height');
 					initHeight = $('.directions_box').outerHeight(true);
@@ -94,9 +92,7 @@ function updateRouteRenderer(start, end, number) {
 					for (var i = 1; i < response.routes[routeCrimePts[number].routeNum].legs[0].steps.length; i++) {
 						// console.log("waypoints - ", response.routes[0].legs[0].steps[i].instructions);
 						step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[i];
-						$('.directions').append("<div class='ui-block-a blocks'></div>")
-						$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
-						$('.directions').append("<div class='ui-block-c blocks'>" + step.distance.text + '<br>' + step.duration.text + "</div>");
+						displaySteps(step)
 					};
 				}
 
@@ -104,15 +100,16 @@ function updateRouteRenderer(start, end, number) {
 			} else {
 
 				if (response.routes[0].legs[0].steps.length) {
-					$('.directions').append("<div class='ui-block-a blocks'></div>")
-					$('.directions').append("<div class='ui-block-b blocks'>" + response.routes[0].legs[0].steps[0].instructions + "</div>");
+					var step = response.routes[0].legs[0].steps[0];
+					displaySteps(step)
+
 					$('.pulldown').css('display', 'block');
 					$('.directions_box').addClass('dir_height');
 					initHeight = $('.directions_box').outerHeight(true);
 					$('.dir_height').css('height', initHeight + 'px');
 					for (var i = 1; i < response.routes[0].legs[0].steps.length; i++) {
-						$('.directions').append("<div class='ui-block-a blocks'></div>")
-						$('.directions').append("<div class='ui-block-b blocks'>" + response.routes[0].legs[0].steps[i].instructions + "</div>");
+						step = response.routes[0].legs[0].steps[i];
+						displaySteps(step)
 					};
 				}
 			}
@@ -120,6 +117,12 @@ function updateRouteRenderer(start, end, number) {
 			console.log("Unable to get directionService information");
 		}
 	});
+}
+
+function displaySteps(step) {
+	$('.directions').append("<div class='ui-block-a blocks'></div>")
+	$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
+	$('.directions').append("<div class='ui-block-c blocks'>" + step.distance.text + '<br>' + step.duration.text + "</div>");
 }
 /**
  * Updates rendering for markers
@@ -140,7 +143,7 @@ function updateMarkers(number) {
 	console.log("routeCrimePts[number].last " + routeCrimePts[number].last);
 	console.log("Size - ", routeCrimePts[number].array.length);
 	console.log("Last - ", routeCrimePts[number].last);
-	for (var i = routeCrimePts[number].last+1, j = 0; i < routeCrimePts[number].array.length; i++) {
+	for (var i = routeCrimePts[number].last + 1, j = 0; i < routeCrimePts[number].array.length; i++) {
 		markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X);
 		createInfoWindow(markers[j - 1], number, i);
 	}
