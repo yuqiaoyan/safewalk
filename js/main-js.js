@@ -76,22 +76,3 @@ function chooseRoute(number) {
 
 }
 
-$(document).ready(function() {
-	$('.pulldown').on("click", function() {
-		if ($(this).hasClass("min")) {
-			$(this).removeClass("min")
-			$(this).addClass("max")
-			$('.dir_height').animate({
-				height: "100%"
-			}, 1000);
-			$('.dir_height').slideDown('slow');
-		} else if ($(this).hasClass("max")) {
-			$(this).removeClass("max")
-			$(this).addClass("min")
-			$('.dir_height').animate({
-				height: initHeight + "px"
-			}, 1000);
-		}
-
-	});
-});

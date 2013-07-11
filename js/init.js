@@ -2,9 +2,9 @@ function init() {
 	//TODO: MOVE INIT TO AFTER THE USER CLICKS SUBMIT
 
 	var localURL = "data/data_2.txt" 
-	var amazonIP = "ec2-54-215-147-231.us-west-1.compute.amazonaws.com"
+	var amazonIP = "54.215.147.231"
 	var IP = "localhost"
-	var requestURL = "http://" + amazonIP + ":5000/?"
+	var requestURL = "http://" + IP + ":5000/?"
 	console.log("requestURL IS",requestURL)
 	var d = new Date();
 	time = d.getHours() + ":" + d.getMinutes(); 
