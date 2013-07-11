@@ -61,7 +61,6 @@ function calcRoute(start, end) {
 	};
 
 	directionsService.route(request, function(response, status) {
-		clearOverlays();
 		if (status == google.maps.DirectionsStatus.OK) {
 			routeCrimePts = [];
 			if(currentAddress == start){
@@ -107,7 +106,6 @@ function calcRoute(start, end) {
  */
 
 function routeInfo(response, routeNum) {
-	console.log("RUN ROUTE!!!");
 	var totalDistance = 0;
 
 	var selectedLines = new Object;
@@ -154,6 +152,41 @@ function routeInfo(response, routeNum) {
 	var radiusMi = ftToMi(totalDistance);
 	var nIndex = 0;
 
+	// var selectedLines = [];
+	// console.log("total distance meters " + totalDistance);
+	// console.log("total distance Mi " + radiusMi);
+
+	/**
+	 * Haversine by day and time
+	 
+	var key;
+	var date = getDate();
+	// key = date.day.hashCode();
+	var hour = Math.floor(date.time / 100);
+	
+	// for(var index = 0; index < 24; index++){
+	for (var n = hour - 4; n < hour + 4; n++) {
+		var index = n;
+		key = date.day.hashCode();
+		if (n >= 24) {
+			key = date.nextDay.hashCode();
+			index -= 24;
+		} else if (n < 0) {
+			key = date.previousDay.hashCode();
+			index += 24;
+		}
+		for (var k = 0; k < database[key][index].length; k++) {
+			
+			/* GET THE X and Y COORDINATE OF ALL THE RELEVANT DATA
+
+			database.X
+			database.Y
+			
+			if (haversine(midJB, midKB, database[key][index][k].Y, database[key][index][k].X, radiusMi)) {
+				selectedLines.array[nIndex++] = database[key][index][k];
+			}
+		};
+	};*/
 
 	function set_selectedLines(crime,index,array){
 
@@ -320,7 +353,7 @@ function findAddress(lat, lng) {
 				if (street.indexOf("San Francisco") !== -1) {
 					$(".start").val(street);
 				}
-				// $(".start").val(street);
+				$(".start").val(street);
 			} else {
 				alert('No results found');
 			}
