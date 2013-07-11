@@ -3,8 +3,8 @@ function init() {
 
 	var localURL = "data/data_2.txt" 
 	var amazonIP = "kebangg.com"
-	var IP = "localhost"
-	var requestURL = "http://" + amazonIP + ":5000/?"
+	var IP = "127.0.0.1"
+	var requestURL = "http://" + IP + ":5000/?"
 	console.log("requestURL IS",requestURL)
 	var d = new Date();
 	time = d.getHours() + ":" + d.getMinutes(); 
