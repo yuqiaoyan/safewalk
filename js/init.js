@@ -16,9 +16,7 @@ function init(start,end) {
 
 	
 	}
-	if(city == "Bellevue"){
-			city="Seattle";
-		}
+	
 
 	var parameters = "day=" + aUser.getToday() + "&city=" + city+ "&time=" + time;
 	
