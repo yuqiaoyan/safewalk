@@ -39,7 +39,7 @@ function renderRoute(routeNum) {
 	/* HTML for drawing a single routeInfo
 	REQUIRES: routeCrimePts and totalCrimes*/
 
-	var routeDiv = "<div class = 'route'> "
+	var routeDiv = "<div class = 'route'> Via "
 	routeDiv += routeCrimePts[routeNum].via
 	routeDiv += "<div class = 'side_text'><span class = 'time'>" + routeCrimePts[routeNum].duration + "</span> - "
 	routeDiv += " <span class = 'crime'> "
@@ -54,7 +54,7 @@ function renderRoutes() {
 	$('.leaf').remove();
 	console.log("size - ", routeCrimePts.length);
 	for (var i = 0; i < routeCrimePts.length; i++) {
-		$('.info').append("<div class='leaf' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(i) + "</div>");
+		$('.leaf_frame').append("<div class='leaf' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(i) + "</div>");
 	}
 }
 
@@ -77,40 +77,46 @@ function updateRouteRenderer(start, end, number) {
 	directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
 			$('.blocks').remove();
-			$('.directions_box').removeClass('dir_height');
+			$('.title_block').remove();
+			$('.dir_height').css('height', 'auto');
 			directionsDisplay.setDirections(response);
 
 			if (validRoute) {
 
 				if (response.routes[routeCrimePts[number].routeNum].legs[0].steps.length) {
-					var step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[0];
-					displaySteps(step)
-					$('.pulldown').css('display', 'block');
+					var summary = response.routes[routeCrimePts[number].routeNum].summary
+					var duration = response.routes[routeCrimePts[number].routeNum].legs[0].duration.text;
+					displayRoute(summary, duration);
+
+					// $('.pulldown').css('display', 'block');
 					$('.directions_box').addClass('dir_height');
 					initHeight = $('.directions_box').outerHeight(true);
 					$('.dir_height').css('height', initHeight + 'px');
-					for (var i = 1; i < response.routes[routeCrimePts[number].routeNum].legs[0].steps.length; i++) {
+					for (var i = 0; i < response.routes[routeCrimePts[number].routeNum].legs[0].steps.length; i++) {
 						// console.log("waypoints - ", response.routes[0].legs[0].steps[i].instructions);
 						step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[i];
 						displaySteps(step)
 					};
+					
 				}
 
 				directionsDisplay.setRouteIndex(routeCrimePts[number].routeNum);
 			} else {
 
 				if (response.routes[0].legs[0].steps.length) {
-					var step = response.routes[0].legs[0].steps[0];
-					displaySteps(step)
-
-					$('.pulldown').css('display', 'block');
+					var summary = response.routes[0].summary
+					var duration = response.routes[0].legs[0].duration.text;
+					displayRoute(summary, duration);
+				
+					// $('.pulldown').css('display', 'block');
 					$('.directions_box').addClass('dir_height');
 					initHeight = $('.directions_box').outerHeight(true);
 					$('.dir_height').css('height', initHeight + 'px');
-					for (var i = 1; i < response.routes[0].legs[0].steps.length; i++) {
+					for (var i = 0; i < response.routes[0].legs[0].steps.length; i++) {
 						step = response.routes[0].legs[0].steps[i];
 						displaySteps(step)
 					};
+					
 				}
 			}
 		} else {
@@ -120,9 +126,23 @@ function updateRouteRenderer(start, end, number) {
 }
 
 function displaySteps(step) {
+	var distance =  Math.round(convertMtToFt(step.distance.value));
+	if(distance >= 528){
+		distance = step.distance.text;
+	}else{
+		distance += " ft";
+	}
 	$('.directions').append("<div class='ui-block-a blocks'></div>")
 	$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
-	$('.directions').append("<div class='ui-block-c blocks'>" + step.distance.text + '<br>' + step.duration.text + "</div>");
+	$('.directions').append("<div class='ui-block-c blocks'>" + distance);
+}
+function displayRoute(summary, duration){
+	$('.title_grid').append("<div class='ui-block-a title_block tba'></div>")
+	$('.title_grid').append("<div class='ui-block-b title_block tbb'>" + summary + "</div>");
+	$('.title_grid').append("<div class='ui-block-c title_block tbc'>" + duration);
+}
+function convertMtToFt(meters){
+	return meters * 3.28084;
 }
 /**
  * Updates rendering for markers

@@ -1,3 +1,4 @@
+
 function init() {
 	//TODO: MOVE INIT TO AFTER THE USER CLICKS SUBMIT
 
@@ -46,6 +47,7 @@ $(document).delegate('#page1', 'pageshow', function() {
 
 $(document).delegate('#page2', 'pageshow', function() {
 	resizeHeight('#page2');
+	$('.info').css('display', 'block');
 	var start = $(".start").val();
 	var end = $(".end").val();
 
@@ -117,4 +119,23 @@ $(window).resize(function() {
 function resizeHeight(page){
 	var the_height = ($(window).height() - $(page).find('[data-role="header"]').height() - $(page).find('[data-role="footer"]').height());
 	$(page).height($(window).height()).find('[data-role="content"]').height(the_height);
+
+}
+function resizeMap(page, height){
+	var start = $(".start").val();
+	var end = $(".end").val();
+	
+	var the_height = ($(window).height() - $(page).find('[data-role="header"]').height() - height);
+	$(page).height($(window).height()).find('[data-role="content"]').height(the_height);
+
+	google.maps.event.trigger(map, 'resize');
+	if (currentRouteNum != -1) {
+		updateRouteRenderer(start, end, currentRouteNum);
+	}
+
+}
+
+function direction_transition(){
+	resizeMap('#page2', initHeight);
+	$('.info').css('display', 'none');
 }

@@ -1,5 +1,4 @@
-
-if(debug){
+if (debug) {
 
 	//if we need to debug print out statistics about our code
 	console.log("Route Crime Array Object: ");
@@ -8,66 +7,66 @@ if(debug){
 };
 
 function submit() {
-	
+
 }
 
-function validateCity(address, cb){
+function validateCity(address, cb) {
 	/* REQUIRES STRING STREET ADDRESS LOCATION
 	RETURNS TRUE IF CITY IS SUPPORTED OTHERWISE RETURN FALSE
 	*/
 
 	var validRoute = true;
 
-	geocoder.geocode({'address': address}, function(results,status){
-		if(status == google.maps.GeocoderStatus.OK){
+	geocoder.geocode({
+		'address': address
+	}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
 			var city;
 			for (var i = 0; i < results[0].address_components.length; i++) {
-				if(results[0].address_components[i].types[0] == "locality"){
+				if (results[0].address_components[i].types[0] == "locality") {
 					city = results[0].address_components[i].long_name;
 					aUser.setCity(city);
 					console.log("User's city is: ", aUser.getCity())
 					break;
 				}
 			};
-			 
+
 			//if the city is not supported then this is not a valid route
-			if(!SUPPORTED_CITIES[city]){
+			if (!SUPPORTED_CITIES[city]) {
 				console.log("Not supported city");
 				console.log("start city: " + city);
 				validRoute = false;
-			}
-			else{
+			} else {
 				console.log("supported city");
 				console.log("start city: " + city);
 				validRoute = true;
 			}
 			cb(validRoute);
-		}
-		else{
+		} else {
 			console.log("Google API RESULT ERROR");
 			console.log("Status" + google.maps.GeocoderStatus.OK);
 		}
-		
-	})	
-	
+
+	})
+
 }
 
 function getBestRoute() {
 	console.log("+getBestRoute");
 
 	//sort routeCrimePts to ascending order
-	routeCrimePts.sort(function(value1,value2){
+	routeCrimePts.sort(function(value1, value2) {
 		return value1.totalCrimes - value2.totalCrimes;
 	})
 
-	
+
 	currentRouteNum = 0;
 	console.log("-getBestRoute");
 
 }
 
 function chooseRoute(number) {
-	
+
 	var start = $(".start").val();
 	var end = $(".end").val();
 	updateMarkers(number)
@@ -77,20 +76,21 @@ function chooseRoute(number) {
 }
 
 $(document).ready(function() {
-	$('.pulldown').on("click", function() {
-		if ($(this).hasClass("min")) {
-			$(this).removeClass("min")
-			$(this).addClass("max")
+		
+	$('.title_grid').on("click", function() {
+		if ($('.directions').hasClass("min")) {
+			$('.directions').removeClass("min")
+			$('.directions').addClass("max")
 			$('.dir_height').animate({
 				height: "100%"
-			}, 1000);
+			}, 500);
 			$('.dir_height').slideDown('slow');
-		} else if ($(this).hasClass("max")) {
-			$(this).removeClass("max")
-			$(this).addClass("min")
+		} else if ($('.directions').hasClass("max")) {
+			$('.directions').removeClass("max")
+			$('.directions').addClass("min")
 			$('.dir_height').animate({
 				height: initHeight + "px"
-			}, 1000);
+			}, 500);
 		}
 
 	});

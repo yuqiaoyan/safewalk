@@ -77,6 +77,7 @@ function calcRoute(start, end) {
 				};
 				getBestRoute(); //sorts routeCrimePts and 
 				renderRoutes();
+				resizeMap('#page2', $('.info').height()+$('.direction_button').height());
 				updateMarkers(currentRouteNum);
 			} else {
 				$('.openOptions').addClass('ui-disabled')
@@ -87,8 +88,8 @@ function calcRoute(start, end) {
 			updateRouteRenderer(start, end, currentRouteNum);
 
 			//temporarily placing it here
-			if(isTracking)
-				renderUser(); //render user marker
+			// if(isTracking)
+				// renderUser(); //render user marker
 		} else {
 			console.log("Unable to get directionService information");
 		}
@@ -185,8 +186,8 @@ function routeInfo(response, routeNum) {
 		}
 		// console.log("total found " + selectedLines.length + " " + selectedLines.last);
 	}
-	selectedLines.totalCrimes = selectedLines.array.length - selectedLines.last;
-	// console.log("total crimes is " + selectedLines.totalCrimes);
+	selectedLines.totalCrimes = selectedLines.array.length - selectedLines.last - 1;
+	console.log("total crimes is " + selectedLines.totalCrimes);
 
 	routeCrimePts[routeNum] = selectedLines;
 }
