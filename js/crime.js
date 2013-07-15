@@ -25,6 +25,17 @@ function initData(dataLocation, callback){
 			//console.log("Total Crimes: ", data[0])
 			
 			database = data;
+
+			/* debugging */
+
+			var numCrimes = 0;
+			for (var key in data){
+				numCrimes = numCrimes + 1;
+				//if((numCrimes%10) == 0)
+				//	findAddress(data.Y,data.X);
+			}
+			console.log("Crimes Retrieved from DB: ", numCrimes);
+
 			//database = JSON.stringify(eval("("+data+")"));
 
 			//processData(data[1]);
