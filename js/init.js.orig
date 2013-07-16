@@ -1,29 +1,38 @@
+<<<<<<< HEAD
+
 function init() {
+=======
+function init(start,end) {
+>>>>>>> fe2a22e174592026d6e90629c2ed07f05d1a3cb4
 	//TODO: MOVE INIT TO AFTER THE USER CLICKS SUBMIT
 
-	var localURL = "data/data_2.txt" 
-<<<<<<< HEAD
-	var amazonIP = "kebangg.com"
-	var IP = "localhost"
-	var requestURL = "http://" + IP + ":5000/?"
-=======
-	var amazonIP = "http://ec2-54-215-147-231.us-west-1.compute.amazonaws.com/"
+	var amazonIP = "ec2-54-215-147-231.us-west-1.compute.amazonaws.com"
 	var IP = "localhost"
 	var requestURL = "http://" + amazonIP + ":5000/?"
->>>>>>> fff772d1fa600f48707a70030ab596479bec79f3
 	console.log("requestURL IS",requestURL)
 	var d = new Date();
 	time = d.getHours() + ":" + d.getMinutes(); 
+
+	var city = aUser.getCity()
+	console.log(city.split(' '))
+	if(city.split(' ').length > 1){
+		city = city.replace(/\s+/g, '');
+		console.log("city is", city)
+
 	
-	var parameters = "day=" + aUser.getToday() + "&city=" + "SanFrancisco" + "&time=" + time;
-	var testParameters = "day=" + "Monday" + "&city=" + "SanFrancisco" + "&time=" + time;
-	requestURL = requestURL + testParameters;
+	}
+	
+
+	var parameters = "day=" + aUser.getToday() + "&city=" + city+ "&time=" + time;
+	
+	requestURL = requestURL + parameters;
 	console.log("requestURL",requestURL)
 
 	//TODO: Debug Flask cross domain
 
 	console.log("+data processing");
 	initData(requestURL, function() {
+		runMap(start, end);
 		$('.submit').removeClass('ui-disabled')
 	});
 	console.log("-data processing");
@@ -38,10 +47,10 @@ $(document).ready(function() {
 	if (debugValue.length > 1) {
 		debug = debugValue[1]; //set a debug value to print out useful information
 	};
-
+	$('.submit').removeClass('ui-disabled')
 	//console.log("userLocation is " + userLocation);
 	//
-	init();
+	
 
 });
 
@@ -52,9 +61,11 @@ $(document).delegate('#page1', 'pageshow', function() {
 
 $(document).delegate('#page2', 'pageshow', function() {
 	resizeHeight('#page2');
+	$('.info').css('display', 'block');
 	var start = $(".start").val();
 	var end = $(".end").val();
 
+	
 	//ASSUME START & END LOCATION IS IN A SUPPORTED CITY
 	//TODO: WRITE A TEST CASE FOR NOT SUPPORTED CITIES
 	//TODO: CHECK THE END POINT
@@ -67,16 +78,21 @@ $(document).delegate('#page2', 'pageshow', function() {
 		if (validRouteA) {
 			console.log("Check end location");
 			validateCity(end, function(validRouteB) {
+				
+				//CRIME IS VALID
 				if (validRouteB) {
+					console.log("THIS IS A VALID CITY")
 					validRoute = true;
+					
 				} else {
 					validRoute = false;
 				}
-				runMap(start, end);
+				init(start,end);
+
 			});
 		} else {
 			validRoute = false;
-			runMap(start, end);
+			init(start,end);
 		}
 
 	});
@@ -123,4 +139,23 @@ $(window).resize(function() {
 function resizeHeight(page){
 	var the_height = ($(window).height() - $(page).find('[data-role="header"]').height() - $(page).find('[data-role="footer"]').height());
 	$(page).height($(window).height()).find('[data-role="content"]').height(the_height);
+
+}
+function resizeMap(page, height){
+	var start = $(".start").val();
+	var end = $(".end").val();
+	
+	var the_height = ($(window).height() - $(page).find('[data-role="header"]').height() - height);
+	$(page).height($(window).height()).find('[data-role="content"]').height(the_height);
+
+	google.maps.event.trigger(map, 'resize');
+	if (currentRouteNum != -1) {
+		updateRouteRenderer(start, end, currentRouteNum);
+	}
+
+}
+
+function direction_transition(){
+	resizeMap('#page2', initHeight);
+	$('.info').css('display', 'none');
 }

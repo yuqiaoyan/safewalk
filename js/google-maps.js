@@ -8,7 +8,6 @@
 function initMap(lat, lng, callback) {
 	console.log("+google-maps initialize");
 
-
 	var polyOption = {
 		strokeColor: "red"
 	}
@@ -119,6 +118,7 @@ function routeInfo(response, routeNum) {
 	selectedLines.last = 0;
 	selectedLines.via;
 	selectedLines.duration;
+	selectedLines.durationValue;
 	selectedLines.swap = function(curr) {
 		var temp = selectedLines.array[selectedLines.last];
 		selectedLines.array[selectedLines.last] = selectedLines.array[curr];
@@ -132,6 +132,7 @@ function routeInfo(response, routeNum) {
 	selectedLines.via = response.routes[routeNum].summary;
 	// console.log(selectedLines.via);
 	selectedLines.duration = response.routes[routeNum].legs[0].duration.text;
+	selectedLines.durationValue = response.routes[routeNum].legs[0].duration.value;
 	// console.log(selectedLines.via);
 	// console.log(selectedLines.duration);
 
@@ -157,7 +158,13 @@ function routeInfo(response, routeNum) {
 
 
 	function set_selectedLines(crime,index,array){
-
+		//console.log("+set_selectedLines")
+		//console.log("midJB",midJB)
+		//console.log("midKB",midKB)
+		//var temp = haversine(47.62268,-122.3560459,47.60733158,-122.3386512,3.25)
+		//console.log("crime", crime)
+		//if(crime.Y == 47.60733158)
+		//	debugger;
 		if(haversine(midJB,midKB,crime.Y,crime.X,radiusMi)){
 			//console.log("CRIME PT : ",crime);
 			selectedLines.array[nIndex++] = crime;
@@ -316,6 +323,7 @@ function findAddress(lat, lng) {
 			if (results[0]) {
 				var street = results[0].formatted_address;
 				console.log("User street: " + street);
+				//console.log("City: ", )
 				// alert(street);
 				currentAddress = street;
 				if (street.indexOf("San Francisco") !== -1) {

@@ -120,11 +120,7 @@ body {
 	margin: 2em 15px;
 }
 
-.leaf {
-	color: blue;
-	padding: 20px;
-	border-bottom: 1px solid black;
-}
+
 
 .time {
 	/*color: white;*/
@@ -134,13 +130,8 @@ body {
 	/*color: white;*/
 }
 
-.leaf:hover {
-	background-color: green;
-}
 
-.side_text {
-	text-align: right;
-}
+
 
 .ui-bar-p {
 	font-family: Helvetica,Arial,sans-serif;
@@ -231,4 +222,28 @@ body {
 	position: absolute;
 	bottom: 0%;
 	background: white;
+}
+
+.routes_header{
+	width: 100%;
+	color: #1D4CA2;
+	padding-left: 5%;
+	padding-top: 1%;
+	padding-bottom: 1%; 
+	border-bottom: 1px solid #1D4CA2;
+	border-top: 2px solid #1D4CA2;
+}
+.route{
+	/*width: 50%;*/
+	/*float:left;	*/
+}
+.side_text {
+	/*width: 50%;*/
+	/*float: right;*/
+	text-align: right;
+}
+.leaf {
+	color: #15449B;
+	
+	/*border-bottom: 1px solid #5D95C3;*/
 }

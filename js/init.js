@@ -1,25 +1,34 @@
-
-function init() {
+function init(start,end) {
 	//TODO: MOVE INIT TO AFTER THE USER CLICKS SUBMIT
 
-	var localURL = "data/data_2.txt" 
 	var amazonIP = "ec2-54-215-147-231.us-west-1.compute.amazonaws.com"
 	var IP = "localhost"
 	var requestURL = "http://" + amazonIP + ":5000/?"
 	console.log("requestURL IS",requestURL)
 	var d = new Date();
 	time = d.getHours() + ":" + d.getMinutes(); 
+
+	var city = aUser.getCity()
+	console.log(city.split(' '))
+	if(city.split(' ').length > 1){
+		city = city.replace(/\s+/g, '');
+		console.log("city is", city)
+
 	
-	var parameters = "day=" + aUser.getToday() + "&city=" + "SanFrancisco" + "&time=" + time;
-	var testParameters = "day=" + "Monday" + "&city=" + "SanFrancisco" + "&time=" + time;
-	requestURL = requestURL + testParameters;
+	}
+	
+
+	var parameters = "day=" + aUser.getToday() + "&city=" + city+ "&time=" + time;
+	
+	requestURL = requestURL + parameters;
 	console.log("requestURL",requestURL)
 
 	//TODO: Debug Flask cross domain
 
 	console.log("+data processing");
 	initData(requestURL, function() {
-		$('.submit').removeClass('ui-disabled')
+		runMap(start, end);
+		
 	});
 	console.log("-data processing");
 
@@ -33,10 +42,9 @@ $(document).ready(function() {
 	if (debugValue.length > 1) {
 		debug = debugValue[1]; //set a debug value to print out useful information
 	};
-
 	//console.log("userLocation is " + userLocation);
 	//
-	init();
+	
 
 });
 
@@ -51,6 +59,7 @@ $(document).delegate('#page2', 'pageshow', function() {
 	var start = $(".start").val();
 	var end = $(".end").val();
 
+	
 	//ASSUME START & END LOCATION IS IN A SUPPORTED CITY
 	//TODO: WRITE A TEST CASE FOR NOT SUPPORTED CITIES
 	//TODO: CHECK THE END POINT
@@ -63,16 +72,21 @@ $(document).delegate('#page2', 'pageshow', function() {
 		if (validRouteA) {
 			console.log("Check end location");
 			validateCity(end, function(validRouteB) {
+				
+				//CRIME IS VALID
 				if (validRouteB) {
+					console.log("THIS IS A VALID CITY")
 					validRoute = true;
+					
 				} else {
 					validRoute = false;
 				}
-				runMap(start, end);
+				init(start,end);
+
 			});
 		} else {
 			validRoute = false;
-			runMap(start, end);
+			init(start,end);
 		}
 
 	});

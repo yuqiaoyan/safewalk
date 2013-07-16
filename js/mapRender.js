@@ -38,12 +38,12 @@ function renderUser() {
 function renderRoute(routeNum) {
 	/* HTML for drawing a single routeInfo
 	REQUIRES: routeCrimePts and totalCrimes*/
-
+	var minutes = routeCrimePts[routeNum].duration.split(' ');
 	var routeDiv = "<div class = 'route'> Via "
-	routeDiv += routeCrimePts[routeNum].via
-	routeDiv += "<div class = 'side_text'><span class = 'time'>" + routeCrimePts[routeNum].duration + "</span> - "
-	routeDiv += " <span class = 'crime'> "
-	routeDiv += routeCrimePts[routeNum].totalCrimes + "\t crimes </span> reported</div> "
+	routeDiv += "<strong>"+routeCrimePts[routeNum].via+"</strong></div>"
+	routeDiv += "<div class = 'side_text'><span class = 'crime'> <strong>"
+	routeDiv += routeCrimePts[routeNum].totalCrimes + "</strong>\t crimes</span><br>"
+	routeDiv += "<span class = 'time'><strong>" + minutes[0] + "</strong> min</span>"
 	routeDiv += "</div>";
 	return routeDiv;
 }
@@ -56,6 +56,9 @@ function renderRoutes() {
 	for (var i = 0; i < routeCrimePts.length; i++) {
 		$('.leaf_frame').append("<div class='leaf' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(i) + "</div>");
 	}
+	$('.leaf').on('click',function(){
+		$(this).css('background-color', '#D8E5F1');
+	});
 }
 
 /**

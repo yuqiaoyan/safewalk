@@ -27,7 +27,7 @@
 <body>
 
 	<div data-role="page" id="page1" class="page1">
-		<div data-theme="p" data-role="header">
+		<div data-theme="b" data-role="header">
 			<h3></h3>
 		</div>
 
@@ -37,8 +37,10 @@
 			<div class="filler"></div>
 
 			<div data-role="fieldcontain" class = "input_field">
-				<input type="text" class="start" value="75 Geary St. San Francisco" tabIndex="7" placeholder="start"/>
-				<input type="text" class ="end" value="100 Market St. San Francisco CA" tabIndex="7"  placeholder="end"/>
+				<input type="text" class="start input-text" value="75 Geary St. San Francisco CA" tabIndex="7" placeholder="start"/>
+				<input type="text" class ="end input-text" value="100 Market St. San Francisco CA" tabIndex="7"  placeholder="end"/>
+				<!--<input type="text" class="start" value="5 Pike St. Seattle WA" tabIndex="7" placeholder="start"/>
+				<input type="text" class ="end" value="2700 11th Ave Seattle WA" tabIndex="7"  placeholder="end"/> -->
 				<!-- Pioneer Elementary School Union City CA -->
 				<!-- 13702 NE 28th St. Bellevue WA -->
 				<!-- 9031 161st PL NE Redmond WA -->
@@ -48,17 +50,17 @@
 			</div>
 
 		</div>
-		<div data-theme="p" data-role="footer" data-position="fixed" >
+		<div data-theme="b" data-role="footer" data-position="fixed" >
 			<h3></h3>
 		</div>
 
 	</div>
 
 	<div data-role="page" id="page2">
-		<div data-theme="p" data-role="header">
-			<a data-role="button" data-transition="slide" data-theme="d" href="#page1" onclick='javascript:isTracking = false;'
+		<div data-theme="b" data-role="header">
+			<a data-role="button" data-transition="slide" data-theme="b" href="#page1" onclick='javascript:isTracking = false;'
           data-icon="back" data-iconpos="left" class="ui-btn-left">Back</a>
-			<a href="#popupOptions" class="openOptions ui-btn-right" data-theme="d" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Routes</a>
+			<a href="#popupOptions" class="openOptions ui-btn-right" data-theme="b" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Routes</a>
 			<h3>Safe Walk</h3>
 		</div>
 		<div data-role="content" class="content_area" >
@@ -74,13 +76,14 @@
 			<div id="map-canvas"></div>
 			<!-- <div data-role="popup" id="popupOptions" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0"> -->
 			<div class="info">
+				<div class="routes_header">Route Options</div>
 				<div class="leaf_frame"></div>
 				
-				<a href="#page2" onclick= "javascript:direction_transition()" data-corners="false" data-role="button" class="directions_button" data-mini="true" data-theme="d" tabIndex="9">Find a Safe Route!</a>
+				<a href="#page2" onclick= "javascript:direction_transition()" data-corners="false" data-role="button" class="directions_button" data-mini="true" data-theme="d" tabIndex="9" style="" style="height: 10px">Get Directions</a>
 				
 			</div>
 			<!-- </div> -->
-			<div data-role="popup" id="popupError" data-overlay-theme="p">
+			<div data-role="popup" id="popupError" data-overlay-theme="b">
 				<label class="errormsg"></label>
 			</div>
 			
