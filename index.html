@@ -31,7 +31,7 @@
 			<h3></h3>
 		</div>
 
-		<div data-role="content" class="content_area" id="routeInput" stype="overflow-y: scroll">
+		<div data-role="content" class="content_area" id="routeInput" stype="overflow-y: auto">
 			<img src="img/hippo.png" class="logo">
 			<img src="img/title.png" class="logo_title">
 			<div class="filler"></div>
@@ -47,14 +47,14 @@
 				<!-- 13702 NE 28th St. Bellevue WA -->
 				<!-- 9031 161st PL NE Redmond WA -->
 				<div class="homeSubmit">
-					<a href="#page2" onclick= "javascript:submit()" data-corners="false" data-role="button" class="submit ui-disabled" data-mini="true" data-theme="d" tabIndex="9">Find a Safe Route!</a>
+					<a href="#page2" onclick= "javascript:submit()" data-corners="false" data-role="button" class="submit ui-disabled" data-mini="true" data-theme="d" tabIndex="9" id="routeButton">Find a Safe Route!</a>
 				</div>
 			</div>
 
 		</div>
-		<!-- <div data-theme="b" data-role="footer" data-position="fixed" >
+		<div data-theme="b" data-role="footer" data-position="fixed" id="mainFooter">
 			<h3></h3>
-		</div> -->
+		</div> 
 
 	</div>
 
@@ -92,13 +92,5 @@
 
 		</div>
 	</div>
-	<script type="text/javascript">
-		var startInput = $('.start');
-		startInput.focus(function(){
-			var inputDiv = document.getElementById("routeInput")
-			inputDiv.scrollTop = inputDiv.scrollHeight;
-
-		});
-	</script>
 </body>
 </html>

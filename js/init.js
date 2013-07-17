@@ -124,13 +124,17 @@ function runMap(start, end) {
 
 
 $(window).resize(function() {
+
 	resizeHeight('#page1');
 	resizeHeight('#page2');
+	var inputDiv = document.getElementById("routeInput")
+	inputDiv.scrollTop = inputDiv.scrollHeight;
 	var start = $(".start").val();
 	var end = $(".end").val();
 	if (currentRouteNum != -1) {
 		updateRouteRenderer(start, end, currentRouteNum);
 	}
+
 });
 
 function resizeHeight(page){
