@@ -96,3 +96,9 @@ $(document).ready(function() {
 
 	});
 });
+
+function direction_transition(){
+	resizeMap('#page2', initHeight);
+	// $('.info').animate({height: '0px'},500);
+	$('.info').css('display','none');
+}

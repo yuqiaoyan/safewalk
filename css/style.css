@@ -222,28 +222,76 @@ body {
 	position: absolute;
 	bottom: 0%;
 	background: white;
+	border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
 }
 
 .routes_header{
-	width: 100%;
+	width: 95%;
 	color: #1D4CA2;
 	padding-left: 5%;
 	padding-top: 1%;
 	padding-bottom: 1%; 
 	border-bottom: 1px solid #1D4CA2;
 	border-top: 2px solid #1D4CA2;
+	border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 .route{
-	/*width: 50%;*/
-	/*float:left;	*/
+	width: 45%;
+	padding-left: 5%;
+	float:left;	
+	top: 25px;
+
 }
 .side_text {
-	/*width: 50%;*/
-	/*float: right;*/
+	width: 45%;
+	padding-right: 5%;
+	float: right;
 	text-align: right;
 }
 .leaf {
 	color: #15449B;
-	
+	height: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 12px;
 	/*border-bottom: 1px solid #5D95C3;*/
+}
+.active{
+	background-color: #D8E5F1;
+}
+.directions_button{
+	width: 100% !important;
+	background-image: -webkit-linear-gradient(#C1D4F1,#C1D4F1) !important;
+	background-image: -moz-linear-gradient(#C1D4F1,#C1D4F1) !important;
+	background-image: -o-linear-gradient(#C1D4F1,#C1D4F1) !important;
+	background-image: -ms-linear-gradient(#C1D4F1,#C1D4F1) !important;
+	background-image: linear-gradient(#C1D4F1,#C1D4F1) !important;
+	border: 1px solid #5B80BA !important;
+	color: #15449B !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+
+	/*padding-top: 5px !important;*/
+	/*padding-bottom: 5px !important;*/
+}
+.directions_button .ui-btn-inner .ui-btn-text{
+    font-size: 14px;
+}
+
+.ui-bar-lb {
+	font-family: Helvetica,Arial,sans-serif;
+	color: #fff;
+	font-weight: 700;
+	text-shadow: 0 -1px 0 #000;
+	border: 1px solid #C1D4F1 !important;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#C1D4F1),to(#C1D4F1)));
+
+	background-image: -webkit-linear-gradient(#C1D4F1,#C1D4F1);
+	background-image: -moz-linear-gradient(#C1D4F1,#C1D4F1);
+	background-image: -o-linear-gradient(#C1D4F1,#C1D4F1);
+	background-image: -ms-linear-gradient(#C1D4F1,#C1D4F1);
+	background-image: linear-gradient(#C1D4F1,#C1D4F1);
 }

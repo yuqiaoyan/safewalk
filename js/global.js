@@ -50,7 +50,7 @@ function user(){
 			console.log("lat: " + getLat());
 			console.log("long: " + getLng());
 			findAddress(lat, lng);
-			$('.submit').removeClass('ui-disabled')
+			// $('.submit').removeClass('ui-disabled')
 		};
 
 		/**
@@ -60,7 +60,7 @@ function user(){
 		var e = function(error) {
 			if (error.code === 1) {
 				alert('Unable to get location');
-				$('.submit').removeClass('ui-disabled')
+				// $('.submit').removeClass('ui-disabled')
 			}
 		}
 		navigator.geolocation.getCurrentPosition(userLocation, e);

@@ -14,7 +14,7 @@ function initMap(lat, lng, callback) {
 	var renderOption = {
 		polylineOptions: polyOption
 	}
-	directionsDisplay = new google.maps.DirectionsRenderer(renderOption);
+	directionsDisplay = new google.maps.DirectionsRenderer();
 
 
 	var mapOptions = {

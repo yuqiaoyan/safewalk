@@ -40,7 +40,7 @@ function renderRoute(routeNum) {
 	REQUIRES: routeCrimePts and totalCrimes*/
 	var minutes = routeCrimePts[routeNum].duration.split(' ');
 	var routeDiv = "<div class = 'route'> Via "
-	routeDiv += "<strong>"+routeCrimePts[routeNum].via+"</strong></div>"
+	routeDiv += "<strong>" + routeCrimePts[routeNum].via + "</strong></div>"
 	routeDiv += "<div class = 'side_text'><span class = 'crime'> <strong>"
 	routeDiv += routeCrimePts[routeNum].totalCrimes + "</strong>\t crimes</span><br>"
 	routeDiv += "<span class = 'time'><strong>" + minutes[0] + "</strong> min</span>"
@@ -54,10 +54,16 @@ function renderRoutes() {
 	$('.leaf').remove();
 	console.log("size - ", routeCrimePts.length);
 	for (var i = 0; i < routeCrimePts.length; i++) {
-		$('.leaf_frame').append("<div class='leaf' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(i) + "</div>");
+		if (i == 0) {
+			$('.leaf_frame').append("<div class='leaf active' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(i) + "</div>");
+		} else {
+			$('.leaf_frame').append("<div class='leaf' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(i) + "</div>");
+		}
 	}
-	$('.leaf').on('click',function(){
-		$(this).css('background-color', '#D8E5F1');
+	$('.leaf').on('click', function() {
+		$('.active').removeClass('active');
+		$(this).addClass('active');
+
 	});
 }
 
@@ -100,7 +106,7 @@ function updateRouteRenderer(start, end, number) {
 						step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[i];
 						displaySteps(step)
 					};
-					
+
 				}
 
 				directionsDisplay.setRouteIndex(routeCrimePts[number].routeNum);
@@ -110,7 +116,7 @@ function updateRouteRenderer(start, end, number) {
 					var summary = response.routes[0].summary
 					var duration = response.routes[0].legs[0].duration.text;
 					displayRoute(summary, duration);
-				
+
 					// $('.pulldown').css('display', 'block');
 					$('.directions_box').addClass('dir_height');
 					initHeight = $('.directions_box').outerHeight(true);
@@ -119,7 +125,7 @@ function updateRouteRenderer(start, end, number) {
 						step = response.routes[0].legs[0].steps[i];
 						displaySteps(step)
 					};
-					
+
 				}
 			}
 		} else {
@@ -129,22 +135,24 @@ function updateRouteRenderer(start, end, number) {
 }
 
 function displaySteps(step) {
-	var distance =  Math.round(convertMtToFt(step.distance.value));
-	if(distance >= 528){
+	var distance = Math.round(convertMtToFt(step.distance.value));
+	if (distance >= 528) {
 		distance = step.distance.text;
-	}else{
+	} else {
 		distance += " ft";
 	}
 	$('.directions').append("<div class='ui-block-a blocks'></div>")
 	$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
 	$('.directions').append("<div class='ui-block-c blocks'>" + distance);
 }
-function displayRoute(summary, duration){
+
+function displayRoute(summary, duration) {
 	$('.title_grid').append("<div class='ui-block-a title_block tba'></div>")
 	$('.title_grid').append("<div class='ui-block-b title_block tbb'>" + summary + "</div>");
 	$('.title_grid').append("<div class='ui-block-c title_block tbc'>" + duration);
 }
-function convertMtToFt(meters){
+
+function convertMtToFt(meters) {
 	return meters * 3.28084;
 }
 /**

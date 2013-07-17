@@ -36,7 +36,7 @@ function init(start,end) {
 
 $(document).ready(function() {
 	//console.log("Window URL: " + window.location.pathname);
-
+	$('.submit').removeClass('ui-disabled')
 	var debugValue = document.URL.split('debug=');
 
 	if (debugValue.length > 1) {
@@ -54,8 +54,11 @@ $(document).delegate('#page1', 'pageshow', function() {
 });
 
 $(document).delegate('#page2', 'pageshow', function() {
+	
+	
 	resizeHeight('#page2');
-	$('.info').css('display', 'block');
+	// $('.info').css('height', 'auto');
+	$('.info').css('display','block'); 
 	var start = $(".start").val();
 	var end = $(".end").val();
 
@@ -101,18 +104,18 @@ function runMap(start, end) {
 	if (!hasMapInit) {
 
 		//User did not give us permission to geocode
-		if (!aUser.getLat()) {
-			console.log("User lat information is not available so map not initiating ")
-		}
+		// if (!aUser.getLat()) {
+		// 	console.log("User lat information is not available so map not initiating ")
+		// }
 
 		//START OR END IS NOT SUPPORTED
-		else {
+		// else {
 			//initiates the map
 			initMap(aUser.getLat(), aUser.getLng(), function() {
 				hasMapInit = true;
 				calcRoute(start, end);
 			});
-		}
+		// }
 
 	} else {
 		calcRoute(start, end);
@@ -139,7 +142,7 @@ function resizeMap(page, height){
 	var start = $(".start").val();
 	var end = $(".end").val();
 	
-	var the_height = ($(window).height() - $(page).find('[data-role="header"]').height() - height);
+	var the_height = ($(window).height() - $(page).find('[data-role="header"]').height() - height) + 20;
 	$(page).height($(window).height()).find('[data-role="content"]').height(the_height);
 
 	google.maps.event.trigger(map, 'resize');
@@ -149,7 +152,3 @@ function resizeMap(page, height){
 
 }
 
-function direction_transition(){
-	resizeMap('#page2', initHeight);
-	$('.info').css('display', 'none');
-}
