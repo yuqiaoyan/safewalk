@@ -131,6 +131,8 @@ $(window).resize(function() {
 	if (currentRouteNum != -1) {
 		updateRouteRenderer(start, end, currentRouteNum);
 	}
+	var inputDiv = document.getElementById("routeInput")
+	inputDiv.scrollTop = inputDiv.scrollHeight;
 });
 
 function resizeHeight(page){

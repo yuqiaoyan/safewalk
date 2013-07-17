@@ -150,9 +150,15 @@ function displaySteps(step) {
 }
 
 function displayRoute(summary, duration) {
-	$('.title_grid').append("<div class='ui-block-a title_block tba'></div>")
-	$('.title_grid').append("<div class='ui-block-b title_block tbb'>" + summary + "</div>");
-	$('.title_grid').append("<div class='ui-block-c title_block tbc'>" + duration);
+	var block;
+	block+="<div class='leaf_block'>";
+	block+="<div class='dir_picture blocks'></div>"
+	block+="<div class='dir_instructions blocks'>" + summary + "</div>";
+	block+="<div class='dir_distance blocks'>" + duration + "</div>";
+	block+="</div>"
+	$('.title_grid').append(block)
+
+	
 }
 
 function convertMtToFt(meters) {
