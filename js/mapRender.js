@@ -85,7 +85,7 @@ function updateRouteRenderer(start, end, number) {
 
 	directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
-			$('.blocks').remove();
+			$('.leaf_block').remove();
 			$('.title_block').remove();
 			$('.directions_box').css('height', 'auto');
 			directionsDisplay.setDirections(response);
@@ -133,15 +133,20 @@ function updateRouteRenderer(start, end, number) {
 }
 
 function displaySteps(step) {
+	console.log("steps", step.instructions);
 	var distance = Math.round(convertMtToFt(step.distance.value));
 	if (distance >= 528) {
 		distance = step.distance.text;
 	} else {
 		distance += " ft";
 	}
-	$('.directions').append("<div class='ui-block-a blocks'></div>")
-	$('.directions').append("<div class='ui-block-b blocks'>" + step.instructions + "</div>");
-	$('.directions').append("<div class='ui-block-c blocks'>" + distance);
+	var block = "";
+	block+="<div class='leaf_block'>";
+	block+="<div class='dir_picture blocks'></div>"
+	block+="<div class='dir_instructions blocks'>" + step.instructions + "</div>";
+	block+="<div class='dir_distance blocks'>" + distance + "</div>";
+	block+="</div>"
+	$('.directions').append(block);
 }
 
 function displayRoute(summary, duration) {
