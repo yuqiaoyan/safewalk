@@ -78,18 +78,18 @@ function chooseRoute(number) {
 
 $(document).ready(function() {
 		
-	$('.title_grid').on("click", function() {
+	$('.title_grid, .routes_header').on("click", function() {
 		if ($('.directions').hasClass("min")) {
 			$('.directions').removeClass("min")
 			$('.directions').addClass("max")
-			$('.dir_height').animate({
-				height: "100%"
+			$('.directions_box').animate({
+				height: "60%"
 			}, 500);
-			$('.dir_height').slideDown('slow');
+			$('.directions_box').slideDown('slow');
 		} else if ($('.directions').hasClass("max")) {
 			$('.directions').removeClass("max")
 			$('.directions').addClass("min")
-			$('.dir_height').animate({
+			$('.directions_box').animate({
 				height: initHeight + "px"
 			}, 500);
 		}

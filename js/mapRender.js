@@ -87,7 +87,7 @@ function updateRouteRenderer(start, end, number) {
 		if (status == google.maps.DirectionsStatus.OK) {
 			$('.blocks').remove();
 			$('.title_block').remove();
-			$('.dir_height').css('height', 'auto');
+			$('.directions_box').css('height', 'auto');
 			directionsDisplay.setDirections(response);
 
 			if (validRoute) {
@@ -98,9 +98,8 @@ function updateRouteRenderer(start, end, number) {
 					displayRoute(summary, duration);
 
 					// $('.pulldown').css('display', 'block');
-					$('.directions_box').addClass('dir_height');
 					initHeight = $('.directions_box').outerHeight(true);
-					$('.dir_height').css('height', initHeight + 'px');
+					$('.directions_box').css('height', initHeight + 'px');
 					for (var i = 0; i < response.routes[routeCrimePts[number].routeNum].legs[0].steps.length; i++) {
 						// console.log("waypoints - ", response.routes[0].legs[0].steps[i].instructions);
 						step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[i];
@@ -118,9 +117,8 @@ function updateRouteRenderer(start, end, number) {
 					displayRoute(summary, duration);
 
 					// $('.pulldown').css('display', 'block');
-					$('.directions_box').addClass('dir_height');
 					initHeight = $('.directions_box').outerHeight(true);
-					$('.dir_height').css('height', initHeight + 'px');
+					$('.directions_box').css('height', initHeight + 'px');
 					for (var i = 0; i < response.routes[0].legs[0].steps.length; i++) {
 						step = response.routes[0].legs[0].steps[i];
 						displaySteps(step)
