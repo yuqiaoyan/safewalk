@@ -31,12 +31,13 @@
 			<h3></h3>
 		</div>
 
-		<div data-role="content" class="content_area">
+		<div data-role="content" class="content_area" id="routeInput" stype="overflow-y: scroll">
 			<img src="img/hippo.png" class="logo">
 			<img src="img/title.png" class="logo_title">
 			<div class="filler"></div>
 
-			<div data-role="fieldcontain" class = "input_field">
+
+			<div data-role="fieldcontain" class = "input_field" >
 				<input type="text" class="start input-text" value="75 Geary St. San Francisco CA" tabIndex="7" placeholder="start"/>
 				<input type="text" class ="end input-text" value="100 Market St. San Francisco CA" tabIndex="7"  placeholder="end"/>
 				<!--<input type="text" class="start" value="5 Pike St. Seattle WA" tabIndex="7" placeholder="start"/>
@@ -51,9 +52,9 @@
 			</div>
 
 		</div>
-		<div data-theme="b" data-role="footer" data-position="fixed" >
+		<!-- <div data-theme="b" data-role="footer" data-position="fixed" >
 			<h3></h3>
-		</div>
+		</div> -->
 
 	</div>
 
@@ -91,5 +92,13 @@
 
 		</div>
 	</div>
+	<script type="text/javascript">
+		var startInput = $('.start');
+		startInput.focus(function(){
+			var inputDiv = document.getElementById("routeInput")
+			inputDiv.scrollTop = inputDiv.scrollHeight;
+
+		});
+	</script>
 </body>
 </html>
