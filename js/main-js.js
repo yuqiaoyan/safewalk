@@ -107,7 +107,7 @@ function direction_transition(){
 	var stepHeader = $('#StepHeader');
 	var selectedLeaf = $('.leaf.active');
 	var viaText = selectedLeaf.children()[0].innerText;
-	console.log(viaText)
+	
 
 	stepHeader[0].innerText = viaText;
 }
