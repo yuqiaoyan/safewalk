@@ -98,7 +98,16 @@ $(document).ready(function() {
 });
 
 function direction_transition(){
+	console.log("+DIRECTION_TRANSITION");
 	resizeMap('#page2', initHeight);
 	// $('.info').animate({height: '0px'},500);
 	$('.info').css('display','none');
+
+	//Update the header
+	var stepHeader = $('#StepHeader');
+	var selectedLeaf = $('.leaf.active');
+	var viaText = selectedLeaf.children()[0].innerText;
+	console.log(viaText)
+
+	stepHeader[0].innerText = viaText;
 }

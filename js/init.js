@@ -56,6 +56,7 @@ $(document).delegate('#page1', 'pageshow', function() {
 $(document).delegate('#page2', 'pageshow', function() {
 	
 	
+
 	resizeHeight('#page2');
 	$('.info').css('height', 'auto');
 	$('.info').css('display','block'); 
