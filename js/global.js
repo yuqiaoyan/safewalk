@@ -75,7 +75,7 @@ function user(){
 	function initialize(){
 		console.log("+initialize")
 	
-		setLocation();
+		// setLocation();
 		console.log("-initialize")
 	}
 	console.log("-user")
