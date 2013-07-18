@@ -100,7 +100,8 @@ $(document).delegate('#page2', 'pageshow', function() {
 function runMap(start, end) {
 	console.log("Valid Route: ")
 	console.log(validRoute);
-
+	var lat = 0;
+	var lng = 0;
 	console.log("(--------- INITIALIZE MAP ---------")
 	if (!hasMapInit) {
 
@@ -112,7 +113,7 @@ function runMap(start, end) {
 		//START OR END IS NOT SUPPORTED
 		// else {
 			//initiates the map
-			initMap(aUser.getLat(), aUser.getLng(), function() {
+			initMap(lat, lng, function() {
 				hasMapInit = true;
 				calcRoute(start, end);
 			});
