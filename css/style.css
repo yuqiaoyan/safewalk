@@ -160,9 +160,6 @@ body {
     border-top-right-radius: 20px;
 	-webkit-box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.75);
 	box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.75);
-}
-
-.directions_box {
 	background-color: white;
 	width: 100%;
 	position: absolute;
@@ -172,6 +169,7 @@ body {
 
 .directions {
 	overflow: auto !important;
+	height: 0px;
 }
 
 .ui-block-a {
@@ -216,14 +214,12 @@ body {
 .step_block{
 	/*height: 40px;*/
 	width: 100%;
-	border-bottom: 1px solid #15449B !important;
+	/*border-bottom: 1px solid #15449B !important;*/
 	padding-top: 25px !important;
 	padding-bottom: 25px !important;
 }
 
-.all_directions {
-	overflow: auto;
-}
+
 
 .pulldown {
 	z-index: 1;
@@ -248,17 +244,12 @@ body {
 
 .title_block {
 
-	/*height: 40px;*/
 	width: 100%;
 	border-bottom: 1px solid #15449B !important;
-	padding-top: 25px !important;
-	padding-bottom: 25px !important;
+	padding-top: 20px !important;
+	padding-bottom: 20px !important;
 	width: 100%;
-	/*color: #15449B;*/
 	font-size: 12px;
-	/*height: 40px !important;*/
-	/*padding-top: 15px !important;*/
-	/*padding-bottom: 15px !important;*/
 	font-weight: bold !important;
 
 }

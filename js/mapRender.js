@@ -87,11 +87,10 @@ function updateRouteRenderer(start, end, number) {
 		if (status == google.maps.DirectionsStatus.OK) {
 			$('.step_block').remove();
 			$('.title_block').remove();
-			$('.directions_box').css('height', 'auto');
+			$('.directions').css('height', '0');
 			directionsDisplay.setDirections(response);
 
 			if (validRoute) {
-
 				if (response.routes[routeCrimePts[number].routeNum].legs[0].steps.length) {
 					var summary = response.routes[routeCrimePts[number].routeNum].summary
 					var duration = response.routes[routeCrimePts[number].routeNum].legs[0].duration.text;
@@ -99,7 +98,7 @@ function updateRouteRenderer(start, end, number) {
 
 					// $('.pulldown').css('display', 'block');
 					initHeight = $('.directions_box').outerHeight(true);
-					$('.directions_box').css('height', initHeight + 'px');
+					// $('.directions_box').css('height', initHeight + 'px');
 					for (var i = 0; i < response.routes[routeCrimePts[number].routeNum].legs[0].steps.length; i++) {
 						// console.log("waypoints - ", response.routes[0].legs[0].steps[i].instructions);
 						step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[i];
@@ -118,7 +117,7 @@ function updateRouteRenderer(start, end, number) {
 
 					// $('.pulldown').css('display', 'block');
 					initHeight = $('.directions_box').outerHeight(true);
-					$('.directions_box').css('height', initHeight + 'px');
+					// $('.directions_box').css('height', initHeight + 'px');
 					for (var i = 0; i < response.routes[0].legs[0].steps.length; i++) {
 						step = response.routes[0].legs[0].steps[i];
 						displaySteps(step)
@@ -141,15 +140,18 @@ function displaySteps(step, i) {
 		distance += " ft";
 	}
 	var block = "";
-	block+="<div class='step_block'>";
+	if(i%2==0){
+		block+="<div class='step_block active'>";
+	}else{
+		block+="<div class='step_block'>";
+	}
+	
 	block+="<div class='dir_picture blocks'></div>"
 	block+="<div class='dir_instructions blocks'>" + step.instructions + "</div>";
 	block+="<div class='dir_distance blocks'>" + distance + "</div>";
 	block+="</div>"
 	$('.directions').append(block);
-	if(i%2==0){
-		$('.step_block').addClass('.active');
-	}
+	
 }
 
 function displayRoute(summary, duration) {
