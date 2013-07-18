@@ -99,6 +99,7 @@ $(document).ready(function() {
 
 function direction_transition(){
 	console.log("+DIRECTION_TRANSITION");
+	$('.directions_box').css('display','block');
 	resizeMap('#page2', initHeight);
 	// $('.info').animate({height: '0px'},500);
 	$('.info').css('display','none');
@@ -117,6 +118,7 @@ function direction_transition(){
 
 function backTransition(){
 	if(isLeaf == false){
+		$('.directions_box').css('display','none');
 		$('.info').css('display','block');
 		isLeaf = true;
 		$('#StepHeader')[0].innerText = "Safewalk";
