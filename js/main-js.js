@@ -119,7 +119,7 @@ function backTransition(){
 	if(isLeaf == false){
 		$('.info').css('display','block');
 		isLeaf = true;
-		$('#StepHeader').innerText = "Safewalk";
+		$('#StepHeader')[0].innerText = "Safewalk";
 	}
 	else{
 		$.mobile.changePage("#page1");
