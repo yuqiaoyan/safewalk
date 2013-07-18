@@ -117,8 +117,13 @@ function direction_transition(){
 }
 
 function backTransition(){
+//"fix" back button to work as expected
 	if(isLeaf == false){
 		$('.directions_box').css('display','none');
+
+		resizeMap('#page2', $('.info').height()+$('.direction_button').height());
+
+
 		$('.info').css('display','block');
 		isLeaf = true;
 		$('#StepHeader')[0].innerText = "Safewalk";
