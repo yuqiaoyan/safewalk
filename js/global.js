@@ -113,6 +113,7 @@ var currentAddress;
 
 var currentRouteNum = -1;
 var loaded = false;
+var isLeaf = true; //if true, this means user has not selected to show steps
 
 /* crime.js globals */
 
@@ -121,3 +122,5 @@ var database = [];
 /*map render globals */
 var userMarker = null;
 var isTracking = false;
+
+

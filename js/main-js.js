@@ -110,4 +110,7 @@ function direction_transition(){
 	
 
 	stepHeader[0].innerText = viaText;
+
+	//update boolean to say we've moved to Step by Step
+	isLeaf = false;
 }
