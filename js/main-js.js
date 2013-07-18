@@ -114,3 +114,16 @@ function direction_transition(){
 	//update boolean to say we've moved to Step by Step
 	isLeaf = false;
 }
+
+function backTransition(){
+	if(isLeaf == false){
+		$('.info').css('display','block');
+		isLeaf = true;
+		$('#StepHeader').innerText = "Safewalk";
+	}
+	else{
+		$.mobile.changePage("#page1");
+		isLeaf = true;
+	}
+
+}
