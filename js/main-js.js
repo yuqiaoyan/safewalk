@@ -78,7 +78,7 @@ function chooseRoute(number) {
 
 $(document).ready(function() {
 		
-	$('.title_grid, .routes_header').on("click", function() {
+	$('.title_grid, .step_header').on("click", function() {
 		if ($('.directions').hasClass("min")) {
 			$('.directions').removeClass("min")
 			$('.directions').addClass("max")

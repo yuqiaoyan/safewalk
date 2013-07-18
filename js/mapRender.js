@@ -85,7 +85,7 @@ function updateRouteRenderer(start, end, number) {
 
 	directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
-			$('.leaf_block').remove();
+			$('.step_block').remove();
 			$('.title_block').remove();
 			$('.directions_box').css('height', 'auto');
 			directionsDisplay.setDirections(response);
@@ -103,7 +103,7 @@ function updateRouteRenderer(start, end, number) {
 					for (var i = 0; i < response.routes[routeCrimePts[number].routeNum].legs[0].steps.length; i++) {
 						// console.log("waypoints - ", response.routes[0].legs[0].steps[i].instructions);
 						step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[i];
-						displaySteps(step)
+						displaySteps(step , i)
 					};
 
 				}
@@ -132,7 +132,7 @@ function updateRouteRenderer(start, end, number) {
 	});
 }
 
-function displaySteps(step) {
+function displaySteps(step, i) {
 	console.log("steps", step.instructions);
 	var distance = Math.round(convertMtToFt(step.distance.value));
 	if (distance >= 528) {
@@ -141,25 +141,31 @@ function displaySteps(step) {
 		distance += " ft";
 	}
 	var block = "";
-	block+="<div class='leaf_block'>";
+	block+="<div class='step_block'>";
 	block+="<div class='dir_picture blocks'></div>"
 	block+="<div class='dir_instructions blocks'>" + step.instructions + "</div>";
 	block+="<div class='dir_distance blocks'>" + distance + "</div>";
 	block+="</div>"
 	$('.directions').append(block);
+	if(i%2==0){
+		$('.step_block').addClass('.active');
+	}
 }
 
 function displayRoute(summary, duration) {
-	var block;
-	block+="<div class='leaf_block'>";
+	// $('.title_grid').append("<div class='ui-block-a title_block tba'></div>")
+	// $('.title_grid').append("<div class='ui-block-b title_block tbb'>" + summary + "</div>");
+	// $('.title_grid').append("<div class='ui-block-c title_block tbc'>" + duration) + "</div>";
+	var block = "";
+	block+="<div class='title_block'>";
 	block+="<div class='dir_picture blocks'></div>"
 	block+="<div class='dir_instructions blocks'>" + summary + "</div>";
 	block+="<div class='dir_distance blocks'>" + duration + "</div>";
 	block+="</div>"
 	$('.title_grid').append(block)
-
-	
 }
+
+
 
 function convertMtToFt(meters) {
 	return meters * 3.28084;

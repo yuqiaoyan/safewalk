@@ -57,7 +57,7 @@ $(document).delegate('#page2', 'pageshow', function() {
 	
 	
 	resizeHeight('#page2');
-	// $('.info').css('height', 'auto');
+	$('.info').css('height', 'auto');
 	$('.info').css('display','block'); 
 	var start = $(".start").val();
 	var end = $(".end").val();
@@ -127,8 +127,8 @@ $(window).resize(function() {
 
 	resizeHeight('#page1');
 	resizeHeight('#page2');
-	var inputDiv = document.getElementById("routeInput")
-	inputDiv.scrollTop = inputDiv.scrollHeight;
+	// var inputDiv = document.getElementById("routeInput")
+	// inputDiv.scrollTop = inputDiv.scrollHeight;
 	var start = $(".start").val();
 	var end = $(".end").val();
 	if (currentRouteNum != -1) {
