@@ -83,7 +83,7 @@ $(document).ready(function() {
 			$('.directions_box').removeClass("min")
 			$('.directions_box').addClass("max")
 			$('.directions').animate({
-				height: $(window).height()/2 + "px"
+				height: $(window).height()/2.5 + "px"
 			}, 500);
 			$('.directions_box').slideDown('slow');
 		} else if ($('.directions_box').hasClass("max")) {
