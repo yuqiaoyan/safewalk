@@ -39,11 +39,12 @@ function renderRoute(routeNum) {
 	/* HTML for drawing a single routeInfo
 	REQUIRES: routeCrimePts and totalCrimes*/
 	var minutes = routeCrimePts[routeNum].duration.split(' ');
+
 	var routeDiv = "<div class = 'route'> Via "
 	routeDiv += "<strong>" + routeCrimePts[routeNum].via + "</strong></div>"
 	routeDiv += "<div class = 'side_text'><span class = 'crime'> <strong>"
 	routeDiv += routeCrimePts[routeNum].totalCrimes + "</strong>\t crimes</span><br>"
-	routeDiv += "<span class = 'time'><strong>" + minutes[0] + "</strong> min</span>"
+	routeDiv += "<span class = 'time'><strong>" + minutes[0] + "</strong> "+ minutes[1]+"</span>"
 	routeDiv += "</div>";
 	return routeDiv;
 }
