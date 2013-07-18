@@ -42,6 +42,7 @@ body {
 	overflow: hidden;
 }
 
+
 .logo {
 	display: block;
 	height: 30%;
@@ -246,8 +247,8 @@ body {
 
 	width: 100%;
 	border-bottom: 1px solid #15449B !important;
-	padding-top: 20px !important;
-	padding-bottom: 20px !important;
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
 	width: 100%;
 	font-size: 12px;
 	font-weight: bold !important;

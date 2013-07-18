@@ -161,8 +161,8 @@ function displayRoute(summary, duration) {
 	var block = "";
 	block+="<div class='title_block'>";
 	block+="<div class='dir_picture blocks'></div>"
-	block+="<div class='dir_instructions blocks'>" + summary + "</div>";
-	block+="<div class='dir_distance blocks'>" + duration + "</div>";
+	block+="<div class='dir_instructions blocks'>" + summary + "<br>"+duration+"</div>";
+	// block+="<div class='dir_distance blocks'>" + duration + "</div>";
 	block+="</div>"
 	$('.title_grid').append(block)
 }
