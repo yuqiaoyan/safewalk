@@ -28,6 +28,7 @@ function init(start,end) {
 	console.log("+data processing");
 	initData(requestURL, function() {
 		runMap(start, end);
+		$('.loading').css('display','none');
 		
 	});
 	console.log("-data processing");
@@ -51,6 +52,7 @@ $(document).ready(function() {
 $(document).delegate('#page1', 'pageshow', function() {
 	// console.log($(window).height());
 	resizeHeight('#page1');
+	$('.loading').css('display','block');
 });
 
 $(document).delegate('#page2', 'pageshow', function() {
