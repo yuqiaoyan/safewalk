@@ -123,4 +123,3 @@ var database = [];
 var userMarker = null;
 var isTracking = false;
 
-

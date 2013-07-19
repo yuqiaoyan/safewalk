@@ -90,7 +90,7 @@ function updateRouteRenderer(start, end, number) {
 			$('.title_block').remove();
 			$('.directions').css('height', '0');
 			directionsDisplay.setDirections(response);
-
+			
 			if (validRoute) {
 				if (response.routes[routeCrimePts[number].routeNum].legs[0].steps.length) {
 					var summary = response.routes[routeCrimePts[number].routeNum].summary

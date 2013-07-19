@@ -18,7 +18,7 @@ body {
 }
 
 .content_area {
-	height: 0%;
+	height: 100%;
 	background-image: -webkit-gradient(linear,left top,left bottom,from(white),to(#b1aca7));
 
 	background-image: -webkit-linear-gradient(white,#b1aca7);
@@ -30,6 +30,7 @@ body {
 }
 
 #page1,#page2 {
+	height: 100%;
 	margin: 0 !important;
 	padding: 0 !important;
 	background-image: -webkit-gradient(linear,left top,left bottom,from(white),to(#b1aca7));
