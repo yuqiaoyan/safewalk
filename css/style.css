@@ -327,6 +327,10 @@ body {
 	margin-bottom: 0 !important;
 
 }
+
 .directions_button .ui-btn-inner .ui-btn-text{
     font-size: 14px;
+}
+.ui-btn-active{
+	text-shadow: none !important;
 }
