@@ -324,10 +324,13 @@ body {
 	background-size: 300px auto;
 	background-position: top;
 	width: 100%;
-	height: 100%;
+	height: 100%
 	z-index: 999;
 	position: absolute;
 	background-color: #229EC6;
 	opacity: .8;
-	
+}
+.introduction{
+	max-width: 500px;
+	margin: auto;
 }
