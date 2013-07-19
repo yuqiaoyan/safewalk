@@ -85,7 +85,7 @@ function calcRoute(start, end) {
 				$(".errormsg").html("Sorry! We currently do not support this city. Our team of hippos are working hard on it");
 				$("#popupError").popup("open")
 			}
-
+			$('.loading').css('display','none');
 			updateRouteRenderer(start, end, currentRouteNum);
 
 			//temporarily placing it here

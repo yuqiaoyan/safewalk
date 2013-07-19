@@ -27,9 +27,7 @@ function init(start,end) {
 
 	console.log("+data processing");
 	initData(requestURL, function() {
-		runMap(start, end);
-		$('.loading').css('display','none');
-		
+		runMap(start, end);		
 	});
 	console.log("-data processing");
 

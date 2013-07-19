@@ -126,6 +126,7 @@ function updateRouteRenderer(start, end, number) {
 
 				}
 			}
+			
 		} else {
 			console.log("Unable to get directionService information");
 		}
