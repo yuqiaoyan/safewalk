@@ -10,7 +10,7 @@
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<!-- // <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script> -->
-	<!-- // <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script> -->
+ 	<!-- // <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script> -->
 
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
@@ -55,7 +55,7 @@
 	<!-- /page -->
 
 	<div data-role="page" id="page1" class="page1">
-		<div data-theme="b" data-role="header">
+		<div data-role="header" class="header">
 			<h3></h3>
 		</div>
 
@@ -64,33 +64,35 @@
 			<img src="img/title.png" class="logo_title">
 			<div class="filler"></div>
 
-			<div data-role="fieldcontain" class = "input_field" >
-				<!-- <input type="text" class="start input-text" value="75 Geary St. San Francisco CA" tabIndex="7" placeholder="start"/>
-				-->
-				<!-- <input type="text" class ="end input-text" value="100 Market St. San Francisco CA" tabIndex="7"  placeholder="end"/>
-				-->
-				<input type="text" class="start" value="5 Pike St. Seattle WA" tabIndex="7" placeholder="start"/>
-				<input type="text" class ="end" value="2700 11th Ave Seattle WA" tabIndex="7"  placeholder="end"/>
-
-				<!-- Pioneer Elementary School Union City CA -->
-				<!-- 13702 NE 28th St. Bellevue WA -->
-				<!-- 9031 161st PL NE Redmond WA -->
+			<!-- Start Input -->
+			<div data-role="fieldcontain" class = "input_field" style="height: 10%; border: none">
+				<span data-role="none" class="corners">
+					<input data-role="none"type="text" class="start input" value="5 Pike St. Seattle WA" placeholder="Start Location"/>
+				</span>
+			</div>
+			<!-- End Input -->
+			<div data-role="fieldcontain" class = "input_field" style="height: 10%; border: none">
+				<span data-role="none" class="corners">
+					<input data-role="none" type="text" class ="end input" value="2700 11th Ave Seattle WA" placeholder="End Location"/>
+				</span>
+			</div>
+			<!-- Submit Button -->
+			<div data-role="fieldcontain" class = "button_field">
 				<div class="homeSubmit">
 					<a href="#page2" onclick= "javascript:submit()" data-corners="false" data-role="button" class="submit ui-disabled" data-mini="true" data-theme="d" tabIndex="9" id="routeButton">Find a Safe Route!</a>
 				</div>
 			</div>
 
 		</div>
-		<div data-theme="b" data-role="footer" data-position="fixed">
+		<div data-role="footer" data-position="fixed" class="footer">
 			<h3></h3>
 		</div>
-
 	</div>
 
 	<div data-role="page" id="page2">
-		<div data-theme="b" data-role="header">
-			<a data-role="button" data-theme="b" href="#" onclick='javascript:backTransition()'
-	          data-icon="back" data-iconpos="left" class="ui-btn-left">Back</a>
+		<div data-theme="p" data-role="header">
+			<a data-role="button" data-theme="c" href="#" onclick='javascript:backTransition()'
+		          data-icon="back" data-iconpos="left" class="ui-btn-left">Back</a>
 			<h3 id="StepHeader">Safewalk</h3>
 		</div>
 		<div data-role="content" class="content_area" >
@@ -108,11 +110,11 @@
 				<div class="routes_header">Route Options</div>
 				<div class="leaf_frame"></div>
 
-				<a href="#page2" onclick= "javascript:direction_transition()" data-corners="false" data-role="button" class="directions_button" data-mini="false"  >Get Directions</a>
+				<a href="#page2" onclick= "javascript:direction_transition()" data-corners="false" data-role="button" class="directions_button" data-mini="false">Get Directions</a>
 
 			</div>
 
-			<div data-role="popup" id="popupError" data-overlay-theme="b">
+			<div data-role="popup" id="popupError" data-overlay-theme="p">
 				<label class="errormsg"></label>
 			</div>
 

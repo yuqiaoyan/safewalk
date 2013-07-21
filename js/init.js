@@ -48,14 +48,13 @@ $(document).ready(function() {
 });
 
 $(document).delegate('#page1', 'pageshow', function() {
-	// console.log($(window).height());
-	// resizeHeight('#page1');
+	resizeHeight('#page1');
 	$('.loading').css('display', 'block');
 });
 
 $(document).delegate('#page2', 'pageshow', function() {
 
-	// resizeHeight('#page2');
+	resizeHeight('#page2');
 	$('.info').css('height', 'auto');
 	$('.info').css('display', 'block');
 	var start = $(".start").val();
@@ -95,6 +94,35 @@ $(document).delegate('#page2', 'pageshow', function() {
 
 });
 
+$(window).resize(function() {
+
+	resizeHeight('#page1');
+	resizeHeight('#page2');
+	
+	if (isLeaf) {
+		
+		resizeMap('#page2', $('.info').height() + $('.direction_button').height());
+	} else {
+		
+		resizeMap('#page2', initHeight);
+	}
+	// var inputDiv = document.getElementById("routeInput")
+	// inputDiv.scrollTop = inputDiv.scrollHeight;
+	// if (map) {
+	// 	var center = map.getCenter();
+	// 	google.maps.event.trigger(map, 'resize');
+	// 	map.setCenter(center);
+	// }
+
+	var start = $(".start").val();
+	var end = $(".end").val();
+	google.maps.event.trigger(map, 'resize');
+	if (currentRouteNum != -1) {
+		updateRouteRenderer(start, end, currentRouteNum);
+	}
+
+});
+
 function runMap(start, end) {
 	console.log("Valid Route: ")
 	console.log(validRoute);
@@ -121,33 +149,6 @@ function runMap(start, end) {
 		calcRoute(start, end);
 	}
 }
-
-
-$(window).resize(function() {
-
-	// resizeHeight('#page1');
-	// resizeHeight('#page2');
-	if (isLeaf) {
-		resizeMap('#page2', $('.info').height() + $('.direction_button').height());
-	} else {
-		resizeMap('#page2', initHeight);
-	}
-	// var inputDiv = document.getElementById("routeInput")
-	// inputDiv.scrollTop = inputDiv.scrollHeight;
-	// if (map) {
-	// 	var center = map.getCenter();
-	// 	google.maps.event.trigger(map, 'resize');
-	// 	map.setCenter(center);
-	// }
-
-	var start = $(".start").val();
-	var end = $(".end").val();
-	google.maps.event.trigger(map, 'resize');
-	if (currentRouteNum != -1) {
-		updateRouteRenderer(start, end, currentRouteNum);
-	}
-
-});
 
 function resizeHeight(page) {
 	var the_height = ($(window).height() - $(page).find('[data-role="header"]').height() - $(page).find('[data-role="footer"]').height());

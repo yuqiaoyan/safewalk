@@ -39,12 +39,18 @@ function renderRoute(routeNum) {
 	/* HTML for drawing a single routeInfo
 	REQUIRES: routeCrimePts and totalCrimes*/
 	var minutes = routeCrimePts[routeNum].duration.split(' ');
-
 	var routeDiv = "<div class = 'route'> Via "
 	routeDiv += "<strong>" + routeCrimePts[routeNum].via + "</strong></div>"
 	routeDiv += "<div class = 'side_text'><span class = 'crime'> <strong>"
 	routeDiv += routeCrimePts[routeNum].totalCrimes + "</strong>\t crimes</span><br>"
-	routeDiv += "<span class = 'time'><strong>" + minutes[0] + "</strong> "+ minutes[1]+"</span>"
+	routeDiv += "<span class = 'time'>";
+	for (var i = 0; i < minutes.length; i++) {
+		if(i%2 == 0)
+			routeDiv += "<strong>" + minutes[i] + "</strong> ";
+		else
+			routeDiv += minutes[i]+" ";
+	};
+	routeDiv += "</span>";
 	routeDiv += "</div>";
 	return routeDiv;
 }
@@ -195,7 +201,7 @@ function updateMarkers(number) {
 	console.log("Last - ", routeCrimePts[number].last);
 	for (var i = routeCrimePts[number].last + 1, j = 0; i < routeCrimePts[number].array.length; i++) {
 		markers[j++] = createMark(routeCrimePts[number].array[i].Y, routeCrimePts[number].array[i].X);
-		createInfoWindow(markers[j - 1], number, i);
+		// createInfoWindow(markers[j - 1], number, i);
 	}
 
 	var mcOptions = {
