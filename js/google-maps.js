@@ -70,22 +70,26 @@ function calcRoute(start, end) {
 			}else{
 				isTracking = false;
 			}
-
+			console.log("+running direction service+");
 			if (validRoute) {
 				$('.openOptions').removeClass('ui-disabled')
 				for (var i = 0; i < response.routes.length; i++) {
 					routeInfo(response, i)
 				};
 				getBestRoute(); //sorts routeCrimePts and 
-				renderRoutes();
+				renderRoutes(routeCrimePts);
 				resizeMap('#page2', $('.info').height()+$('.direction_button').height());
 				updateMarkers(currentRouteNum);
 			} else {
+				renderRoutes(response.routes);
+				resizeMap('#page2', $('.info').height()+$('.direction_button').height());
 				$('.openOptions').addClass('ui-disabled')
 				$(".errormsg").html("Sorry! We currently do not support this city. Our team of hippos are working hard on it");
 				$("#popupError").popup("open")
+				
 			}
 			$('.loading').css('display','none');
+			console.log("-running direction service-");
 			updateRouteRenderer(start, end, currentRouteNum);
 
 			//temporarily placing it here
@@ -160,15 +164,15 @@ function routeInfo(response, routeNum) {
 
 
 	function set_selectedLines(crime,index,array){
-		//console.log("+set_selectedLines")
-		//console.log("midJB",midJB)
-		//console.log("midKB",midKB)
-		//var temp = haversine(47.62268,-122.3560459,47.60733158,-122.3386512,3.25)
-		//console.log("crime", crime)
-		//if(crime.Y == 47.60733158)
+		// console.log("+set_selectedLines")
+		// console.log("midJB",midJB)
+		// console.log("midKB",midKB)
+		// (37.8084763 ,-122.26881204999998)
+		// var temp = haversine(47.62268,-122.3560459,47.60733158,-122.3386512,3.25)
+		// console.log("crime", crime)
+		// if(crime.Y == 47.60733158)
 		//	debugger;
 		if(haversine(midJB,midKB,crime.Y,crime.X,radiusMi)){
-			//console.log("CRIME PT : ",crime);
 			selectedLines.array[nIndex++] = crime;
 		}
 	}

@@ -1,6 +1,23 @@
-var SUPPORTED_CITIES = {"San Francisco":1,"Seattle":1};
+var SUPPORTED_CITIES = {
+	"San Francisco": "SanFrancisco",
+	"Seattle": "Seattle",
+	"Alameda": "Alameda",
+	"Albany": "Alameda",
+	"Berkeley": "Alameda",
+	"Dublin": "Alameda",
+	"Emeryville": "Alameda",
+	"Fremont": "Alameda",
+	"Hayward": "Alameda",
+	"Livermore": "Alameda",
+	"Newark": "Alameda",
+	"Oakland": "Alameda",
+	"Piedmont": "Alameda",
+	"Pleasanton": "Alameda",
+	"San Leandro": "Alameda",
+	"Union City": "Alameda"
+};
 
-function user(){
+function user() {
 	console.log("+user")
 
 	//GLOBAL PRIVATE VARIABLES
@@ -17,20 +34,29 @@ function user(){
 	this.setLocation = setLocation;
 	this.getToday = getToday; //from 0-6
 	this.getCity = getCity;
-	this.setCity=setCity;
-	
+	this.setCity = setCity;
+
 	//------- GETTER FUNCTIONS -----------//
-	function getLat(){return lat;}
 
-	function getLng(){ return lng;}
+	function getLat() {
+		return lat;
+	}
 
-	function getPt(){ return point;}
+	function getLng() {
+		return lng;
+	}
 
-	function getCity(){ return city;}
+	function getPt() {
+		return point;
+	}
 
-	function getToday(){		
+	function getCity() {
+		return city;
+	}
+
+	function getToday() {
 		var date = getDate(); //object: prevDay, day, nextDay, time 
-		today = date.day; 
+		today = date.day;
 		console.log("user date: ")
 		console.log(date);
 		return today
@@ -38,8 +64,9 @@ function user(){
 
 
 	//------- SETTER FUNCTIONS -----------//
-	function setLocation(){
-	//sets user lat and lng based on their current location
+
+	function setLocation() {
+		//sets user lat and lng based on their current location
 
 		var userLocation = function(pos) {
 			// "this" is the instance of the function itself i believe
@@ -66,15 +93,16 @@ function user(){
 		navigator.geolocation.getCurrentPosition(userLocation, e);
 	}
 
-	function setCity(parsedCity){
+	function setCity(parsedCity) {
 		city = parsedCity;
 	}
 
 
 	//------- INITIALIZE -----------//
-	function initialize(){
+
+	function initialize() {
 		console.log("+initialize")
-	
+
 		// setLocation();
 		console.log("-initialize")
 	}
@@ -122,4 +150,3 @@ var database = [];
 /*map render globals */
 var userMarker = null;
 var isTracking = false;
-

@@ -53,23 +53,19 @@ function validateCity(address, cb) {
 
 function getBestRoute() {
 	console.log("+getBestRoute");
-
 	//sort routeCrimePts to ascending order
 	routeCrimePts.sort(function(value1, value2) {
 		return value1.totalCrimes - value2.totalCrimes;
 	})
-
-
-	currentRouteNum = 0;
 	console.log("-getBestRoute");
 
 }
 
 function chooseRoute(number) {
-
 	var start = $(".start").val();
 	var end = $(".end").val();
-	updateMarkers(number)
+	if(validRoute)
+		updateMarkers(number)
 	updateRouteRenderer(start, end, number);
 	currentRouteNum = number;
 	// calcRoute(start, end, number, false);
@@ -107,9 +103,7 @@ function direction_transition(){
 	//Update the header
 	var stepHeader = $('#StepHeader');
 	var selectedLeaf = $('.leaf.active');
-	var viaText = selectedLeaf.children()[0].innerText;
-	
-
+	var viaText = selectedLeaf.children()[0].innerText;	
 	stepHeader[0].innerText = viaText;
 
 	//update boolean to say we've moved to Step by Step

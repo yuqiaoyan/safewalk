@@ -35,36 +35,55 @@ function renderUser() {
 		setTimeout(renderUser, 5000);
 }
 
-function renderRoute(routeNum) {
+function renderRoute(routes, routeNum) {
 	/* HTML for drawing a single routeInfo
 	REQUIRES: routeCrimePts and totalCrimes*/
-	var minutes = routeCrimePts[routeNum].duration.split(' ');
-	var routeDiv = "<div class = 'route'> Via "
-	routeDiv += "<strong>" + routeCrimePts[routeNum].via + "</strong></div>"
-	routeDiv += "<div class = 'side_text'><span class = 'crime'> <strong>"
-	routeDiv += routeCrimePts[routeNum].totalCrimes + "</strong>\t crimes</span><br>"
-	routeDiv += "<span class = 'time'>";
-	for (var i = 0; i < minutes.length; i++) {
-		if(i%2 == 0)
-			routeDiv += "<strong>" + minutes[i] + "</strong> ";
-		else
-			routeDiv += minutes[i]+" ";
-	};
-	routeDiv += "</span>";
-	routeDiv += "</div>";
+
+	if (validRoute) {
+		var minutes = routeCrimePts[routeNum].duration.split(' ');
+		var routeDiv = "<div class = 'route'> Via "
+		routeDiv += "<strong>" + routeCrimePts[routeNum].via + "</strong></div>"
+		routeDiv += "<div class = 'side_text'><span class = 'crime'> <strong>"
+		routeDiv += routeCrimePts[routeNum].totalCrimes + "</strong>\t crimes</span><br>"
+		routeDiv += "<span class = 'time'>";
+		for (var i = 0; i < minutes.length; i++) {
+			if (i % 2 == 0)
+				routeDiv += "<strong>" + minutes[i] + "</strong> ";
+			else
+				routeDiv += minutes[i] + " ";
+		};
+		routeDiv += "</span>";
+		routeDiv += "</div>";
+	} else {
+		//Non-supported routes
+		var minutes = routes[routeNum].legs[0].duration.text.split(' ');
+		var routeDiv = "<div class = 'route'> Via "
+		routeDiv += "<strong>" + routes[routeNum].summary + "</strong></div>"
+		routeDiv += "<span class = 'time'>";
+		routeDiv += "<div class = 'side_text'>"
+		for (var i = 0; i < minutes.length; i++) {
+			if (i % 2 == 0)
+				routeDiv += "<strong>" + minutes[i] + "</strong> ";
+			else
+				routeDiv += minutes[i] + " ";
+		};
+		routeDiv += "</span>";
+		routeDiv += "</div>";
+	}
 	return routeDiv;
 }
 
-function renderRoutes() {
+function renderRoutes(routes) {
 	//Draws the 3 routes on the result page
 	console.log("<--render routes-->");
 	$('.leaf').remove();
-	console.log("size - ", routeCrimePts.length);
-	for (var i = 0; i < routeCrimePts.length; i++) {
+	console.log("size - ", routes.length);
+	for (var i = 0; i < routes.length; i++) {
 		if (i == 0) {
-			$('.leaf_frame').append("<div class='leaf active' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(i) + "</div>");
+			currentRouteNum = 0;
+			$('.leaf_frame').append("<div class='leaf active' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(routes, i) + "</div>");
 		} else {
-			$('.leaf_frame').append("<div class='leaf' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(i) + "</div>");
+			$('.leaf_frame').append("<div class='leaf' onclick='javascript:chooseRoute(" + i + ")' >" + renderRoute(routes, i) + "</div>");
 		}
 	}
 	$('.leaf').on('click', function() {
@@ -96,7 +115,7 @@ function updateRouteRenderer(start, end, number) {
 			$('.title_block').remove();
 			$('.directions').css('height', '0');
 			directionsDisplay.setDirections(response);
-			
+
 			if (validRoute) {
 				if (response.routes[routeCrimePts[number].routeNum].legs[0].steps.length) {
 					var summary = response.routes[routeCrimePts[number].routeNum].summary
@@ -109,7 +128,7 @@ function updateRouteRenderer(start, end, number) {
 					for (var i = 0; i < response.routes[routeCrimePts[number].routeNum].legs[0].steps.length; i++) {
 						// console.log("waypoints - ", response.routes[0].legs[0].steps[i].instructions);
 						step = response.routes[routeCrimePts[number].routeNum].legs[0].steps[i];
-						displaySteps(step , i)
+						displaySteps(step, i)
 					};
 
 				}
@@ -117,22 +136,23 @@ function updateRouteRenderer(start, end, number) {
 				directionsDisplay.setRouteIndex(routeCrimePts[number].routeNum);
 			} else {
 
-				if (response.routes[0].legs[0].steps.length) {
-					var summary = response.routes[0].summary
-					var duration = response.routes[0].legs[0].duration.text;
+				if (response.routes[number].legs[0].steps.length) {
+					var summary = response.routes[number].summary
+					var duration = response.routes[number].legs[0].duration.text;
 					displayRoute(summary, duration);
 
 					// $('.pulldown').css('display', 'block');
 					initHeight = $('.directions_box').outerHeight(true);
 					// $('.directions_box').css('height', initHeight + 'px');
-					for (var i = 0; i < response.routes[0].legs[0].steps.length; i++) {
-						step = response.routes[0].legs[0].steps[i];
-						displaySteps(step)
+					for (var i = number; i < response.routes[number].legs[0].steps.length; i++) {
+						step = response.routes[number].legs[0].steps[i];
+						displaySteps(step, i)
 					};
 
 				}
+				directionsDisplay.setRouteIndex(number);
 			}
-			
+
 		} else {
 			console.log("Unable to get directionService information");
 		}
@@ -140,7 +160,7 @@ function updateRouteRenderer(start, end, number) {
 }
 
 function displaySteps(step, i) {
-	console.log("steps", step.instructions);
+	// console.log("steps", step.instructions);
 	var distance = Math.round(convertMtToFt(step.distance.value));
 	if (distance >= 528) {
 		distance = step.distance.text;
@@ -148,18 +168,18 @@ function displaySteps(step, i) {
 		distance += " ft";
 	}
 	var block = "";
-	if(i%2==0){
-		block+="<div class='step_block active'>";
-	}else{
-		block+="<div class='step_block'>";
+	if (i % 2 == 0) {
+		block += "<div class='step_block active'>";
+	} else {
+		block += "<div class='step_block'>";
 	}
-	
-	block+="<div class='dir_picture blocks'></div>"
-	block+="<div class='dir_instructions blocks'>" + step.instructions + "</div>";
-	block+="<div class='dir_distance blocks'>" + distance + "</div>";
-	block+="</div>"
+
+	block += "<div class='dir_picture blocks'></div>"
+	block += "<div class='dir_instructions blocks'>" + step.instructions + "</div>";
+	block += "<div class='dir_distance blocks'>" + distance + "</div>";
+	block += "</div>"
 	$('.directions').append(block);
-	
+
 }
 
 function displayRoute(summary, duration) {
@@ -167,11 +187,11 @@ function displayRoute(summary, duration) {
 	// $('.title_grid').append("<div class='ui-block-b title_block tbb'>" + summary + "</div>");
 	// $('.title_grid').append("<div class='ui-block-c title_block tbc'>" + duration) + "</div>";
 	var block = "";
-	block+="<div class='title_block'>";
-	block+="<div class='dir_picture blocks'></div>"
-	block+="<div class='dir_instructions blocks'>" + summary + "<br>"+duration+"</div>";
+	block += "<div class='title_block'>";
+	block += "<div class='dir_picture blocks'></div>"
+	block += "<div class='dir_instructions blocks'>" + summary + "<br>" + duration + "</div>";
 	// block+="<div class='dir_distance blocks'>" + duration + "</div>";
-	block+="</div>"
+	block += "</div>"
 	$('.title_grid').append(block)
 }
 

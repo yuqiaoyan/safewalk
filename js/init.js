@@ -8,28 +8,29 @@ function init(start, end) {
 	var d = new Date();
 	time = d.getHours() + ":" + d.getMinutes();
 
-	var city = aUser.getCity()
-	console.log(city.split(' '))
-	if (city.split(' ').length > 1) {
-		city = city.replace(/\s+/g, '');
-		console.log("city is", city)
+	// var city = aUser.getCity()
+	// console.log(city.split(' '))
+	// if (city.split(' ').length > 1) {
+	// 	city = city.replace(/\s+/g, '');
+	// 	console.log("city is", city)
 
 
-	}
+	// }
+	var city = SUPPORTED_CITIES[aUser.getCity()];
 
-
-	var parameters = "day=" + aUser.getToday() + "&city=" + city + "&time=" + time;
-
-	requestURL = requestURL + parameters;
-	console.log("requestURL", requestURL)
-
-	//TODO: Debug Flask cross domain
-
-	console.log("+data processing");
-	initData(requestURL, function() {
+	if (city) {
+		var parameters = "day=" + aUser.getToday() + "&city=" + city + "&time=" + time;
+		requestURL = requestURL + parameters;
+		console.log("requestURL", requestURL)
+		console.log("+data processing");
+		initData(requestURL, function() {
+			runMap(start, end);
+		});
+		console.log("-data processing");
+		//TODO: Debug Flask cross domain
+	} else
 		runMap(start, end);
-	});
-	console.log("-data processing");
+
 
 }
 
@@ -98,16 +99,16 @@ $(window).resize(function() {
 
 	resizeHeight('#page1');
 	resizeHeight('#page2');
-	
+
 	if (isLeaf) {
-		
+
 		resizeMap('#page2', $('.info').height() + $('.direction_button').height());
 	} else {
-		
+
 		resizeMap('#page2', initHeight);
 	}
-	// var inputDiv = document.getElementById("routeInput")
-	// inputDiv.scrollTop = inputDiv.scrollHeight;
+	var inputDiv = document.getElementById("routeInput")
+	inputDiv.scrollTop = inputDiv.scrollHeight;
 	// if (map) {
 	// 	var center = map.getCenter();
 	// 	google.maps.event.trigger(map, 'resize');
