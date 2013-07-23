@@ -347,7 +347,9 @@ body {
 	padding-left: 5%;
 	padding-top: 1%;
 	width: 95%;
-	
+	color: #15449B;
+	font-size: 14px;
+	font-weight: bold;
 }
 #StepHeader{
 	color: #15449B !important;
