@@ -409,6 +409,8 @@ body {
 	text-align: center !important;
 }
 
-#StepHeader .ui-title{
+#page3{
+	z-index: -1;
+	color:white;
 
 }

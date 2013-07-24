@@ -108,6 +108,7 @@ function direction_transition(){
 
 	//update boolean to say we've moved to Step by Step
 	isLeaf = false;
+	window.location.hash = "#page3"
 }
 
 function backTransition(){
@@ -121,6 +122,7 @@ function backTransition(){
 		$('.info').css('display','block');
 		isLeaf = true;
 		$('#StepHeader')[0].innerText = "Safewalk";
+		window.location.hash = "#page2"
 	}
 	else{
 		$.mobile.changePage("#page1");
@@ -128,3 +130,14 @@ function backTransition(){
 	}
 
 }
+
+$(window).bind('hashchange',function(){
+	//console.log("+hashchange")
+	if(window.location.hash=="#page3"){
+		//need to fix this for forward functionality
+		direction_transition();	
+	}
+	else if(window.location.hash=="#page2" && isLeaf==false){
+		backTransition();
+	}
+})
