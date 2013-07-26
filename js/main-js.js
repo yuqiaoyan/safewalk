@@ -81,6 +81,7 @@ $(document).ready(function() {
 			$('.directions').animate({
 				height: $(window).height()/2.5 + "px"
 			}, 500);
+			$('.step_header').text('Hide Steps')
 			$('.directions_box').slideDown('slow');
 		} else if ($('.directions_box').hasClass("max")) {
 			$('.directions_box').removeClass("max")
@@ -88,6 +89,8 @@ $(document).ready(function() {
 			$('.directions').animate({
 				height: "0px"
 			}, 500);
+			$('.step_header').text('Show Steps')
+			
 		}
 
 	});
