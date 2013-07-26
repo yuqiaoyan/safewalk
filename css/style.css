@@ -3,6 +3,54 @@ body {
 	padding: 0;
 }
 
+#android-back{
+	color:white;
+	border:none;
+	
+	text-decoration:none;
+}
+
+#android-feedback{
+	color:white;
+	border:none;
+	
+	text-decoration:none;
+}
+
+#android-back .ui-btn-inner{
+	font-size: 16px;
+	padding-left: 1.5em;
+}
+
+#android-feedback .ui-btn-inner{
+	font-size: 16px;
+}
+
+/* remove border between each item */
+.ui-header{
+	height: 42px;
+	/*height: 9.5%;*/
+}
+
+.ui-btn-inner{
+	border:0;
+	
+}
+
+.ui-icon{
+	background-color: inherit;
+	-webkit-border-radius:0px;
+}
+.ui-shadow{
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+
+.ui-btn-up-a, .ui-btn-down-a{
+	background-image:none;
+	border:0;
+}
+
 #popupError {
 	width: 40% !important;
 
@@ -353,9 +401,16 @@ body {
 }
 #StepHeader{
 	color: #15449B !important;
-	/*font-size: 14px;*/
-	font-weight: 500;
+	font-size: 18px;
+	font-weight: 700;
 	font-family: Helvetica,Arial,sans-serif !important;
 	white-space: nowrap;
+	text-shadow: 0 -1px 0 #000;
 	text-align: center !important;
+}
+
+#page3{
+	z-index: -1;
+	color:white;
+
 }
