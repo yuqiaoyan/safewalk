@@ -298,12 +298,12 @@ body {
 }
 
 .header {
-	border: 1px solid #426EAE !important;
+	border-bottom: 1px solid #426EAE !important;
 	border-top: 1px solid #C1D4F1 !important;
 }
 
 .footer {
-	border: 1px solid #426EAE !important;
+	border-top: 1px solid #426EAE !important;
 	border-bottom: 0 !important;
 }
 
