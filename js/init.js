@@ -4,7 +4,7 @@ function init(start, end) {
 	var amazonIP = "ec2-54-215-147-231.us-west-1.compute.amazonaws.com"
 	var IP = "localhost"
 	var requestURL = "http://" + amazonIP + ":5000/?"
-	console.log("requestURL IS", requestURL)
+	//console.log("requestURL IS", requestURL)
 	var d = new Date();
 	time = d.getHours() + ":" + d.getMinutes();
 
