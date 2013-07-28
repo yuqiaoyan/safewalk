@@ -19,7 +19,9 @@ function init(start, end) {
 	var city = SUPPORTED_CITIES[aUser.getCity()];
 
 	if (city) {
-		var parameters = "day=" + aUser.getToday() + "&city=" + city + "&time=" + time;
+		var parameters = "day=" + aUser.getToday() + "&city=" + city + "&time=" + time + "&start="+start+"&end="+end;
+		console.log("start", start)
+		console.log("end", end)
 		requestURL = requestURL + parameters;
 		console.log("requestURL", requestURL)
 		console.log("+data processing");
