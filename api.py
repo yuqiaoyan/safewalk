@@ -51,10 +51,10 @@ def my_service():
 	dayOfWeek = request.args.get('day')
 	city = request.args.get('city')
 	time = request.args.get('time')
-	start = request.args.get('start')
- 	end = request.args.get('end')
+	#start = request.args.get('start')
+ 	#end = request.args.get('end')
 
- 	logRoute(start,end)
+ 	#logRoute(start,end)
 
 	crimeList = GetData(client, city, dayOfWeek,time)
 	totalCrimes = len(crimeList)
