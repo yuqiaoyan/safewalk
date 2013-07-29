@@ -6,7 +6,7 @@ from crossDomain import *
 
 import sys
 sys.path.append('/home/ubuntu/safewalk/dba')
-#sys.path.append('/Users/bonnieyu/safewalk/dba')
+#sys.path.append('/Applications/MAMP/htdocs/swAmbrish/dba')
 
 from dbAccess import *
 
@@ -36,6 +36,12 @@ def connect(db_name,collection_name):
 	collection = db[collection_name]
 	return (db,collection)
 
+def logRoute(start,end):
+	f = open("logs/startEnd.csv", "a")
+	output = start + ", " + end +"\n"
+	f.write(output)
+	f.close()
+
 @app.route('/')
 @crossdomain(origin='*')
 def my_service():
@@ -45,6 +51,10 @@ def my_service():
 	dayOfWeek = request.args.get('day')
 	city = request.args.get('city')
 	time = request.args.get('time')
+	start = request.args.get('start')
+ 	end = request.args.get('end')
+
+ 	logRoute(start,end)
 
 	crimeList = GetData(client, city, dayOfWeek,time)
 	totalCrimes = len(crimeList)

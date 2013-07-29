@@ -4,7 +4,7 @@ function init(start, end) {
 	var amazonIP = "ec2-54-215-147-231.us-west-1.compute.amazonaws.com"
 	var IP = "localhost"
 	var requestURL = "http://" + amazonIP + ":5000/?"
-	console.log("requestURL IS", requestURL)
+	//console.log("requestURL IS", requestURL)
 	var d = new Date();
 	time = d.getHours() + ":" + d.getMinutes();
 
@@ -19,7 +19,9 @@ function init(start, end) {
 	var city = SUPPORTED_CITIES[aUser.getCity()];
 
 	if (city) {
-		var parameters = "day=" + aUser.getToday() + "&city=" + city + "&time=" + time;
+		var parameters = "day=" + aUser.getToday() + "&city=" + city + "&time=" + time + "&start="+start+"&end="+end;
+		console.log("start", start)
+		console.log("end", end)
 		requestURL = requestURL + parameters;
 		console.log("requestURL", requestURL)
 		console.log("+data processing");
