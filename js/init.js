@@ -105,17 +105,17 @@ $(window).resize(function() {
 	var inputDiv = document.getElementById("routeInput")
 	inputDiv.scrollTop = inputDiv.scrollHeight;
 
-	// // if (isLeaf) {
-	// // 	resizeMap('#page2', $('.info').height() + $('.direction_button').height());
-	// // } else {
-	// // 	resizeMap('#page2', initHeight);
-	// // }
+	// if (isLeaf) {
+	// 	resizeMap('#page2', $('.info').height() + $('.direction_button').height());
+	// } else {
+	// 	resizeMap('#page2', initHeight);
+	// }
 	
-	// // // if (map) {
-	// // // 	var center = map.getCenter();
-	// // // 	google.maps.event.trigger(map, 'resize');
-	// // // 	map.setCenter(center);
-	// // // }
+	// if (map) {
+	// 	var center = map.getCenter();
+	// 	google.maps.event.trigger(map, 'resize');
+	// 	map.setCenter(center);
+	// }
 
 	// var start = $(".start").val();
 	// var end = $(".end").val();
