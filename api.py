@@ -51,10 +51,10 @@ def my_service():
 	dayOfWeek = request.args.get('day')
 	city = request.args.get('city')
 	time = request.args.get('time')
-	start = request.args.get('start')
- 	end = request.args.get('end')
+	#start = request.args.get('start')
+ 	#end = request.args.get('end')
 
- 	logRoute(start,end)
+ 	#logRoute(start,end)
 
 	crimeList = GetData(client, city, dayOfWeek,time)
 	totalCrimes = len(crimeList)
@@ -75,7 +75,7 @@ def my_service():
 #api.add_resource(HelloWorld, '/')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
 
     #crime_db, crime_data = connect("sw","SF")
 #for crime in crime_data.find({"DayOfWeek":dayOfWeek}):
