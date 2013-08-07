@@ -152,11 +152,13 @@ function routeInfo(response, routeNum) {
 
 	//totalDistance = steps[steps.length-1].distance.value;
 
-	var initialStepJB = steps[0].start_location.jb;
-	var initialStepKB = steps[0].start_location.kb;
-	var finalStepKB = steps[steps.length - 1].start_location.kb;
-	var finalStepJB = steps[steps.length - 1].start_location.jb;
+	var initialStepJB = steps[0].start_location.lat();
+	var initialStepKB = steps[0].start_location.lng();
+	var finalStepKB = steps[steps.length - 1].start_location.lng();
+	var finalStepJB = steps[steps.length - 1].start_location.lat();
 
+	console.log('step', initialStepJB);
+	console.log('step', initialStepKB);
 	var midJB = (initialStepJB + finalStepJB) / 2;
 	var midKB = (initialStepKB + finalStepKB) / 2;
 	var radiusMi = ftToMi(totalDistance);
@@ -165,8 +167,10 @@ function routeInfo(response, routeNum) {
 
 	function set_selectedLines(crime,index,array){
 		// console.log("+set_selectedLines")
-		// console.log("midJB",midJB)
-		// console.log("midKB",midKB)
+		console.log("midJB",midJB)
+		console.log("midKB",midKB)
+		console.log("CRIMEY", crime.Y);
+		console.log("CRIMEX", crime.X);
 		// (37.8084763 ,-122.26881204999998)
 		// var temp = haversine(47.62268,-122.3560459,47.60733158,-122.3386512,3.25)
 		// console.log("crime", crime)
@@ -176,7 +180,7 @@ function routeInfo(response, routeNum) {
 			selectedLines.array[nIndex++] = crime;
 		}
 	}
-
+	console.log('db',database);
 	database.forEach(set_selectedLines);
 
 	// console.log("total selected lines " + selectedLines.array.length);
@@ -189,10 +193,10 @@ function routeInfo(response, routeNum) {
 	function updateCrimeCount(num, selectedLines) {
 		var radius = 0.05; //in mile
 		for (var i = 0; i < steps[num].path.length; i++) {
-			selectedLines.pathjb.push(steps[num].path[i].jb);
-			selectedLines.pathkb.push(steps[num].path[i].kb);
+			selectedLines.pathjb.push(steps[num].path[i].lat());
+			selectedLines.pathkb.push(steps[num].path[i].lng());
 			for (var j = 0; j < selectedLines.last; j++) {
-				if (haversine(steps[num].path[i].jb, steps[num].path[i].kb, selectedLines.array[j].Y, selectedLines.array[j].X, radius)) {
+				if (haversine(steps[num].path[i].lat(), steps[num].path[i].lng(), selectedLines.array[j].Y, selectedLines.array[j].X, radius)) {
 					selectedLines.swap(j);
 				}
 			}

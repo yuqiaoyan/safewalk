@@ -1,7 +1,7 @@
 <html>
 <head>
 	<!-- Google analytics -->
-  <script type="text/javascript">
+	<script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-42668040-1']);
@@ -15,19 +15,15 @@
 
 </script>
 
-
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1,user-scalable=no">
-	
-	<!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.3.1.min.css"/>
-	-->
-	<!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.3.1.min.css"/>
-	-->
+
+	<!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.3.1.min.css"/> -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.3.1.min.css"/> -->
 	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<!-- // <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script> -->
- 	<!-- // <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script> -->
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<!--<script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>-->
 
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
@@ -75,12 +71,11 @@
 		<div data-role="header" class="header">
 			<h3></h3>
 		</div>
-	
+
 		<div data-role="content" class="content_area" id="routeInput" style="overflow-y: auto">
 			<img src="img/hippo.png" class="logo">
 			<img src="img/title.png" class="logo_title">
 			<div class="filler"></div>
-
 			<!-- Start Input -->
 			<div data-role="fieldcontain" class = "input_field">
 				<span data-role="none" class="corners">
@@ -90,7 +85,9 @@
 			<!-- End Input -->
 			<div data-role="fieldcontain" class = "input_field">
 				<span data-role="none" class="corners">
-					<input data-role="none" type="text" class ="end" value="Union Square, San Francisco CA" placeholder="End Location"/> </span> </div>
+					<input data-role="none" type="text" class ="end" value="Union Square, San Francisco CA" placeholder="End Location"/>
+				</span>
+			</div>
 			<!-- Submit Button -->
 			<div data-role="fieldcontain" class = "button_field">
 				<div class="homeSubmit">
@@ -109,42 +106,46 @@
 			<a href="#" id="android-back"  data-icon="arrow-l"  data-iconshadow="false" class="" onclick='javascript:backTransition()'
 		          >Back</a>
 			<!-- <a href="#" onclick='javascript:backTransition()'
-		          >Back</a> -->
-			<h1 id="StepHeader" class="ui-title">Safewalk</h1>
-			<!-- <div id="StepHeader" class="logo_header" style="height: 20px; font-size:16px"> Safewalk</div> -->
-			<a href="https://docs.google.com/forms/d/1CtyNNH6LkXnZ25n4xJKQejInQQg-JiQnND_A91EaKNM/viewform" id="android-feedback" 
+		          >Back</a>
+		-->
+		<h1 id="StepHeader" class="ui-title">Safewalk</h1>
+		<!-- <div id="StepHeader" class="logo_header" style="height: 20px; font-size:16px">Safewalk</div>
+	-->
+	<a href="https://docs.google.com/forms/d/1CtyNNH6LkXnZ25n4xJKQejInQQg-JiQnND_A91EaKNM/viewform" id="android-feedback" 
 		          >Feedback</a>
-		</div>
-		<div data-role="content" class="content_area" >
-			<div class="loading"></div>
-			<div class='directions_box  min'>
-				<div class="step_header">Show Steps</div>
-				<div class="title_grid"></div>
-				<div class="directions" style="overflow: auto"></div>
-			</div>
-			
-			<div id="map-canvas"></div>
-			<!-- <div data-role="popup" id="popupOptions" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
-			-->
-			<div id ="page3"> testM </div>
-			<div class="info">
-				<div class="routes_header">
-					<label>Route Options</label><br><span style="font-size: 10">Crimes reported in the last three months</span>
-				</div>
-				<div class="leaf_frame"></div>
-				
-				<!-- managing the hash information to change back/forward navigation behavior -->
-				
-				<a href="#page3" onclick= "javascript:direction_transition()" data-corners="false" data-role="button" class="directions_button" data-mini="false">Get Directions</a>
-
-			</div>
-
-			<div data-role="popup" id="popupError" data-overlay-theme="p">
-				<label class="errormsg"></label>
-			</div>
-
-		</div>
+</div>
+<div data-role="content" class="content_area" >
+	<div class="loading"></div>
+	<div class='directions_box  min'>
+		<div class="step_header">Show Steps</div>
+		<div class="title_grid"></div>
+		<div class="directions" style="overflow: auto"></div>
 	</div>
-	
+
+	<div id="map-canvas"></div>
+	<!-- <div data-role="popup" id="popupOptions" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
+	-->
+	<div id ="page3">testM</div>
+	<div class="info">
+		<div class="routes_header">
+			<label>Route Options</label>
+			<br>
+			<span style="font-size: 10">Crimes reported in the last three months</span>
+		</div>
+		<div class="leaf_frame"></div>
+
+		<!-- managing the hash information to change back/forward navigation behavior -->
+
+		<a href="#page3" onclick= "javascript:direction_transition()" data-corners="false" data-role="button" class="directions_button" data-mini="false">Get Directions</a>
+
+	</div>
+
+	<div data-role="popup" id="popupError" data-overlay-theme="p">
+		<label class="errormsg"></label>
+	</div>
+
+</div>
+</div>
+
 </body>
 </html>
